@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<meta name="description" content="فصل اول نظریه زبان‌ها و ماشین‌ها — مفاهیم پایه: مجموعه‌ها، روابط، توابع، الفبا، رشته، زبان، گرامر، اتوماتا، اثبات و استقرا، و مروری بر ماشین‌های محاسباتی.">
+<meta name="author" content="مهران غلامی مقدم">
+<title>فصل ۰۱ — مقدمه‌ای بر زبان‌ها و ماشین‌ها</title>
+<link rel="icon" href="mehran-favicon.ico" sizes="any">
+<link rel="canonical" href="https://mehran00programmer.github.io/Theory-of-Languages-and-Machines/part-01.html">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="reading-progress">
+  <div class="reading-progress-bar"></div>
+</div>
+
+<header class="doc-header">
+  <div class="page">
+    <div class="hero-badge" style="display:inline-block;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:1.5px;background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.2);padding:4px 12px;border-radius:20px;margin-bottom:14px;">فصل ۰۱</div>
+    <h1 class="doc-title">مقدمه‌ای بر زبان‌ها و ماشین‌ها</h1>
+    <p class="doc-subtitle">
+      در این فصل با مفاهیم بنیادین نظریه زبان‌ها و ماشین‌ها آشنا می‌شویم: مرور ریاضیات پایه
+      (مجموعه‌ها، روابط، توابع، گراف‌ها)، تعریف الفبا، رشته و زبان، معرفی گرامرها و اتوماتاها،
+      روش‌های اثبات و استقرا، و مروری بر سلسله‌مراتب زبان‌ها و ماشین‌های محاسباتی.
+    </p>
+
+    <div class="author-card">
+      <div class="author-name">مهران غلامی مقدم</div>
+      <a class="author-link" href="https://github.com/Mehran00programmer" target="_blank" rel="noopener noreferrer" aria-label="گیت‌هاب مهران غلامی مقدم">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        github.com/Mehran00programmer
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <aside class="toc-wrap fade-in">
+    <div class="toc-header">فهرست مطالب این فصل</div>
+    <ul class="toc-list">
+      <li><a class="toc-link" href="#s1"><span class="num">01</span><span>نظریه محاسبات چیست؟</span></a></li>
+      <li><a class="toc-link" href="#s2"><span class="num">02</span><span>مرور مفاهیم پایه ریاضی</span></a></li>
+      <li><a class="toc-link" href="#s3"><span class="num">03</span><span>توابع و روابط</span></a></li>
+      <li><a class="toc-link" href="#s4"><span class="num">04</span><span>گراف‌ها و درخت‌ها</span></a></li>
+      <li><a class="toc-link" href="#s5"><span class="num">05</span><span>روش‌های اثبات</span></a></li>
+      <li><a class="toc-link" href="#s6"><span class="num">06</span><span>استقرای ریاضی</span></a></li>
+      <li><a class="toc-link" href="#s7"><span class="num">07</span><span>الفبا، رشته و زبان</span></a></li>
+      <li><a class="toc-link" href="#s8"><span class="num">08</span><span>عملیات روی زبان‌ها</span></a></li>
+      <li><a class="toc-link" href="#s9"><span class="num">09</span><span>گرامرها</span></a></li>
+      <li><a class="toc-link" href="#s10"><span class="num">10</span><span>اتوماتاها و ماشین‌های محاسباتی</span></a></li>
+      <li><a class="toc-link" href="#s11"><span class="num">11</span><span>سلسله‌مراتب چامسکی</span></a></li>
+      <li><a class="toc-link" href="#s12"><span class="num">12</span><span>خلاصه و تمرین‌ها</span></a></li>
+    </ul>
+  </aside>
+
+  <main>
+
+    <!-- ==================== 1.1 ==================== -->
+    <section class="section fade-in" id="s1">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2 class="section-title">نظریه محاسبات چیست؟</h2>
+      </div>
+
+      <p>
+        <strong>نظریه محاسبات (Theory of Computation)</strong> شاخه‌ای از علوم کامپیوتر است
+        که به مطالعه <strong>توانایی‌ها و محدودیت‌های محاسبه</strong> می‌پردازد. این شاخه
+        می‌کوشد به پرسش‌های بنیادین زیر پاسخ دهد:
+      </p>
+
+      <ul>
+        <li>چه مسائلی را می‌توان با کامپیوتر حل کرد؟</li>
+        <li>چه مسائلی را نمی‌توان حل کرد؟</li>
+        <li>اگر مسئله‌ای قابل حل است، با چه منابعی (زمان، حافظه) می‌توان آن را حل کرد؟</li>
+        <li>ماشین‌های محاسباتی مختلف چه توانایی‌هایی دارند؟</li>
+      </ul>
+
+      <h3>نظریه زبان‌ها و ماشین‌ها در دل نظریه محاسبات</h3>
+      <p>
+        درس <strong>نظریه زبان‌ها و ماشین‌ها</strong> یکی از سه ستون اصلی نظریه محاسبات است.
+        این سه ستون عبارتند از:
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">۱. اتوماتا (Automata)</div>
+          <div class="card-desc">
+            مطالعه ماشین‌های انتزاعی و توانایی محاسباتی آن‌ها. از ساده‌ترین ماشین (اتوماتای
+            متناهی) تا قدرتمندترین (ماشین تورینگ).
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">۲. زبان‌ها (Languages)</div>
+          <div class="card-desc">
+            مطالعه زبان‌های صوری و دسته‌بندی آن‌ها. هر ماشین، دسته‌ای از زبان‌ها را
+            می‌پذیرد و هر دسته زبان، یک ماشین متناظر دارد.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">۳. محاسبه‌پذیری (Computability)</div>
+          <div class="card-desc">
+            مطالعه مسائلی که اساساً <strong>قابل حل</strong> هستند و مسائلی که
+            <strong>غیرقابل حل</strong> هستند.
+          </div>
+        </div>
+      </div>
+
+      <h3>چرا این درس را می‌خوانیم؟</h3>
+      <ul>
+        <li>
+          <strong>درک عمیق‌تر از کامپیوتر:</strong> یاد می‌گیریم کامپیوترها در چه محدوده‌ای
+          کار می‌کنند و مرز توانایی آن‌ها کجاست.
+        </li>
+        <li>
+          <strong>مبانی طراحی کامپایلرها:</strong> تحلیل‌گرهای لغوی و نحوی که در کامپایلرها
+          استفاده می‌شوند، بر پایه اتوماتاها و گرامرها ساخته شده‌اند.
+        </li>
+        <li>
+          <strong>الگوریتم‌ها و پیچیدگی:</strong> فهم بهتر کلاس‌های پیچیدگی مانند P و NP
+          ریشه در این درس دارد.
+        </li>
+        <li>
+          <strong>پردازش زبان‌های طبیعی:</strong> بسیاری از تکنیک‌های تحلیل زبان طبیعی بر
+          پایه گرامرها هستند.
+        </li>
+        <li>
+          <strong>هوش مصنوعی و نظریه تصمیم:</strong> مباحث تصمیم‌پذیری و کاهش‌پذیری
+          کاربردهای مستقیم در هوش مصنوعی دارند.
+        </li>
+      </ul>
+
+      <div class="callout note">
+        <span class="callout-label">نکته تاریخی</span>
+        <p>
+          این درس ریشه در کارهای mathematicians دهه ۱۹۳۰ دارد. ریاضی‌دانانی مانند
+          <strong>آلن تورینگ (Alan Turing)</strong>، <strong>کورت گودل (Kurt Gödel)</strong>
+          و <strong>آلونزو چرچ (Alonzo Church)</strong> تلاش کردند مفاهیمی مانند «محاسبه‌پذیری»
+          و «اثبات‌پذیری» را دقیقاً تعریف کنند. این کارها پایه‌گذار علوم کامپیوتر نظری شدند.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== 1.2 ==================== -->
+    <section class="section fade-in" id="s2">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2 class="section-title">مرور مفاهیم پایه ریاضی</h2>
+      </div>
+
+      <p>
+        پیش از ورود به مباحث اصلی، لازم است با برخی مفاهیم پایه ریاضی آشنا شویم. این مفاهیم
+        ابزارهایی هستند که در سراسر این درس به‌کار می‌آیند.
+      </p>
+
+      <h3>مجموعه (Set)</h3>
+      <p>
+        <strong>مجموعه</strong> مجموعه‌ای از اشیاء متمایز است که <strong>اعضای</strong>
+        مجموعه نامیده می‌شوند. مجموعه را با حروف بزرگ و اعضای آن را با حروف کوچک نشان می‌دهیم.
+      </p>
+
+      <h4>نمایش مجموعه</h4>
+      <ul>
+        <li>
+          <strong>نمایش شمارشی:</strong> اعضا بین دو آکولاد و با کاما جدا می‌شوند.
+          مثلاً: <code>S = {a, b, c}</code>
+        </li>
+        <li>
+          <strong>نمایش توصیفی:</strong> با استفاده از یک شرط، اعضا توصیف می‌شوند.
+          مثلاً: <code>S = {x | x عدد زوج است}</code>
+        </li>
+      </ul>
+
+      <h4>عضویت و عدم عضویت</h4>
+      <ul>
+        <li><code>x ∈ S</code> یعنی x عضو مجموعه S است.</li>
+        <li><code>x ∉ S</code> یعنی x عضو مجموعه S نیست.</li>
+      </ul>
+
+      <h4>انواع مهم مجموعه‌ها</h4>
+      <ul>
+        <li>
+          <strong>مجموعه تهی (Empty Set):</strong> مجموعه‌ای که هیچ عضوی ندارد.
+          با نماد <code>∅</code> یا <code>{}</code> نشان داده می‌شود.
+        </li>
+        <li>
+          <strong>مجموعه متناهی (Finite Set):</strong> مجموعه‌ای که تعداد اعضای آن متناهی است.
+        </li>
+        <li>
+          <strong>مجموعه نامتناهی (Infinite Set):</strong> مجموعه‌ای که تعداد اعضای آن
+          نامتناهی است.
+        </li>
+      </ul>
+
+      <h3>عملیات روی مجموعه‌ها</h3>
+
+      <h4>۱. اجتماع (Union)</h4>
+      <p>
+        اجتماع دو مجموعه S و T، مجموعه‌ای است که شامل تمام اعضای S و T (بدون تکرار) است.
+      </p>
+      <p><code>S ∪ T = {x | x ∈ S یا x ∈ T}</code></p>
+
+      <h4>۲. اشتراک (Intersection)</h4>
+      <p>
+        اشتراک دو مجموعه S و T، مجموعه‌ای است که شامل اعضای مشترک S و T است.
+      </p>
+      <p><code>S ∩ T = {x | x ∈ S و x ∈ T}</code></p>
+
+      <h4>۳. تفاضل (Difference)</h4>
+      <p>
+        تفاضل S از T، مجموعه‌ای است که شامل اعضای S است که در T نیستند.
+      </p>
+      <p><code>S − T = {x | x ∈ S و x ∉ T}</code></p>
+
+      <h4>۴. مکمل (Complement)</h4>
+      <p>
+        مکمل یک مجموعه S نسبت به مجموعه مرجع U، مجموعه‌ای است که شامل تمام اعضای U است که
+        در S نیستند.
+      </p>
+      <p><code>‾S = {x ∈ U | x ∉ S}</code></p>
+
+      <h4>۵. ضرب دکارتی (Cartesian Product)</h4>
+      <p>
+        ضرب دکارتی دو مجموعه S و T، مجموعه‌ای از <strong>زوج‌های مرتب</strong> است که
+        عضو اول از S و عضو دوم از T می‌آید.
+      </p>
+      <p><code>S × T = {(x, y) | x ∈ S و y ∈ T}</code></p>
+
+      <h3>زیرمجموعه (Subset)</h3>
+      <ul>
+        <li>
+          اگر هر عضو S، عضوی از T باشد، می‌گوییم <strong>S زیرمجموعه T</strong> است
+          و می‌نویسیم <code>S ⊆ T</code>.
+        </li>
+        <li>
+          اگر S زیرمجموعه T باشد اما S ≠ T، می‌گوییم <strong>S زیرمجموعه سره T</strong> است
+          و می‌نویسیم <code>S ⊂ T</code>.
+        </li>
+      </ul>
+
+      <h3>مجموعه توانی (Power Set)</h3>
+      <p>
+        مجموعه توانی یک مجموعه S، مجموعه‌ای از <strong>تمام زیرمجموعه‌های</strong> S است
+        و با <code>2^S</code> یا <code>P(S)</code> نشان داده می‌شود.
+      </p>
+      <p>
+        اگر اندازه S برابر n باشد، اندازه مجموعه توانی آن <code>2^n</code> خواهد بود.
+      </p>
+
+      <div class="callout note">
+        <span class="callout-label">مثال</span>
+        <p>
+          اگر <code>S = {a, b}</code>، آنگاه مجموعه توانی آن برابر است با:
+          <br>
+          <code>2^S = {∅, {a}, {b}, {a, b}}</code>
+          <br>
+          اندازه <code>2^S</code> برابر ۴ (یعنی <code>2^2</code>) است.
+        </p>
+      </div>
+
+      <h3>اعداد طبیعی و اصل موضوعی</h3>
+      <p>
+        در این درس، عمدتاً با <strong>اعداد طبیعی</strong> سر و کار داریم:
+      </p>
+      <p><code>N = {0, 1, 2, 3, ...}</code></p>
+      <p>
+        هر مجموعه متناهی یا نامتناهی شمارا با اعداد طبیعی متناظر است.
+      </p>
+    </section>
+
+    <!-- ==================== 1.3 ==================== -->
+    <section class="section fade-in" id="s3">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2 class="section-title">توابع و روابط</h2>
+      </div>
+
+      <h3>زوج مرتب و n-تایی مرتب</h3>
+      <p>
+        یک <strong>زوج مرتب (Ordered Pair)</strong> از دو عضو (a, b) تشکیل شده که در آن
+        ترتیب مهم است. یعنی <code>(a, b) ≠ (b, a)</code> (مگر a = b).
+      </p>
+      <p>
+        به همین شکل، یک <strong>n-تایی مرتب</strong> مجموعه‌ای از n عضو است که ترتیب آن‌ها
+        مهم است: <code>(a₁, a₂, ..., aₙ)</code>.
+      </p>
+
+      <h3>رابطه (Relation)</h3>
+      <p>
+        یک <strong>رابطه</strong> از مجموعه S به مجموعه T، زیرمجموعه‌ای از
+        <code>S × T</code> است. اگر <code>(a, b) ∈ R</code>، می‌نویسیم <code>a R b</code>.
+      </p>
+
+      <h4>خواص روابط</h4>
+      <p>یک رابطه R روی مجموعه S می‌تواند یکی از خواص زیر را داشته باشد:</p>
+      <ul>
+        <li>
+          <strong>بازتابی (Reflexive):</strong> برای هر <code>a ∈ S</code>، <code>a R a</code>
+          برقرار است.
+        </li>
+        <li>
+          <strong>تقارنی (Symmetric):</strong> اگر <code>a R b</code>، آنگاه <code>b R a</code>.
+        </li>
+        <li>
+          <strong>پادتقارنی (Antisymmetric):</strong> اگر <code>a R b</code> و
+          <code>b R a</code>، آنگاه <code>a = b</code>.
+        </li>
+        <li>
+          <strong>متعدی (Transitive):</strong> اگر <code>a R b</code> و <code>b R c</code>،
+          آنگاه <code>a R c</code>.
+        </li>
+      </ul>
+
+      <h4>رابطه هم‌ارزی (Equivalence Relation)</h4>
+      <p>
+        رابطه‌ای که <strong>بازتابی، تقارنی و متعدی</strong> باشد، رابطه هم‌ارزی نامیده می‌شود.
+        این نوع رابطه مجموعه را به <strong>کلاس‌های هم‌ارزی</strong> افراز می‌کند.
+      </p>
+
+      <h3>تابع (Function)</h3>
+      <p>
+        یک <strong>تابع</strong> از مجموعه S به مجموعه T، رابطه‌ای است که به هر عضو S دقیقاً
+        یک عضو از T نسبت می‌دهد.
+      </p>
+      <p>نماد: <code>f: S → T</code></p>
+
+      <h4>انواع توابع</h4>
+      <ul>
+        <li>
+          <strong>یک‌به‌یک (Injective):</strong> اگر <code>f(a) = f(b)</code>، آنگاه
+          <code>a = b</code>. اعضای مختلف، مقادیر مختلف می‌گیرند.
+        </li>
+        <li>
+          <strong>پوشا (Surjective):</strong> برای هر <code>b ∈ T</code>، یک
+          <code>a ∈ S</code> وجود دارد که <code>f(a) = b</code>. تمام T پوشش داده می‌شود.
+        </li>
+        <li>
+          <strong>دوسویی (Bijective):</strong> تابعی که هم یک‌به‌یک و هم پوشا باشد.
+          این توابع، تناظر یک‌به‌یک بین دو مجموعه ایجاد می‌کنند.
+        </li>
+      </ul>
+
+      <div class="callout key">
+        <span class="callout-label">اهمیت دوسویی</span>
+        <p>
+          اگر بین دو مجموعه تناظر دوسویی وجود داشته باشد، می‌گوییم آن دو مجموعه
+          <strong>هم‌اندازه (Equipotent)</strong> هستند. این مفهوم، پایه‌ای برای تعریف
+          <strong>مجموعه‌های شمارا و ناشمارا</strong> است.
+        </p>
+      </div>
+
+      <h3>مجموعه شمارا (Countable Set)</h3>
+      <p>
+        مجموعه‌ای که اعضای آن را می‌توان به‌صورت یک دنباله شماره‌گذاری کرد،
+        <strong>مجموعه شمارا</strong> نامیده می‌شود. به عبارت دیگر، بین اعضای آن و اعداد
+        طبیعی تناظر یک‌به‌یک برقرار است.
+      </p>
+
+      <ul>
+        <li>مجموعه اعداد طبیعی <code>N</code> شمارا است.</li>
+        <li>مجموعه اعداد صحیح <code>Z</code> شمارا است.</li>
+        <li>مجموعه اعداد گویا <code>Q</code> شمارا است.</li>
+        <li>
+          اما مجموعه اعداد حقیقی <code>R</code> <strong>ناشمارا (Uncountable)</strong> است.
+          این نتیجه‌گیری مهم در ادامه درس به‌کار می‌آید.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ==================== 1.4 ==================== -->
+    <section class="section fade-in" id="s4">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2 class="section-title">گراف‌ها و درخت‌ها</h2>
+      </div>
+
+      <h3>گراف (Graph)</h3>
+      <p>
+        یک <strong>گراف</strong> زوجی به شکل <code>G = (V, E)</code> است که در آن:
+      </p>
+      <ul>
+        <li><strong>V:</strong> مجموعه رأس‌ها (Vertices)</li>
+        <li><strong>E:</strong> مجموعه یال‌ها (Edges) که هر یال، دو رأس را به هم متصل می‌کند</li>
+      </ul>
+
+      <h3>انواع گراف</h3>
+      <ul>
+        <li>
+          <strong>گراف جهت‌دار (Directed Graph یا Digraph):</strong> یال‌ها دارای جهت هستند.
+          یعنی یال از یک رأس به رأس دیگر می‌رود.
+        </li>
+        <li>
+          <strong>گراف بی‌جهت (Undirected Graph):</strong> یال‌ها جهت ندارند و
+          ارتباط دوطرفه است.
+        </li>
+        <li>
+          <strong>گراف برچسب‌دار (Labeled Graph):</strong> یال‌ها یا رأس‌ها دارای برچسب هستند.
+        </li>
+      </ul>
+
+      <h3>مسیر و دور</h3>
+      <ul>
+        <li>
+          <strong>مسیر (Path):</strong> دنباله‌ای از یال‌ها که رأس‌ها را به هم متصل می‌کنند.
+        </li>
+        <li>
+          <strong>مسیر ساده (Simple Path):</strong> مسیری که هیچ رأس آن تکرار نشود.
+        </li>
+        <li>
+          <strong>دور (Cycle):</strong> مسیری که از یک رأس شروع و به همان رأس ختم شود.
+        </li>
+      </ul>
+
+      <h3>درخت (Tree)</h3>
+      <p>
+        یک <strong>درخت</strong> یک گراف بی‌جهت و همبند است که <strong>دور ندارد</strong>.
+        به عبارت دیگر، درخت یک گراف بدون دور و بدون تناقض است.
+      </p>
+
+      <h4>خواص درخت</h4>
+      <ul>
+        <li>
+          درخت با n رأس، دقیقاً <code>n − 1</code> یال دارد.
+        </li>
+        <li>
+          درخت ریشه‌دار (Rooted Tree) درختی است که یک رأس به‌عنوان ریشه مشخص شده است.
+        </li>
+        <li>
+          درخت دودویی (Binary Tree) درختی است که هر رأس حداکثر دو فرزند دارد.
+        </li>
+      </ul>
+
+      <h3>کاربرد گراف‌ها در این درس</h3>
+      <p>
+        گراف‌ها به‌ویژه گراف‌های جهت‌دار و برچسب‌دار، ابزار اصلی نمایش
+        <strong>اتوماتاها</strong> هستند. در فصل‌های بعدی از نمودار حالت‌ها برای نمایش
+        اتوماتای متناهی، اتوماتای پشته‌ای و ماشین تورینگ استفاده می‌کنیم.
+      </p>
+
+      <div class="callout note">
+        <span class="callout-label">نکته</span>
+        <p>
+          یک اتوماتا در واقع یک گراف جهت‌دار برچسب‌دار است که در آن رأس‌ها حالت‌ها،
+          یال‌ها گذارها و برچسب‌ها نمادهای ورودی هستند.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== 1.5 ==================== -->
+    <section class="section fade-in" id="s5">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2 class="section-title">روش‌های اثبات</h2>
+      </div>
+
+      <p>
+        در نظریه محاسبات، اثبات نقش کلیدی دارد. باید بتوانیم ادعاهای ریاضی را به‌صورت دقیق
+        اثبات کنیم. روش‌های اصلی اثبات عبارتند از:
+      </p>
+
+      <h3>۱. اثبات مستقیم (Direct Proof)</h3>
+      <p>
+        در این روش، با فرض درستی گزاره p، به‌صورت مستقیم نتیجه می‌گیریم که q نیز درست است.
+      </p>
+      <p>
+        <strong>ساختار:</strong> فرض کن p درست است → با استدلال‌های منطقی → q درست است.
+      </p>
+
+      <h3>۲. اثبات عکس نقیض (Proof by Contrapositive)</h3>
+      <p>
+        به‌جای اثبات <code>p → q</code>، اثبات می‌کنیم که <code>¬q → ¬p</code>. این دو گزاره
+        هم‌ارز منطقی هستند.
+      </p>
+
+      <h3>۳. اثبات با تناقض (Proof by Contradiction)</h3>
+      <p>
+        فرض می‌کنیم <code>¬(p → q)</code> درست است (یعنی p درست و q نادرست). سپس نشان می‌دهیم
+        این فرض به یک تناقض می‌رسد. پس ادعای اصلی درست است.
+      </p>
+
+      <h3>۴. اثبات با مثال نقض (Proof by Counterexample)</h3>
+      <p>
+        برای اثبات نادرستی یک گزاره کلی، کافی است یک مثال بیاوریم که در آن گزاره نادرست است.
+      </p>
+
+      <div class="callout note">
+        <span class="callout-label">مثال</span>
+        <p>
+          ادعا: «هر عدد اول فرد است.» برای رد این ادعا، عدد ۲ را مثال می‌زنیم که اول است
+          اما زوج است.
+        </p>
+      </div>
+
+      <h3>۵. اثبات با استقرا (Proof by Induction)</h3>
+      <p>
+        یکی از مهم‌ترین روش‌های اثبات در نظریه محاسبات است که در بخش بعدی به‌تفصیل بررسی می‌شود.
+      </p>
+
+      <h3>۶. اثبات با اجتماع (Proof by Cases)</h3>
+      <p>
+        زمانی که یک گزاره شرایط مختلفی داشته باشد، آن را به چند حالت تقسیم می‌کنیم و برای هر
+        حالت جداگانه اثبات می‌کنیم.
+      </p>
+    </section>
+
+    <!-- ==================== 1.6 ==================== -->
+    <section class="section fade-in" id="s6">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2 class="section-title">استقرای ریاضی</h2>
+      </div>
+
+      <p>
+        <strong>استقرای ریاضی (Mathematical Induction)</strong> روشی قدرتمند برای اثبات
+        گزاره‌هایی است که به اعداد طبیعی وابسته‌اند.
+      </p>
+
+      <h3>ساختار استقرا</h3>
+      <p>برای اثبات اینکه گزاره <code>P(n)</code> برای تمام <code>n ≥ n₀</code> درست است:</p>
+
+      <ol class="flow">
+        <li>
+          <strong>پایه استقرا (Base Case)</strong>
+          <span>نشان می‌دهیم <code>P(n₀)</code> درست است. معمولاً کوچک‌ترین مقدار (مثلاً n₀ = 0 یا 1).</span>
+        </li>
+        <li>
+          <strong>فرض استقرا (Inductive Hypothesis)</strong>
+          <span>فرض می‌کنیم <code>P(k)</code> برای یک k دلخواه درست است.</span>
+        </li>
+        <li>
+          <strong>گام استقرا (Inductive Step)</strong>
+          <span>نشان می‌دهیم اگر <code>P(k)</code> درست باشد، آنگاه <code>P(k+1)</code> نیز درست است.</span>
+        </li>
+      </ol>
+
+      <p>
+        با ترکیب این سه مرحله نتیجه می‌گیریم که <code>P(n)</code> برای تمام اعداد طبیعی
+        بزرگ‌تر از n₀ درست است.
+      </p>
+
+      <div class="callout key">
+        <span class="callout-label">تشبیه</span>
+        <p>
+          استقرا را مانند دومینو در نظر بگیرید: اگر اولین دومینو بیفتد (پایه) و هر دومینو
+          با افتادن خودش، دومینوی بعدی را بیندازد (گام)، همه دومینوها می‌افتند.
+        </p>
+      </div>
+
+      <h3>مثال کامل: مجموع اعداد طبیعی</h3>
+      <p>
+        می‌خواهیم اثبات کنیم:
+      </p>
+      <p><code>1 + 2 + 3 + ... + n = n(n + 1) / 2</code></p>
+
+      <h4>گام ۱: پایه استقرا</h4>
+      <p>
+        برای <code>n = 1</code>: سمت چپ = ۱ و سمت راست = <code>1 × 2 / 2 = 1</code>. درست است.
+      </p>
+
+      <h4>گام ۲: فرض استقرا</h4>
+      <p>
+        فرض می‌کنیم برای <code>n = k</code> درست است:
+        <br>
+        <code>1 + 2 + ... + k = k(k + 1) / 2</code>
+      </p>
+
+      <h4>گام ۳: گام استقرا</h4>
+      <p>
+        باید ثابت کنیم برای <code>n = k + 1</code> نیز درست است:
+        <br>
+        <code>1 + 2 + ... + k + (k + 1) = ?</code>
+      </p>
+      <p>
+        با استفاده از فرض استقرا:
+        <br>
+        <code>= k(k + 1) / 2 + (k + 1)</code>
+        <br>
+        <code>= (k(k + 1) + 2(k + 1)) / 2</code>
+        <br>
+        <code>= (k + 1)(k + 2) / 2</code>
+      </p>
+      <p>این همان فرمول برای <code>n = k + 1</code> است. پس اثبات کامل شد. ✓</p>
+
+      <h3>استقرای قوی (Strong Induction)</h3>
+      <p>
+        نوع دیگری از استقرا وجود دارد که در آن به‌جای فرض <code>P(k)</code>، فرض می‌کنیم
+        <code>P(n₀), P(n₀ + 1), ..., P(k)</code> همه درست هستند و از آن نتیجه می‌گیریم
+        <code>P(k + 1)</code> نیز درست است.
+      </p>
+      <p>
+        این نوع استقرا در اثبات‌های مربوط به افراز اعداد و تجزیه به عوامل اول
+        کاربرد فراوان دارد.
+      </p>
+
+      <h3>استقرای ساختاری (Structural Induction)</h3>
+      <p>
+        نوعی از استقرا که برای اثبات خواص <strong>ساختارهای بازگشتی</strong> (مانند
+        رشته‌ها، درخت‌ها، عبارات و گرامرها) به‌کار می‌رود. این روش در سراسر درس نظریه زبان‌ها
+        و ماشین‌ها کاربرد فراوانی دارد.
+      </p>
+    </section>
+
+    <!-- ==================== 1.7 ==================== -->
+    <section class="section fade-in" id="s7">
+      <div class="section-head">
+        <span class="section-num">07</span>
+        <h2 class="section-title">الفبا، رشته و زبان</h2>
+      </div>
+
+      <p>
+        سه مفهوم بنیادین در نظریه زبان‌ها عبارتند از: <strong>الفبا</strong>،
+        <strong>رشته</strong> و <strong>زبان</strong>. این سه مفهوم پایه کل درس را تشکیل می‌دهند.
+      </p>
+
+      <h3>الفبا (Alphabet)</h3>
+      <p>
+        <strong>الفبا</strong> یک مجموعه متناهی و ناتهی از <strong>نمادها</strong> است که با
+        حرف یونانی <code>Σ</code> (سیگما) نشان داده می‌شود.
+      </p>
+
+      <h4>مثال‌های الفبا</h4>
+      <ul>
+        <li><code>Σ = {0, 1}</code> — الفبای دودویی</li>
+        <li><code>Σ = {a, b, c, ..., z}</code> — الفبای حروف انگلیسی کوچک</li>
+        <li><code>Σ = {if, then, else, while}</code> — الفبای کلمات کلیدی یک زبان برنامه‌نویسی</li>
+      </ul>
+
+      <h3>رشته (String)</h3>
+      <p>
+        یک <strong>رشته</strong> دنباله‌ای متناهی از نمادهای الفبا است. مثلاً اگر
+        <code>Σ = {a, b}</code>، آنگاه <code>a</code>، <code>ab</code>، <code>baab</code>
+        و <code>abababa</code> نمونه‌هایی از رشته‌ها هستند.
+      </p>
+
+      <h4>رشته تهی (Empty String)</h4>
+      <p>
+        رشته‌ای که هیچ نمادی ندارد و با <code>λ</code> (لامبدا) یا <code>ε</code> (اپسیلون)
+        نشان داده می‌شود. طول این رشته صفر است.
+      </p>
+
+      <h4>طول رشته (Length)</h4>
+      <p>
+        تعداد نمادهای یک رشته را <strong>طول</strong> آن می‌نامیم و با <code>|w|</code>
+        نشان می‌دهیم.
+      </p>
+      <ul>
+        <li><code>|λ| = 0</code></li>
+        <li><code>|a| = 1</code></li>
+        <li><code>|aba| = 3</code></li>
+      </ul>
+
+      <h4>الحاق رشته‌ها (Concatenation)</h4>
+      <p>
+        الحاق دو رشته w و v، رشته‌ای است که با نوشتن نمادهای w و سپس v به‌دست می‌آید.
+        با <code>wv</code> نشان داده می‌شود.
+      </p>
+      <p>
+        مثال: اگر <code>w = ab</code> و <code>v = ba</code>، آنگاه <code>wv = abba</code>.
+      </p>
+      <p>
+        نکته مهم: <code>wλ = λw = w</code> (رشته تهی، عنصر خنثی الحاق است).
+      </p>
+
+      <h4>توان رشته (Reversal)</h4>
+      <p>
+        معکوس یک رشته w، رشته‌ای است که نمادهای آن به ترتیب معکوس قرار گرفته‌اند و با
+        <code>w^R</code> نشان داده می‌شود.
+      </p>
+      <p>
+        مثال: اگر <code>w = abc</code>، آنگاه <code>w^R = cba</code>.
+      </p>
+
+      <h4>توان رشته (Power)</h4>
+      <p>
+        <code>w^n</code> یعنی رشته w، n بار تکرار شده است.
+      </p>
+      <ul>
+        <li><code>w^0 = λ</code></li>
+        <li><code>w^1 = w</code></li>
+        <li><code>w^2 = ww</code></li>
+        <li>و به همین ترتیب.</li>
+      </ul>
+
+      <h4>زیررشته، پیشوند و پسوند</h4>
+      <ul>
+        <li>
+          <strong>زیررشته (Substring):</strong> رشته‌ای که از حذف تعدادی نماد از ابتدا و
+          انتهای یک رشته حاصل می‌شود.
+        </li>
+        <li>
+          <strong>پیشوند (Prefix):</strong> رشته‌ای که از حذف تعدادی نماد از انتهای یک رشته
+          حاصل می‌شود.
+        </li>
+        <li>
+          <strong>پسوند (Suffix):</strong> رشته‌ای که از حذف تعدادی نماد از ابتدای یک رشته
+          حاصل می‌شود.
+        </li>
+      </ul>
+
+      <h3>زبان (Language)</h3>
+      <p>
+        یک <strong>زبان</strong> مجموعه‌ای از رشته‌ها روی یک الفبای مشخص است.
+        به‌عبارت دیگر، زبان زیرمجموعه‌ای از <code>Σ*</code> است، که در آن
+        <code>Σ*</code> مجموعه تمام رشته‌های ممکن روی الفبای Σ (شامل رشته تهی) است.
+      </p>
+
+      <div class="callout key">
+        <span class="callout-label">تعریف کلیدی</span>
+        <p>
+          <strong>زبان L</strong> روی الفبای Σ، هر زیرمجموعه‌ای از <code>Σ*</code> است.
+          یعنی <code>L ⊆ Σ*</code>.
+        </p>
+      </div>
+
+      <h4>مثال‌های زبان</h4>
+      <ul>
+        <li>
+          <code>L₁ = {a, aa, aaa, ...}</code> — زبان رشته‌هایی که فقط از a تشکیل شده‌اند.
+        </li>
+        <li>
+          <code>L₂ = {0, 1, 00, 01, 10, 11, ...}</code> — همه رشته‌های دودویی.
+        </li>
+        <li>
+          <code>L₃ = {aⁿbⁿ | n ≥ 0}</code> — زبان رشته‌هایی با n تا a و سپس n تا b.
+        </li>
+      </ul>
+
+      <h4>مکمل زبان</h4>
+      <p>
+        مکمل زبان L نسبت به Σ*، مجموعه‌ای از رشته‌هایی است که در L نیستند:
+      </p>
+      <p><code>‾L = Σ* − L</code></p>
+
+      <div class="callout note">
+        <span class="callout-label">نکته مهم</span>
+        <p>
+          <code>Σ*</code> خود یک زبان است و شامل تمام رشته‌های ممکن (شامل رشته تهی) روی
+          الفبای Σ می‌شود. همچنین <code>Σ⁺ = Σ* − {λ}</code> مجموعه رشته‌های ناتهی است.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== 1.8 ==================== -->
+    <section class="section fade-in" id="s8">
+      <div class="section-head">
+        <span class="section-num">08</span>
+        <h2 class="section-title">عملیات روی زبان‌ها</h2>
+      </div>
+
+      <p>
+        چون زبان‌ها مجموعه هستند، عملیات مجموعه‌ای روی آن‌ها تعریف می‌شود. اما عملیات
+        مخصوص زبان‌ها (مثل الحاق، ستاره کلین و معکوس) نیز وجود دارند.
+      </p>
+
+      <h3>عملیات مجموعه‌ای</h3>
+      <ul>
+        <li>
+          <strong>اجتماع (Union):</strong>
+          <code>L₁ ∪ L₂ = {w | w ∈ L₁ یا w ∈ L₂}</code>
+        </li>
+        <li>
+          <strong>اشتراک (Intersection):</strong>
+          <code>L₁ ∩ L₂ = {w | w ∈ L₁ و w ∈ L₂}</code>
+        </li>
+        <li>
+          <strong>تفاضل (Difference):</strong>
+          <code>L₁ − L₂ = {w | w ∈ L₁ و w ∉ L₂}</code>
+        </li>
+        <li>
+          <strong>مکمل (Complement):</strong>
+          <code>‾L = Σ* − L</code>
+        </li>
+      </ul>
+
+      <h3>عملیات مخصوص زبان‌ها</h3>
+
+      <h4>۱. الحاق زبان‌ها (Concatenation)</h4>
+      <p>
+        الحاق دو زبان L₁ و L₂، مجموعه‌ای است از الحاق هر رشته در L₁ با هر رشته در L₂:
+      </p>
+      <p><code>L₁L₂ = {wv | w ∈ L₁ و v ∈ L₂}</code></p>
+
+      <h4>۲. توان زبان</h4>
+      <p>
+        <code>Lⁿ</code> یعنی الحاق زبان L با خودش n بار:
+      </p>
+      <ul>
+        <li><code>L⁰ = {λ}</code></li>
+        <li><code>L¹ = L</code></li>
+        <li><code>L² = LL</code></li>
+        <li>و به همین ترتیب.</li>
+      </ul>
+
+      <h4>۳. ستاره کلین (Kleene Star)</h4>
+      <p>
+        <code>L*</code> مجموعه‌ای است از الحاق صفر یا چند رشته از L:
+      </p>
+      <p><code>L* = L⁰ ∪ L¹ ∪ L² ∪ ...</code></p>
+      <p>
+        نکته: <code>λ ∈ L*</code> همیشه درست است، چون <code>L⁰ = {λ}</code>.
+      </p>
+
+      <h4>۴. به‌علاوه کلین (Kleene Plus)</h4>
+      <p>
+        <code>L⁺</code> مجموعه‌ای است از الحاق یک یا چند رشته از L:
+      </p>
+      <p><code>L⁺ = L¹ ∪ L² ∪ L³ ∪ ...</code></p>
+      <p>
+        تفاوت با <code>L*</code> این است که <code>L⁺</code> شامل رشته تهی نیست،
+        مگر اینکه <code>λ ∈ L</code> باشد.
+      </p>
+
+      <h4>۵. معکوس زبان (Reversal)</h4>
+      <p>
+        <code>L^R = {w^R | w ∈ L}</code> — مجموعه معکوس تمام رشته‌های L.
+      </p>
+
+      <div class="callout note">
+        <span class="callout-label">مثال</span>
+        <p>
+          اگر <code>L = {a, ab}</code>، آنگاه:
+        </p>
+        <ul>
+          <li><code>L² = {aa, aab, aba, abab}</code></li>
+          <li><code>L* = {λ, a, ab, aa, aab, aba, abab, ...}</code></li>
+          <li><code>L^R = {a, ba}</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ==================== 1.9 ==================== -->
+    <section class="section fade-in" id="s9">
+      <div class="section-head">
+        <span class="section-num">09</span>
+        <h2 class="section-title">گرامرها</h2>
+      </div>
+
+      <h3>تعریف گرامر</h3>
+      <p>
+        یک <strong>گرامر (Grammar)</strong> یک مدل تولیدی برای زبان است که نشان می‌دهد چگونه
+        می‌توان رشته‌های یک زبان را از نمادهای ساده‌تر تولید کرد.
+      </p>
+
+      <p>گرامر G به‌صورت چهارتایی زیر تعریف می‌شود:</p>
+      <p><code>G = (V, T, S, P)</code></p>
+
+      <ul>
+        <li>
+          <strong>V (Non-terminals):</strong> مجموعه متناهی از متغیرها یا نمادهای غیرپایانه
+        </li>
+        <li>
+          <strong>T (Terminals):</strong> مجموعه متناهی از نمادهای پایانه (که با الفبا یکی است)
+        </li>
+        <li>
+          <strong>S (Start Symbol):</strong> نماد شروع، که عضو V است
+        </li>
+        <li>
+          <strong>P (Productions):</strong> مجموعه قواعد تولید
+        </li>
+      </ul>
+
+      <p>
+        در گرامر، <code>V</code> و <code>T</code> اشتراک ندارند (<code>V ∩ T = ∅</code>).
+      </p>
+
+      <h3>قواعد تولید</h3>
+      <p>
+        هر قاعده تولید به شکل <code>x → y</code> است که در آن x از V و y از
+        <code>(V ∪ T)*</code> است. یعنی سمت چپ شامل حداقل یک متغیر است و سمت راست هر ترکیبی
+        از متغیرها و پایانه‌ها می‌تواند باشد.
+      </p>
+
+      <h3>مثال: گرامر برای زبان aⁿbⁿ</h3>
+      <p>گرامر زیر زبان <code>L = {aⁿbⁿ | n ≥ 1}</code> را تولید می‌کند:</p>
+      <p><code>G = (V, T, S, P)</code> که در آن:</p>
+      <ul>
+        <li><code>V = {S}</code></li>
+        <li><code>T = {a, b}</code></li>
+        <li><code>P = {S → aSb, S → ab}</code></li>
+      </ul>
+
+      <h4>نمونه اشتقاق</h4>
+      <p>برای تولید رشته <code>aaabbb</code>:</p>
+      <p>
+        <code>S ⇒ aSb ⇒ aaSbb ⇒ aaabbb</code>
+      </p>
+
+      <h3>اشتقاق (Derivation)</h3>
+      <p>
+        فرآیند تولید یک رشته از نماد شروع با استفاده از قواعد تولید را
+        <strong>اشتقاق</strong> می‌نامیم. اگر <code>S ⇒* w</code>، یعنی w از S اشتقاق‌پذیر است.
+      </p>
+
+      <h3>زبان تولیدشده توسط گرامر</h3>
+      <p>
+        زبان تولیدشده توسط گرامر G، مجموعه‌ای از رشته‌هایی است که با نمادهای پایانه ساخته
+        می‌شوند و از S اشتقاق‌پذیر هستند:
+      </p>
+      <p><code>L(G) = {w ∈ T* | S ⇒* w}</code></p>
+
+      <h3>انواع اشتقاق</h3>
+      <ul>
+        <li>
+          <strong>اشتقاق چپ‌ترین (Leftmost Derivation):</strong> در هر گام، چپ‌ترین متغیر
+          جایگزین می‌شود.
+        </li>
+        <li>
+          <strong>اشتقاق راست‌ترین (Rightmost Derivation):</strong> در هر گام، راست‌ترین
+          متغیر جایگزین می‌شود.
+        </li>
+      </ul>
+
+      <h3>درخت اشتقاق (Derivation Tree)</h3>
+      <p>
+        درخت اشتقاق یا درخت تجزیه (Parse Tree)، درختی است که فرآیند اشتقاق را نشان می‌دهد:
+      </p>
+      <ul>
+        <li>ریشه: نماد شروع S</li>
+        <li>گره‌های داخلی: متغیرها</li>
+        <li>برگ‌ها: نمادهای پایانه</li>
+      </ul>
+      <p>
+        درخت اشتقاق برای تحلیل نحوی زبان‌های برنامه‌نویسی در کامپایلرها کاربرد بسیار مهمی دارد.
+      </p>
+    </section>
+
+    <!-- ==================== 1.10 ==================== -->
+    <section class="section fade-in" id="s10">
+      <div class="section-head">
+        <span class="section-num">10</span>
+        <h2 class="section-title">اتوماتاها و ماشین‌های محاسباتی</h2>
+      </div>
+
+      <h3>اتوماتا چیست؟</h3>
+      <p>
+        <strong>اتوماتا (Automaton)</strong> یک مدل ریاضی از یک ماشین محاسباتی است که
+        به‌صورت انتزاعی محاسبه را مدل می‌کند. جمع آن <strong>اتوماتاها</strong> است.
+      </p>
+
+      <h3>اجزای یک اتوماتا</h3>
+      <ul>
+        <li>
+          <strong>ورودی (Input):</strong> رشته‌ای از نمادهای یک الفبا
+        </li>
+        <li>
+          <strong>حالت‌ها (States):</strong> مجموعه‌ای از حالت‌ها که ماشین در هر لحظه در
+          یکی از آن‌ها قرار دارد
+        </li>
+        <li>
+          <strong>گذارها (Transitions):</strong> قواعدی که تعیین می‌کنند با خواندن یک نماد،
+          ماشین از یک حالت به حالت دیگر می‌رود
+        </li>
+        <li>
+          <strong>حالت شروع (Start State):</strong> حالتی که ماشین از آن شروع می‌کند
+        </li>
+        <li>
+          <strong>حالت‌های پایانی (Final States):</strong> حالت‌هایی که اگر ماشین در آن‌ها
+          متوقف شود، ورودی را <strong>می‌پذیرد</strong>
+        </li>
+      </ul>
+
+      <h3>پذیرش و رد</h3>
+      <ul>
+        <li>
+          اگر ماشین پس از خواندن کامل ورودی در یک حالت پایانی باشد، ورودی را
+          <strong>می‌پذیرد</strong>.
+        </li>
+        <li>
+          در غیر این صورت، ورودی را <strong>رد می‌کند</strong>.
+        </li>
+      </ul>
+
+      <h3>زبان پذیرفته‌شده توسط اتوماتا</h3>
+      <p>
+        مجموعه تمام رشته‌هایی که یک اتوماتا می‌پذیرد، زبان آن اتوماتا را تشکیل می‌دهد.
+      </p>
+
+      <h3>انواع اتوماتاها</h3>
+      <p>در این درس با چهار نوع اصلی ماشین محاسباتی آشنا می‌شویم:</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">۱. اتوماتای متناهی (FA)</div>
+          <div class="card-desc">
+            ساده‌ترین نوع. حافظه‌ای ندارد و فقط حالت فعلی را نگه می‌دارد.
+            زبان‌های باقاعده را می‌پذیرد.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">۲. اتوماتای پشته‌ای (PDA)</div>
+          <div class="card-desc">
+            دارای یک حافظه پشته‌ای. زبان‌های مستقل از متن را می‌پذیرد.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">۳. ماشین تورینگ (TM)</div>
+          <div class="card-desc">
+            قدرتمندترین مدل محاسباتی. دارای نوار نامتناهی. زبان‌های بازگشتی را می‌پذیرد.
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">۴. ماشین تورینگ غیرقطعی (NTM)</div>
+          <div class="card-desc">
+            نسخه غیرقطعی ماشین تورینگ. قدرت مشابه TM قطعی دارد.
+          </div>
+        </div>
+      </div>
+
+      <h3>قطعی در مقابل غیرقطعی</h3>
+      <ul>
+        <li>
+          <strong>قطعی (Deterministic):</strong> در هر حالت و با هر نماد ورودی،
+          فقط یک گذار ممکن وجود دارد.
+        </li>
+        <li>
+          <strong>غیرقطعی (Nondeterministic):</strong> در یک حالت و با یک نماد، ممکن است
+          چند گذار مختلف وجود داشته باشد. ماشین به‌طور «جادویی» بهترین مسیر را انتخاب می‌کند.
+        </li>
+      </ul>
+
+      <div class="callout key">
+        <span class="callout-label">نکته مهم</span>
+        <p>
+          جالب است که در مورد اتوماتای متناهی و پشته‌ای، نسخه قطعی و غیرقطعی
+          <strong>قدرت برابر</strong> دارند (زبان‌های یکسانی را می‌پذیرند). این در حالی است
+          که برای ماشین تورینگ هم همینطور است (اگرچه اثبات آن پیچیده‌تر است).
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== 1.11 ==================== -->
+    <section class="section fade-in" id="s11">
+      <div class="section-head">
+        <span class="section-num">11</span>
+        <h2 class="section-title">سلسله‌مراتب چامسکی</h2>
+      </div>
+
+      <p>
+        یکی از زیباترین و منظم‌ترین دستاوردهای نظریه زبان‌ها،
+        <strong>سلسله‌مراتب چامسکی (Chomsky Hierarchy)</strong> است که زبان‌ها را بر
+        اساس پیچیدگی گرامرها و ماشین‌های متناظرشان دسته‌بندی می‌کند.
+      </p>
+
+      <h3>چهار نوع گرامر</h3>
+      <p>نوام چامسکی (Noam Chomsky) چهار نوع گرامر معرفی کرد:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>نوع</th>
+              <th>نام گرامر</th>
+              <th>زبان</th>
+              <th>ماشین متناظر</th>
+              <th>قاعده تولید</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>نوع ۰</td>
+              <td>بدون محدودیت</td>
+              <td>بازگشتی شمارا</td>
+              <td>ماشین تورینگ</td>
+              <td class="cell-ltr">α → β</td>
+            </tr>
+            <tr>
+              <td>نوع ۱</td>
+              <td>حساس به متن</td>
+              <td>حساس به متن</td>
+              <td>اتوماتای کرانه‌ای خطی</td>
+              <td class="cell-ltr">αAβ → αγβ</td>
+            </tr>
+            <tr>
+              <td>نوع ۲</td>
+              <td>مستقل از متن</td>
+              <td>مستقل از متن</td>
+              <td>اتوماتای پشته‌ای</td>
+              <td class="cell-ltr">A → γ</td>
+            </tr>
+            <tr>
+              <td>نوع ۳</td>
+              <td>باقاعده</td>
+              <td>باقاعده</td>
+              <td>اتوماتای متناهی</td>
+              <td class="cell-ltr">A → aB | a</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>توضیح هر نوع</h4>
+      <ul>
+        <li>
+          <strong>گرامر نوع ۰ (بدون محدودیت):</strong> هیچ محدودیتی روی قواعد نیست.
+          قدرتمندترین نوع گرامر. زبان‌های بازگشتی شمارا را تولید می‌کند.
+        </li>
+        <li>
+          <strong>گرامر نوع ۱ (حساس به متن):</strong> طول سمت راست هر قاعده، حداقل به اندازه
+          طول سمت چپ است.
+        </li>
+        <li>
+          <strong>گرامر نوع ۲ (مستقل از متن):</strong> سمت چپ قاعده باید یک متغیر منفرد باشد.
+          پرکاربردترین نوع گرامر در طراحی زبان‌های برنامه‌نویسی.
+        </li>
+        <li>
+          <strong>گرامر نوع ۳ (باقاعده):</strong> قواعد ساده‌ای دارند که فقط اجازه می‌دهند
+          یک نماد پایانه به یک متغیر یا به متغیر و یک نماد پایانه منتهی شود.
+        </li>
+      </ul>
+
+      <h3>سلسله‌مراتب زبان‌ها</h3>
+      <p>این چهار دسته به‌صورت تودرتو هستند:</p>
+      <p>
+        <code>Regular ⊂ Context-Free ⊂ Context-Sensitive ⊂ Recursively Enumerable</code>
+      </p>
+
+      <h3>نمودار سلسله‌مراتب</h3>
+      <div class="diagram">
+        <svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="سلسله‌مراتب چامسکی">
+          <ellipse cx="320" cy="210" rx="300" ry="190" fill="#0d1117" stroke="#6e7681" stroke-width="1.5"/>
+          <text x="320" y="60" text-anchor="middle" fill="#6e7681" font-family="Vazirmatn, sans-serif" font-size="12">Recursively Enumerable (Type 0)</text>
+
+          <ellipse cx="320" cy="220" rx="230" ry="140" fill="#161b22" stroke="#d29922" stroke-width="1.5"/>
+          <text x="320" y="105" text-anchor="middle" fill="#d29922" font-family="Vazirmatn, sans-serif" font-size="12">Context-Sensitive (Type 1)</text>
+
+          <ellipse cx="320" cy="240" rx="160" ry="95" fill="#161b22" stroke="#3fb950" stroke-width="1.5"/>
+          <text x="320" y="165" text-anchor="middle" fill="#3fb950" font-family="Vazirmatn, sans-serif" font-size="12">Context-Free (Type 2)</text>
+
+          <ellipse cx="320" cy="255" rx="90" ry="55" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
+          <text x="320" y="250" text-anchor="middle" fill="#58a6ff" font-family="Vazirmatn, sans-serif" font-size="12" font-weight="600">Regular</text>
+          <text x="320" y="270" text-anchor="middle" fill="#58a6ff" font-family="Vazirmatn, sans-serif" font-size="11">(Type 3)</text>
+
+          <text x="320" y="390" text-anchor="middle" fill="#6e7681" font-family="Vazirmatn, sans-serif" font-size="12">افزایش قدرت با پایین رفتن در سلسله‌مراتب</text>
+        </svg>
+        <div class="diagram-caption">
+          سلسله‌مراتب چامسکی — هر زبان باقاعده، یک زبان مستقل از متن نیز هست
+        </div>
+      </div>
+
+      <h3>کاربردهای عملی</h3>
+      <ul>
+        <li>
+          <strong>زبان‌های باقاعده:</strong> تحلیل‌گر لغوی (Lexer) در کامپایلرها،
+          جستجو و تطبیق الگو (Regex).
+        </li>
+        <li>
+          <strong>زبان‌های مستقل از متن:</strong> تحلیل‌گر نحوی (Parser) در کامپایلرها،
+          زبان‌های برنامه‌نویسی.
+        </li>
+        <li>
+          <strong>زبان‌های حساس به متن:</strong> برخی پردازش‌های زبان طبیعی.
+        </li>
+        <li>
+          <strong>زبان‌های بازگشتی شمارا:</strong> مدل‌سازی کامل محاسبه.
+        </li>
+      </ul>
+    </section>
+
+    <!-- ==================== 1.12 ==================== -->
+    <section class="section fade-in" id="s12">
+      <div class="section-head">
+        <span class="section-num">12</span>
+        <h2 class="section-title">خلاصه و تمرین‌ها</h2>
+      </div>
+
+      <p>
+        در این فصل با مفاهیم بنیادین نظریه زبان‌ها و ماشین‌ها آشنا شدیم. جدول زیر خلاصه‌ای از
+        مهم‌ترین نکات مطرح‌شده است.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>مفهوم</th><th>خلاصه</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>نظریه محاسبات</strong></td><td>مطالعه توانایی‌ها و محدودیت‌های محاسبه</td></tr>
+            <tr><td><strong>مجموعه</strong></td><td>مجموعه‌ای از اعضای متمایز</td></tr>
+            <tr><td><strong>رابطه هم‌ارزی</strong></td><td>بازتابی، تقارنی و متعدی</td></tr>
+            <tr><td><strong>تابع دوسویی</strong></td><td>یک‌به‌یک و پوشا</td></tr>
+            <tr><td><strong>گراف</strong></td><td>مجموعه‌ای از رأس‌ها و یال‌ها</td></tr>
+            <tr><td><strong>درخت</strong></td><td>گراف بی‌جهت و همبند بدون دور</td></tr>
+            <tr><td><strong>استقرا</strong></td><td>پایه + فرض + گام</td></tr>
+            <tr><td><strong>الفبا (Σ)</strong></td><td>مجموعه متناهی از نمادها</td></tr>
+            <tr><td><strong>رشته</strong></td><td>دنباله متناهی از نمادهای الفبا</td></tr>
+            <tr><td><strong>رشته تهی (λ)</strong></td><td>رشته‌ای با طول صفر</td></tr>
+            <tr><td><strong>زبان</strong></td><td>زیرمجموعه‌ای از Σ*</td></tr>
+            <tr><td><strong>ستاره کلین</strong></td><td>L* = L⁰ ∪ L¹ ∪ L² ∪ ...</td></tr>
+            <tr><td><strong>گرامر</strong></td><td>چهارتایی (V, T, S, P)</td></tr>
+            <tr><td><strong>اشتقاق</strong></td><td>تولید رشته از نماد شروع</td></tr>
+            <tr><td><strong>اتوماتا</strong></td><td>مدل ریاضی محاسبه</td></tr>
+            <tr><td><strong>سلسله‌مراتب چامسکی</strong></td><td>Regular ⊂ CF ⊂ CS ⊂ RE</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="exercise-box">
+        <div class="exercise-title">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3.5V12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5"/>
+            <path d="M2 3.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1"/>
+            <path d="M5 2v2M11 2v2M5 7h6M5 10h4"/>
+          </svg>
+          تمرین‌های پایان فصل
+        </div>
+        <ol class="exercise-list">
+          <li>نظریه محاسبات را تعریف کنید و بگویید سه ستون اصلی آن چیست.</li>
+          <li>مجموعه توانی مجموعه <code>S = {a, b, c}</code> را بنویسید و اندازه آن را تعیین کنید.</li>
+          <li>با استفاده از استقرای ریاضی اثبات کنید که <code>1 + 3 + 5 + ... + (2n − 1) = n²</code>.</li>
+          <li>تفاوت مجموعه شمارا و ناشمارا را توضیح دهید و برای هر کدام یک مثال بزنید.</li>
+          <li>تفاوت رابطه هم‌ارزی و رابطه ترتیب جزئی چیست؟</li>
+          <li>یک درخت با ۱۰ رأس چند یال دارد؟ چرا؟</li>
+          <li>فرض کنید <code>Σ = {0, 1}</code>. تمام رشته‌های با طول حداکثر ۳ را بنویسید.</li>
+          <li>اگر <code>w = abba</code>، مقدار <code>|w|</code>، <code>w^R</code> و <code>w²</code> را محاسبه کنید.</li>
+          <li>زبان <code>L = {aⁿbⁿ | n ≥ 0}</code> را با توصیف فارسی بنویسید.</li>
+          <li>اگر <code>L₁ = {a, b}</code> و <code>L₂ = {0, 1}</code>، زبان‌های <code>L₁L₂</code>، <code>L₁*</code> و <code>L₁ ∪ L₂</code> را بنویسید.</li>
+          <li>گرامر <code>G = ({S}, {a, b}, S, P)</code> با <code>P = {S → aSb, S → λ}</code> را در نظر بگیرید. این گرامر چه زبانی تولید می‌کند؟</li>
+          <li>برای رشته <code>aabb</code> در گرامر سؤال قبل، درخت اشتقاق رسم کنید.</li>
+          <li>تفاوت اشتقاق چپ‌ترین و راست‌ترین را با یک مثال توضیح دهید.</li>
+          <li>سلسله‌مراتب چامسکی را با ذکر ماشین متناظر برای هر نوع گرامر بنویسید.</li>
+          <li>تفاوت قطعی و غیرقطعی در اتوماتاها را با یک مثال توضیح دهید.</li>
+          <li>چرا می‌گوییم زبان‌های باقاعده زیرمجموعه زبان‌های مستقل از متن هستند؟</li>
+          <li>یک کاربرد عملی زبان‌های باقاعده در دنیای واقعی ذکر کنید.</li>
+          <li>یک کاربرد عملی زبان‌های مستقل از متن در دنیای واقعی ذکر کنید.</li>
+        </ol>
+      </div>
+    </section>
+
+    <nav class="part-nav">
+      <span class="part-nav-btn disabled">
+        <span class="arrow">&#8594;</span>
+        فصل قبلی
+      </span>
+      <a class="part-nav-btn home" href="index.html">
+        فهرست مطالب
+      </a>
+      <a class="part-nav-btn" href="part-02.html">
+        فصل بعدی
+        <span class="arrow">&#8592;</span>
+      </a>
+    </nav>
+
+  </main>
+</div>
+
+<footer class="doc-footer">
+  <div class="footer-name">مهران غلامی مقدم</div>
+  <div>
+    <a class="footer-link" href="https://github.com/Mehran00programmer" target="_blank" rel="noopener noreferrer">github.com/Mehran00programmer</a>
+  </div>
+</footer>
+
+<button class="back-to-top" type="button" aria-label="بازگشت به بالا">
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 13V3"/>
+    <polyline points="3 8 8 3 13 8"/>
+  </svg>
+</button>
+
+<button class="theme-toggle" type="button" aria-label="تغییر تم">
+  <svg class="icon-moon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 9.5A6 6 0 0 1 6.5 2 6 6 0 1 0 14 9.5z"/>
+  </svg>
+  <svg class="icon-sun" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="8" cy="8" r="3"/>
+    <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.5 1.5M11.5 11.5L13 13M13 3l-1.5 1.5M4.5 11.5L3 13"/>
+  </svg>
+</button>
+
+<script src="assets/app.js"></script>
+
+</body>
+</html>
