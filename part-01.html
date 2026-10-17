@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0d1117">
-<meta name="description" content="فصل اول نظریه زبان‌ها و ماشین‌ها — مجموعه‌ها، الفبا، رشته، عملیات روی رشته‌ها، زبان، گرامر، اتوماتا و سلسله‌مراتب چامسکی.">
+<meta name="description" content="فصل اول نظریه زبان‌ها و ماشین‌ها — مجموعه‌ها، الفبا، رشته، عملیات، زبان، گرامر، روش نوشتن گرامر، مثال‌های حل‌شده و تمرین‌های متنوع.">
 <meta name="author" content="مهران غلامی مقدم">
-<title>فصل ۰۱ — مجموعه‌ها، رشته‌ها، زبان‌ها و ماشین‌ها</title>
+<title>فصل ۰۱ — مجموعه‌ها، رشته‌ها، زبان‌ها و گرامرها</title>
 <link rel="icon" href="mehran-favicon.ico" sizes="any">
 <link rel="canonical" href="https://mehran00programmer.github.io/Theory-of-Languages-and-Machines/part-01.html">
 <link rel="stylesheet" href="assets/style.css">
@@ -20,13 +20,11 @@
 <header class="doc-header">
   <div class="page">
     <div class="hero-badge" style="display:inline-block;font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:1.5px;background:rgba(88,166,255,0.08);border:1px solid rgba(88,166,255,0.2);padding:4px 12px;border-radius:20px;margin-bottom:14px;">فصل ۰۱</div>
-    <h1 class="doc-title">مجموعه‌ها، رشته‌ها، زبان‌ها و ماشین‌ها</h1>
+    <h1 class="doc-title">مجموعه‌ها، رشته‌ها، زبان‌ها و گرامرها</h1>
     <p class="doc-subtitle">
-      در این فصل از صفر شروع می‌کنیم: ابتدا با مفهوم مجموعه، انواع نمایش، عملیات، زیرمجموعه،
-      مجموعه توانی و ضرب دکارتی آشنا می‌شویم. سپس الفبا، نماد، رشته، عملیات روی رشته‌ها
-      (اتصال، معکوس، توان)، مفاهیم Σ* و Σ⁺ را به‌تفصیل بررسی می‌کنیم. در ادامه زبان،
-      عملیات روی زبان‌ها، گرامر، اشتقاق، درخت اشتقاق، اتوماتا و سلسله‌مراتب چامسکی را
-      با مثال‌های فراوان یاد می‌گیریم.
+      این فصل کامل‌ترین مرجع برای شروع درس نظریه زبان‌ها و ماشین‌هاست. از صفر شروع می‌کنیم و
+      تا نوشتن گرامر برای هر زبانی پیش می‌رویم. شامل روش‌های گام‌به‌گام نوشتن گرامر،
+      مثال‌های فراوان حل‌شده، الگوهای رایج امتحانی و بیش از ۱۰۰ تمرین دسته‌بندی‌شده.
     </p>
 
     <div class="author-card">
@@ -47,24 +45,28 @@
     <div class="toc-header">فهرست مطالب این فصل</div>
     <ul class="toc-list">
       <li><a class="toc-link" href="#s1"><span class="num">01</span><span>این درس درباره چیست؟</span></a></li>
-      <li><a class="toc-link" href="#s2"><span class="num">02</span><span>مجموعه‌ها: تعریف، اعضا و نمادگذاری</span></a></li>
+      <li><a class="toc-link" href="#s2"><span class="num">02</span><span>مجموعه‌ها: تعریف و نمادگذاری</span></a></li>
       <li><a class="toc-link" href="#s3"><span class="num">03</span><span>نمایش و انواع مجموعه‌ها</span></a></li>
-      <li><a class="toc-link" href="#s4"><span class="num">04</span><span>زیرمجموعه و مقایسه مجموعه‌ها</span></a></li>
-      <li><a class="toc-link" href="#s5"><span class="num">05</span><span>عملیات روی مجموعه‌ها</span></a></li>
+      <li><a class="toc-link" href="#s4"><span class="num">04</span><span>زیرمجموعه و مقایسه</span></a></li>
+      <li><a class="toc-link" href="#s5"><span class="num">05</span><span>عملیات مجموعه‌ها</span></a></li>
       <li><a class="toc-link" href="#s6"><span class="num">06</span><span>ضرب دکارتی و مجموعه توانی</span></a></li>
-      <li><a class="toc-link" href="#s7"><span class="num">07</span><span>قوانین دمورگان و اتحادهای مجموعه</span></a></li>
+      <li><a class="toc-link" href="#s7"><span class="num">07</span><span>قوانین دمورگان</span></a></li>
       <li><a class="toc-link" href="#s8"><span class="num">08</span><span>الفبا و نماد</span></a></li>
-      <li><a class="toc-link" href="#s9"><span class="num">09</span><span>رشته‌ها: تعریف و ویژگی‌ها</span></a></li>
+      <li><a class="toc-link" href="#s9"><span class="num">09</span><span>رشته‌ها</span></a></li>
       <li><a class="toc-link" href="#s10"><span class="num">10</span><span>عملیات روی رشته‌ها</span></a></li>
-      <li><a class="toc-link" href="#s11"><span class="num">11</span><span>پیشوند، پسوند و زیررشته</span></a></li>
+      <li><a class="toc-link" href="#s11"><span class="num">11</span><span>پیشوند، پسوند، زیررشته</span></a></li>
       <li><a class="toc-link" href="#s12"><span class="num">12</span><span>Σ* و Σ⁺</span></a></li>
-      <li><a class="toc-link" href="#s13"><span class="num">13</span><span>زبان: تعریف و مثال‌ها</span></a></li>
+      <li><a class="toc-link" href="#s13"><span class="num">13</span><span>زبان</span></a></li>
       <li><a class="toc-link" href="#s14"><span class="num">14</span><span>عملیات روی زبان‌ها</span></a></li>
-      <li><a class="toc-link" href="#s15"><span class="num">15</span><span>گرامرها</span></a></li>
+      <li><a class="toc-link" href="#s15"><span class="num">15</span><span>گرامر: تعریف رسمی</span></a></li>
       <li><a class="toc-link" href="#s16"><span class="num">16</span><span>اشتقاق و درخت اشتقاق</span></a></li>
-      <li><a class="toc-link" href="#s17"><span class="num">17</span><span>اتوماتاها</span></a></li>
-      <li><a class="toc-link" href="#s18"><span class="num">18</span><span>سلسله‌مراتب چامسکی</span></a></li>
-      <li><a class="toc-link" href="#s19"><span class="num">19</span><span>خلاصه و تمرین‌ها</span></a></li>
+      <li><a class="toc-link" href="#s17"><span class="num">17</span><span>روش گام‌به‌گام نوشتن گرامر</span></a></li>
+      <li><a class="toc-link" href="#s18"><span class="num">18</span><span>گرامر چه زبانی تولید می‌کند؟</span></a></li>
+      <li><a class="toc-link" href="#s19"><span class="num">19</span><span>الگوهای رایج امتحانی</span></a></li>
+      <li><a class="toc-link" href="#s20"><span class="num">20</span><span>مثال‌های حل‌شده جامع</span></a></li>
+      <li><a class="toc-link" href="#s21"><span class="num">21</span><span>اتوماتاها</span></a></li>
+      <li><a class="toc-link" href="#s22"><span class="num">22</span><span>سلسله‌مراتب چامسکی</span></a></li>
+      <li><a class="toc-link" href="#s23"><span class="num">23</span><span>تمرین‌های جامع دسته‌بندی‌شده</span></a></li>
     </ul>
   </aside>
 
@@ -125,13 +127,29 @@
         نمی‌توان رشته، زبان، گرامر یا ماشین را فهمید. به همین دلیل این فصل را
         از صفر و با مجموعه‌ها شروع می‌کنیم.
       </p>
+
+      <h3>ساختار این فصل</h3>
+      <p>
+        این فصل طوری طراحی شده که شما را از صفر تا سطح تسلط کامل بر نوشتن گرامر ببرد:
+      </p>
+      <ol>
+        <li>بخش ۰۲ تا ۰۷: مجموعه‌ها (پایه ریاضی)</li>
+        <li>بخش ۰۸ تا ۱۴: الفبا، رشته و زبان (پایه نظریه)</li>
+        <li>بخش ۱۵ تا ۱۶: گرامر و اشتقاق (مفاهیم اصلی)</li>
+        <li>بخش ۱۷: روش گام‌به‌گام نوشتن گرامر (مهارت کلیدی)</li>
+        <li>بخش ۱۸: تحلیل گرامر (چه زبانی تولید می‌کند؟)</li>
+        <li>بخش ۱۹: الگوهای رایج امتحانی (تجربه عملی)</li>
+        <li>بخش ۲۰: مثال‌های جامع حل‌شده (تمرین با حل)</li>
+        <li>بخش ۲۱ تا ۲۲: اتوماتاها و سلسله‌مراتب چامسکی</li>
+        <li>بخش ۲۳: بیش از ۱۰۰ تمرین دسته‌بندی‌شده</li>
+      </ol>
     </section>
 
     <!-- ==================== 1.2 ==================== -->
     <section class="section fade-in" id="s2">
       <div class="section-head">
         <span class="section-num">02</span>
-        <h2 class="section-title">مجموعه‌ها: تعریف، اعضا و نمادگذاری</h2>
+        <h2 class="section-title">مجموعه‌ها: تعریف و نمادگذاری</h2>
       </div>
 
       <h3>تعریف شهودی مجموعه</h3>
@@ -146,13 +164,18 @@
       </ul>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال‌های بیشتر برای تفهیم</span>
         <p>
           <code>{1, 2, 3}</code> یک مجموعه است. اعضای آن ۱، ۲ و ۳ هستند.
           <br>
           <code>{3, 1, 2}</code> همان مجموعه است. چون ترتیب مهم نیست.
           <br>
           <code>{1, 2, 2, 3}</code> هم همان مجموعه است. چون تکرار مهم نیست.
+          <br>
+          <code>{a, b, c}</code> مجموعه‌ای از سه حرف است.
+          <br>
+          <code>{1, {2, 3}}</code> مجموعه‌ای است که اعضای آن ۱ و مجموعه {۲, ۳} هستند.
+          (اعضای تودرتو مجازند.)
         </p>
       </div>
 
@@ -160,6 +183,7 @@
       <p>
         مرسوم است که مجموعه‌ها را با <strong>حروف بزرگ</strong> (مانند A, B, S, Σ) و
         اعضای آن‌ها را با <strong>حروف کوچک</strong> (مانند a, b, x) نشان دهیم.
+        خود مجموعه را با دو آکولاد <code>{ }</code> احاطه می‌کنیم.
       </p>
 
       <h3>عضویت و عدم عضویت</h3>
@@ -193,10 +217,16 @@
       </p>
       <p><code>A = B ⟺ (∀x : x ∈ A ⟺ x ∈ B)</code></p>
 
+      <div class="callout note">
+        <span class="callout-label">مثال</span>
+        <p>
+          <code>{1, 2, 3} = {3, 2, 1}</code> — درست است.
+          <br>
+          <code>{1, 2} = {1, 2, 3}</code> — نادرست است (چون ۳ در مجموعه اول نیست).
+        </p>
+      </div>
+
       <h3>نمادهای یونانی مهم در این درس</h3>
-      <p>
-        در این درس بارها با نمادهای یونانی سر و کار خواهیم داشت. جدول زیر را حفظ کنید:
-      </p>
       <div class="table-wrap">
         <table>
           <thead>
@@ -209,6 +239,8 @@
             <tr><td class="cell-ltr"><code>∅</code></td><td>تهی</td><td>مجموعه تهی</td></tr>
             <tr><td class="cell-ltr"><code>∀</code></td><td>برای هر</td><td>سور عمومی</td></tr>
             <tr><td class="cell-ltr"><code>∃</code></td><td>وجود دارد</td><td>سور وجودی</td></tr>
+            <tr><td class="cell-ltr"><code>⇒</code></td><td>نتیجه می‌دهد</td><td>استنتاج منطقی</td></tr>
+            <tr><td class="cell-ltr"><code>→</code></td><td>می‌رود به</td><td>قاعده تولید گرامر</td></tr>
           </tbody>
         </table>
       </div>
@@ -228,9 +260,15 @@
 
       <h4>روش ۱: نمایش شمارشی (Roster Method)</h4>
       <p>
-        تمام اعضای مجموعه را بین دو آکولاد <code>{ }</code> می‌نویسیم و با کاما جدا می‌کنیم.
+        تمام اعضای مجموعه را بین دو آکولاد می‌نویسیم و با کاما جدا می‌کنیم.
       </p>
-      <p><strong>مثال:</strong> <code>A = {1, 2, 3, 4, 5}</code></p>
+      <p><strong>مثال‌ها:</strong></p>
+      <ul>
+        <li><code>A = {1, 2, 3, 4, 5}</code></li>
+        <li><code>B = {a, b, c, d}</code></li>
+        <li><code>C = {2, 4, 6, 8, 10}</code></li>
+        <li><code>D = {red, green, blue}</code></li>
+      </ul>
       <p>
         <strong>محدودیت:</strong> این روش فقط برای مجموعه‌های متناهی و کوچک مناسب است.
         برای مجموعه‌های بزرگ یا نامتناهی کاربرد ندارد.
@@ -244,20 +282,29 @@
       <p><code>{x | شرطِ x}</code> &nbsp; یا &nbsp; <code>{x : شرطِ x}</code></p>
       <p>هر دو علامت <code>|</code> و <code>:</code> به معنای «به‌طوری‌که» هستند.</p>
 
-      <p><strong>مثال‌ها:</strong></p>
+      <p><strong>مثال‌های متنوع:</strong></p>
       <ul>
         <li>
-          <code>{x | x عدد طبیعی زوج است}</code> = مجموعه اعداد طبیعی زوج.
+          <code>{x | x عدد طبیعی زوج است}</code> = مجموعه اعداد طبیعی زوج = <code>{2, 4, 6, 8, ...}</code>
         </li>
         <li>
           <code>{x ∈ ℕ | x &lt; 5}</code> = <code>{0, 1, 2, 3, 4}</code>
         </li>
         <li>
-          <code>{2x | x ∈ ℕ}</code> = مجموعه اعداد زوج.
+          <code>{x ∈ ℕ | x &gt; 10 و x &lt; 15}</code> = <code>{11, 12, 13, 14}</code>
+        </li>
+        <li>
+          <code>{2x | x ∈ ℕ}</code> = مجموعه اعداد زوج = <code>{0, 2, 4, 6, ...}</code>
+        </li>
+        <li>
+          <code>{x² | x ∈ ℕ}</code> = مجموعه مربع‌های کامل = <code>{0, 1, 4, 9, 16, ...}</code>
         </li>
         <li>
           <code>{aⁿbⁿ | n ≥ 0}</code> = مجموعه رشته‌هایی که n تا a و سپس n تا b دارند
           (این یک زبان است و در ادامه بیشتر درباره‌اش صحبت می‌کنیم).
+        </li>
+        <li>
+          <code>{w ∈ {a, b}* | |w| زوج است}</code> = مجموعه رشته‌های روی {a, b} با طول زوج.
         </li>
       </ul>
 
@@ -265,7 +312,8 @@
         <span class="callout-label">نکته</span>
         <p>
           نمایش ضابطه‌ای <strong>قدرتمندترین</strong> روش است، چون می‌توان با آن
-          مجموعه‌های نامتناهی را هم تعریف کرد.
+          مجموعه‌های نامتناهی را هم تعریف کرد. در این درس، اکثر زبان‌ها را با این روش
+          نمایش می‌دهیم.
         </p>
       </div>
 
@@ -284,19 +332,27 @@
       </p>
       <p>
         <strong>نکته مهم:</strong> <code>∅</code> و <code>{∅}</code> دو چیز متفاوت هستند!
-        <code>∅</code> تهی است، اما <code>{∅}</code> یک مجموعه تک‌عضوی است که تنها عضو آن،
-        مجموعه تهی است.
+        <code>∅</code> تهی است (صفر عضو)، اما <code>{∅}</code> یک مجموعه تک‌عضوی است که
+        تنها عضو آن، مجموعه تهی است (یک عضو).
+      </p>
+      <p>
+        اندازه: <code>|∅| = 0</code> اما <code>|{∅}| = 1</code>.
       </p>
 
       <h4>۲. مجموعه تک‌عضوی (Singleton)</h4>
       <p>مجموعه‌ای که فقط یک عضو دارد.</p>
-      <p><strong>مثال:</strong> <code>{5}</code> یا <code>{a}</code></p>
+      <p><strong>مثال:</strong> <code>{5}</code> یا <code>{a}</code> یا <code>{∅}</code></p>
 
       <h4>۳. مجموعه متناهی (Finite Set)</h4>
       <p>
         مجموعه‌ای که تعداد اعضای آن <strong>متناهی</strong> است. یعنی می‌توان شمرد که چند عضو دارد.
       </p>
-      <p><strong>مثال:</strong> <code>{1, 2, 3}</code> — اندازه آن برابر ۳ است.</p>
+      <p><strong>مثال‌ها:</strong></p>
+      <ul>
+        <li><code>{1, 2, 3}</code> — اندازه آن برابر ۳ است.</li>
+        <li><code>{a, b, c, d, e}</code> — اندازه آن برابر ۵ است.</li>
+        <li><code>∅</code> — اندازه آن برابر ۰ است.</li>
+      </ul>
       <p>
         اندازه (یا کاردینالیتی) یک مجموعه متناهی A را با <code>|A|</code> نشان می‌دهیم.
       </p>
@@ -308,7 +364,8 @@
       <ul>
         <li>
           <strong>شمارا (Countably Infinite):</strong> اعضای آن را می‌توان با اعداد طبیعی
-          شماره‌گذاری کرد. مثل <code>ℕ = {1, 2, 3, ...}</code> و <code>ℤ = {..., -1, 0, 1, ...}</code>.
+          شماره‌گذاری کرد. مثل <code>ℕ = {1, 2, 3, ...}</code> و <code>ℤ = {..., -1, 0, 1, ...}</code>
+          و <code>ℚ = {a/b | a, b ∈ ℤ، b ≠ 0}</code>.
         </li>
         <li>
           <strong>ناشمارا (Uncountably Infinite):</strong> اعضای آن قابل شماره‌گذاری با
@@ -320,6 +377,10 @@
       <p>
         مجموعه‌ای که <strong>تمام اعضای مورد بحث</strong> را در بر می‌گیرد. با <code>U</code>
         نمایش داده می‌شود. در هر مسئله، مجموعه جهانی مشخص می‌کند که دامنه بحث چیست.
+      </p>
+      <p>
+        <strong>مثال:</strong> اگر مسئله درباره اعداد طبیعی است، U = ℕ. اگر درباره
+        دانشجویان یک دانشگاه است، U = مجموعه همه دانشجویان.
       </p>
 
       <h4>۶. مجموعه اعداد مهم در ریاضیات</h4>
@@ -333,6 +394,7 @@
             <tr><td class="cell-ltr"><code>ℤ</code></td><td>اعداد صحیح</td><td class="cell-ltr">{..., -2, -1, 0, 1, 2, ...}</td></tr>
             <tr><td class="cell-ltr"><code>ℚ</code></td><td>اعداد گویا</td><td>کسری‌ها (a/b که b ≠ 0)</td></tr>
             <tr><td class="cell-ltr"><code>ℝ</code></td><td>اعداد حقیقی</td><td>همه اعداد روی خط اعداد</td></tr>
+            <tr><td class="cell-ltr"><code>ℂ</code></td><td>اعداد مختلط</td><td>اعداد به شکل a + bi</td></tr>
           </tbody>
         </table>
       </div>
@@ -359,7 +421,7 @@
       </p>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال‌های متنوع</span>
         <p>
           <code>{1, 2} ⊆ {1, 2, 3}</code> — درست است.
           <br>
@@ -368,6 +430,10 @@
           <code>{1, 2, 3} ⊆ {1, 2, 3}</code> — درست است (هر مجموعه زیرمجموعه خودش است).
           <br>
           <code>{1, 2, 3} ⊂ {1, 2, 3}</code> — نادرست است (زیرا مساوی هستند).
+          <br>
+          <code>{1, 4} ⊆ {1, 2, 3}</code> — نادرست است (چون ۴ در مجموعه دوم نیست).
+          <br>
+          <code>∅ ⊆ {1, 2, 3}</code> — درست است (تهی زیرمجموعه هر مجموعه‌ای است).
         </p>
       </div>
 
@@ -377,7 +443,29 @@
         <li><strong>پادتقارنی:</strong> اگر <code>A ⊆ B</code> و <code>B ⊆ A</code>، آنگاه <code>A = B</code>.</li>
         <li><strong>متعدی:</strong> اگر <code>A ⊆ B</code> و <code>B ⊆ C</code>، آنگاه <code>A ⊆ C</code>.</li>
         <li><strong>مجموعه تهی:</strong> مجموعه تهی زیرمجموعه هر مجموعه‌ای است: <code>∅ ⊆ A</code> برای هر A.</li>
+        <li><strong>مجموعه جهانی:</strong> هر مجموعه‌ای زیرمجموعه مجموعه جهانی است: <code>A ⊆ U</code>.</li>
       </ul>
+
+      <h3>تعداد زیرمجموعه‌ها</h3>
+      <p>
+        اگر اندازه مجموعه A برابر n باشد، تعداد کل زیرمجموعه‌های آن (شامل ∅ و خود A)
+        برابر <code>2ⁿ</code> است.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>اندازه A</th><th>تعداد زیرمجموعه‌ها</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>0 (تهی)</td><td class="cell-ltr">2⁰ = 1</td></tr>
+            <tr><td>1</td><td class="cell-ltr">2¹ = 2</td></tr>
+            <tr><td>2</td><td class="cell-ltr">2² = 4</td></tr>
+            <tr><td>3</td><td class="cell-ltr">2³ = 8</td></tr>
+            <tr><td>4</td><td class="cell-ltr">2⁴ = 16</td></tr>
+            <tr><td>n</td><td class="cell-ltr">2ⁿ</td></tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>مقایسه مجموعه‌ها</h3>
 
@@ -390,7 +478,9 @@
       <h4>۲. هم‌ارزی (Equivalence)</h4>
       <p>
         دو مجموعه <strong>هم‌ارز</strong> هستند اگر بین آن‌ها تناظر یک‌به‌یک برقرار باشد
-        (یعنی هم‌اندازه باشند). مثلاً <code>{1, 2, 3}</code> و <code>{a, b, c}</code> هم‌ارزند،
+        (یعنی هم‌اندازه باشند).
+      </p>
+      <p><strong>مثال:</strong> <code>{1, 2, 3}</code> و <code>{a, b, c}</code> هم‌ارزند،
         هرچند مساوی نیستند.
       </p>
 
@@ -400,11 +490,16 @@
         نداشته باشند:
       </p>
       <p><code>A ∩ B = ∅</code></p>
+      <p><strong>مثال:</strong> <code>{1, 2}</code> و <code>{3, 4}</code> جدا از هم هستند.</p>
 
       <h4>۴. قابل مقایسه (Comparable)</h4>
       <p>
         دو مجموعه <strong>قابل مقایسه</strong> هستند اگر یکی زیرمجموعه دیگری باشد
         (یعنی یا <code>A ⊆ B</code> یا <code>B ⊆ A</code>).
+      </p>
+      <p>
+        <strong>مثال:</strong> <code>{1, 2}</code> و <code>{1, 2, 3}</code> قابل مقایسه هستند.
+        اما <code>{1, 3}</code> و <code>{2, 4}</code> قابل مقایسه نیستند (هیچ‌کدام زیرمجموعه دیگری نیست).
       </p>
     </section>
 
@@ -426,9 +521,14 @@
         (بدون تکرار) است.
       </p>
       <p><code>A ∪ B = {x | x ∈ A یا x ∈ B}</code></p>
-      <p><strong>مثال:</strong> اگر <code>A = {1, 2, 3}</code> و <code>B = {3, 4, 5}</code>، آنگاه
-        <code>A ∪ B = {1, 2, 3, 4, 5}</code>.
-      </p>
+      <p><strong>مثال‌های متنوع:</strong></p>
+      <ul>
+        <li><code>{1, 2, 3} ∪ {3, 4, 5} = {1, 2, 3, 4, 5}</code></li>
+        <li><code>{1, 2} ∪ {3, 4} = {1, 2, 3, 4}</code></li>
+        <li><code>{a, b, c} ∪ {d, e} = {a, b, c, d, e}</code></li>
+        <li><code>{1, 2, 3} ∪ ∅ = {1, 2, 3}</code> (تهی عنصر خنثی است)</li>
+        <li><code>{1, 2} ∪ {1, 2} = {1, 2}</code> (اجتماع با خودش)</li>
+      </ul>
 
       <h3>۲. اشتراک (Intersection) — <code>∩</code></h3>
       <p>
@@ -436,18 +536,28 @@
         مجموعه است.
       </p>
       <p><code>A ∩ B = {x | x ∈ A و x ∈ B}</code></p>
-      <p><strong>مثال:</strong> اگر <code>A = {1, 2, 3}</code> و <code>B = {3, 4, 5}</code>، آنگاه
-        <code>A ∩ B = {3}</code>.
-      </p>
+      <p><strong>مثال‌های متنوع:</strong></p>
+      <ul>
+        <li><code>{1, 2, 3} ∩ {3, 4, 5} = {3}</code></li>
+        <li><code>{1, 2, 3} ∩ {4, 5, 6} = ∅</code></li>
+        <li><code>{1, 2, 3, 4} ∩ {2, 4, 6} = {2, 4}</code></li>
+        <li><code>{a, b, c} ∩ {a, b, c} = {a, b, c}</code></li>
+        <li><code>{1, 2, 3} ∩ ∅ = ∅</code></li>
+      </ul>
 
       <h3>۳. تفاضل (Difference) — <code>−</code></h3>
       <p>
         تفاضل A منهای B، مجموعه‌ای است که شامل اعضای A است که در B <strong>نیستند</strong>.
       </p>
       <p><code>A − B = {x | x ∈ A و x ∉ B}</code></p>
-      <p><strong>مثال:</strong> اگر <code>A = {1, 2, 3}</code> و <code>B = {3, 4, 5}</code>، آنگاه
-        <code>A − B = {1, 2}</code> و <code>B − A = {4, 5}</code>.
-      </p>
+      <p><strong>مثال‌های متنوع:</strong></p>
+      <ul>
+        <li><code>{1, 2, 3} − {3, 4, 5} = {1, 2}</code></li>
+        <li><code>{3, 4, 5} − {1, 2, 3} = {4, 5}</code></li>
+        <li><code>{1, 2, 3} − {1, 2, 3} = ∅</code></li>
+        <li><code>{1, 2, 3} − ∅ = {1, 2, 3}</code></li>
+        <li><code>{1, 2, 3} − {4, 5, 6} = {1, 2, 3}</code></li>
+      </ul>
 
       <h3>۴. مکمل (Complement) — <code>‾A</code> یا <code>A'</code></h3>
       <p>
@@ -455,9 +565,13 @@
         <strong>نیستند</strong>.
       </p>
       <p><code>‾A = U − A = {x ∈ U | x ∉ A}</code></p>
-      <p><strong>مثال:</strong> اگر <code>U = {1, 2, 3, 4, 5}</code> و <code>A = {1, 2}</code>، آنگاه
-        <code>‾A = {3, 4, 5}</code>.
-      </p>
+      <p><strong>مثال‌های متنوع:</strong></p>
+      <ul>
+        <li>اگر <code>U = {1, 2, 3, 4, 5}</code> و <code>A = {1, 2}</code>، آنگاه <code>‾A = {3, 4, 5}</code>.</li>
+        <li>اگر <code>U = {a, b, c, d, e}</code> و <code>A = {a, c, e}</code>، آنگاه <code>‾A = {b, d}</code>.</li>
+        <li><code>‾∅ = U</code> (مکمل تهی، همه مجموعه جهانی است)</li>
+        <li><code>‾U = ∅</code> (مکمل مجموعه جهانی، تهی است)</li>
+      </ul>
 
       <h3>۵. تفاضل متقارن (Symmetric Difference) — <code>△</code></h3>
       <p>
@@ -465,9 +579,13 @@
         مجموعه</strong> هستند اما در <strong>هر دو</strong> نیستند.
       </p>
       <p><code>A △ B = (A − B) ∪ (B − A) = (A ∪ B) − (A ∩ B)</code></p>
-      <p><strong>مثال:</strong> اگر <code>A = {1, 2, 3}</code> و <code>B = {3, 4, 5}</code>، آنگاه
-        <code>A △ B = {1, 2, 4, 5}</code>.
-      </p>
+      <p><strong>مثال‌های متنوع:</strong></p>
+      <ul>
+        <li><code>{1, 2, 3} △ {3, 4, 5} = {1, 2, 4, 5}</code></li>
+        <li><code>{1, 2, 3} △ {1, 2, 3} = ∅</code></li>
+        <li><code>{1, 2} △ ∅ = {1, 2}</code></li>
+        <li><code>{1, 2, 3} △ {4, 5, 6} = {1, 2, 3, 4, 5, 6}</code></li>
+      </ul>
 
       <h3>خلاصه عملیات</h3>
       <div class="table-wrap">
@@ -540,13 +658,27 @@
       </p>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال‌های متنوع</span>
         <p>
-          اگر <code>A = {1, 2}</code> و <code>B = {x, y}</code>، آنگاه:
+          <strong>مثال ۱:</strong> اگر <code>A = {1, 2}</code> و <code>B = {x, y}</code>، آنگاه:
           <br>
           <code>A × B = {(1, x), (1, y), (2, x), (2, y)}</code>
           <br>
+          <code>B × A = {(x, 1), (x, 2), (y, 1), (y, 2)}</code>
+          <br>
           توجه کنید که <code>A × B</code> با <code>B × A</code> متفاوت است.
+        </p>
+        <p>
+          <strong>مثال ۲:</strong> اگر <code>A = {a, b}</code> و <code>B = {1, 2, 3}</code>، آنگاه:
+          <br>
+          <code>A × B = {(a, 1), (a, 2), (a, 3), (b, 1), (b, 2), (b, 3)}</code>
+        </p>
+        <p>
+          <strong>مثال ۳:</strong> اگر <code>A = {0, 1}</code>، آنگاه:
+          <br>
+          <code>A × A = {(0, 0), (0, 1), (1, 0), (1, 1)}</code>
+          <br>
+          (این همان مجموعه رشته‌های دودویی با طول ۲ است.)
         </p>
       </div>
 
@@ -564,6 +696,27 @@
         نتیجه یک مجموعه از n-تایی‌های مرتب است.
       </p>
 
+      <div class="callout note">
+        <span class="callout-label">مثال</span>
+        <p>
+          اگر <code>A = {0, 1}</code>، آنگاه:
+          <br>
+          <code>A × A × A = {(0,0,0), (0,0,1), (0,1,0), (0,1,1), (1,0,0), (1,0,1), (1,1,0), (1,1,1)}</code>
+          <br>
+          این همان مجموعه رشته‌های دودویی با طول ۳ است.
+        </p>
+      </div>
+
+      <div class="callout key">
+        <span class="callout-label">ارتباط با نظریه زبان‌ها</span>
+        <p>
+          ضرب دکارتی، ارتباط تنگاتنگی با نظریه زبان‌ها دارد. اگر <code>Σ = {a, b}</code>،
+          آنگاه <code>Σ × Σ</code> مجموعه‌ای از همه رشته‌های با طول ۲ است. به عبارت دیگر،
+          ضرب دکارتی n باره Σ، همان <code>Σⁿ</code> است که در بخش <a href="#s12">Σ* و Σ⁺</a>
+          بیشتر توضیح می‌دهیم.
+        </p>
+      </div>
+
       <h3>مجموعه توانی (Power Set) — <code>2^A</code> یا <code>P(A)</code></h3>
       <p>
         مجموعه توانی یک مجموعه A، مجموعه‌ای است که شامل <strong>تمام زیرمجموعه‌های</strong>
@@ -580,20 +733,31 @@
       </p>
 
       <div class="callout note">
-        <span class="callout-label">مثال کامل</span>
+        <span class="callout-label">مثال‌های کامل</span>
         <p>
-          اگر <code>A = {a, b}</code>، آنگاه:
+          <strong>مثال ۱:</strong> اگر <code>A = {a}</code>، آنگاه:
+          <br>
+          <code>2^A = {∅, {a}}</code>
+          <br>
+          اندازه <code>2^A</code> برابر است با <code>2¹ = 2</code>.
+        </p>
+        <p>
+          <strong>مثال ۲:</strong> اگر <code>A = {a, b}</code>، آنگاه:
           <br>
           <code>2^A = {∅, {a}, {b}, {a, b}}</code>
           <br>
           اندازه <code>2^A</code> برابر است با <code>2² = 4</code>.
         </p>
         <p>
-          اگر <code>B = {1, 2, 3}</code>، آنگاه:
+          <strong>مثال ۳:</strong> اگر <code>B = {1, 2, 3}</code>، آنگاه:
           <br>
           <code>2^B = {∅, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3}}</code>
           <br>
           اندازه <code>2^B</code> برابر است با <code>2³ = 8</code>.
+        </p>
+        <p>
+          <strong>مثال ۴:</strong> اگر <code>C = {a, b, c, d}</code>، اندازه <code>2^C</code>
+          برابر <code>2⁴ = 16</code> خواهد بود. (نیازی به نوشتن تمام ۱۶ عضو نیست.)
         </p>
       </div>
 
@@ -605,6 +769,10 @@
         <li>
           مجموعه توانی یک مجموعه n-عضوی، یک ساختار ترکیبیاتی بسیار مهم است که در
           سراسر ریاضیات و علوم کامپیوتر کاربرد دارد.
+        </li>
+        <li>
+          <strong>نکته:</strong> اگر A متناهی باشد، <code>2^A</code> هم متناهی است.
+          اگر A نامتناهی باشد، <code>2^A</code> نیز نامتناهی (و در واقع ناشمارا) است.
         </li>
       </ul>
 
@@ -621,11 +789,18 @@
       <div class="callout note">
         <span class="callout-label">مثال</span>
         <p>
-          برای مجموعه <code>A = {1, 2, 3}</code>، یکی از افرازها این است:
-          <br>
-          <code>{{1}, {2, 3}}</code>
-          <br>
-          بلوک‌ها جدا از هم هستند و اجتماعشان A است.
+          برای مجموعه <code>A = {1, 2, 3}</code>، نمونه‌هایی از افرازها:
+        </p>
+        <ul>
+          <li><code>{{1, 2, 3}}</code> — یک بلوک</li>
+          <li><code>{{1}, {2, 3}}</code> — دو بلوک</li>
+          <li><code>{{1, 2}, {3}}</code> — دو بلوک</li>
+          <li><code>{{1, 3}, {2}}</code> — دو بلوک</li>
+          <li><code>{{1}, {2}, {3}}</code> — سه بلوک</li>
+        </ul>
+        <p>
+          توجه: <code>{{1}, {2}}</code> افراز نیست، چون اجتماع بلوک‌ها {1, 2} است،
+          نه {1, 2, 3}.
         </p>
       </div>
     </section>
@@ -676,7 +851,7 @@
         برای اثبات <code>X = Y</code>، نشان می‌دهیم <code>X ⊆ Y</code> و <code>Y ⊆ X</code>.
       </p>
 
-      <p><strong>مثال: اثبات <code>‾(A ∪ B) = ‾A ∩ ‾B</code></strong></p>
+      <p><strong>مثال ۱: اثبات <code>‾(A ∪ B) = ‾A ∩ ‾B</code></strong></p>
       <p>
         <strong>اثبات <code>‾(A ∪ B) ⊆ ‾A ∩ ‾B</code>:</strong>
       </p>
@@ -732,12 +907,14 @@
       <ul>
         <li><code>Σ = {0, 1}</code> — الفبای دودویی.</li>
         <li><code>Σ = {a, b}</code> — الفبای دو نمادی.</li>
+        <li><code>Σ = {a, b, c}</code> — الفبای سه نمادی.</li>
         <li><code>Σ = {a, b, c, ..., z}</code> — الفبای حروف کوچک انگلیسی.</li>
         <li><code>Σ = {0, 1, 2, ..., 9}</code> — الفبای ارقام اعشاری.</li>
         <li>
           <code>Σ = {if, then, else, while, for}</code> — الفبای کلمات کلیدی یک زبان
           برنامه‌نویسی.
         </li>
+        <li><code>Σ = {a}</code> — الفبای تک‌نمادی.</li>
       </ul>
 
       <h3>نماد (Symbol)</h3>
@@ -748,6 +925,7 @@
       <ul>
         <li>در الفبای <code>Σ = {0, 1}</code>، نمادها عبارتند از ۰ و ۱.</li>
         <li>در الفبای <code>Σ = {a, b}</code>، نمادها عبارتند از a و b.</li>
+        <li>در الفبای <code>Σ = {a, b, c}</code>، نمادها عبارتند از a و b و c.</li>
       </ul>
 
       <div class="callout note">
@@ -757,6 +935,17 @@
           <code>if</code>). مهم این است که به‌عنوان یک واحد تجزیه‌ناپذیر در نظر گرفته شوند.
         </p>
       </div>
+
+      <h3>تفاوت نماد و رشته</h3>
+      <p>
+        این تفاوت را باید کاملاً درک کنید:
+      </p>
+      <ul>
+        <li><strong>نماد:</strong> یک واحد تجزیه‌ناپذیر است. مثلاً <code>a</code> یک نماد است.</li>
+        <li><strong>رشته:</strong> دنباله‌ای از نمادهاست. مثلاً <code>abc</code> یک رشته است.</li>
+        <li>یک رشته می‌تواند طول ۰، ۱، ۲، ... داشته باشد.</li>
+        <li>یک نماد همیشه طول ۱ دارد (به‌عنوان یک واحد).</li>
+      </ul>
     </section>
 
     <!-- ==================== 1.9 ==================== -->
@@ -776,16 +965,22 @@
         </p>
       </div>
 
-      <h4>مثال‌های رشته</h4>
+      <h4>مثال‌های متنوع رشته</h4>
       <p>
-        اگر <code>Σ = {a, b}</code> باشد، نمونه‌های رشته روی این الفبا عبارتند از:
+        اگر <code>Σ = {a, b}</code> باشد، نمونه‌های رشته روی این الفبا:
       </p>
       <ul>
-        <li><code>a</code>، <code>b</code></li>
-        <li><code>ab</code>، <code>ba</code>، <code>aa</code>، <code>bb</code></li>
-        <li><code>aba</code>، <code>bab</code>، <code>aab</code>، <code>bba</code></li>
-        <li><code>ababab</code>، <code>aaabbb</code>، ...</li>
+        <li>طول ۰: <code>λ</code></li>
+        <li>طول ۱: <code>a</code>، <code>b</code></li>
+        <li>طول ۲: <code>aa</code>، <code>ab</code>، <code>ba</code>، <code>bb</code></li>
+        <li>طول ۳: <code>aaa</code>، <code>aab</code>، <code>aba</code>، <code>abb</code>، <code>baa</code>، <code>bab</code>، <code>bba</code>، <code>bbb</code></li>
+        <li>طول ۴: <code>aaaa</code>، <code>aaab</code>، ... (۱۶ رشته)</li>
       </ul>
+
+      <p>
+        اگر <code>Σ = {0, 1}</code> باشد، نمونه‌های رشته: <code>0</code>، <code>1</code>، <code>01</code>،
+        <code>10</code>، <code>110</code>، <code>1010</code>، و غیره.
+      </p>
 
       <h3>رشته تهی (Empty String)</h3>
       <p>
@@ -817,6 +1012,7 @@
             <tr><td class="cell-ltr"><code>ab</code></td><td class="cell-ltr">2</td></tr>
             <tr><td class="cell-ltr"><code>aba</code></td><td class="cell-ltr">3</td></tr>
             <tr><td class="cell-ltr"><code>ababab</code></td><td class="cell-ltr">6</td></tr>
+            <tr><td class="cell-ltr"><code>0011010</code></td><td class="cell-ltr">7</td></tr>
           </tbody>
         </table>
       </div>
@@ -827,11 +1023,16 @@
         اهمیت دارد</strong>. به همین دلیل است که <code>ab</code> و <code>ba</code> دو
         رشته متفاوت هستند.
       </p>
+      <p>
+        <strong>مثال:</strong> <code>ab</code> و <code>ba</code> و <code>aab</code> و <code>aba</code>
+        و <code>baa</code> همه رشته‌های متفاوتی هستند.
+      </p>
 
       <h3>تکرار در رشته</h3>
       <p>
         برخلاف مجموعه‌ها که در آن‌ها اعضا باید متمایز باشند، در رشته‌ها نمادها
-        <strong>می‌توانند تکرار شوند</strong>. مثلاً <code>aaa</code> یک رشته معتبر است.
+        <strong>می‌توانند تکرار شوند</strong>. مثلاً <code>aaa</code>، <code>aabaa</code>،
+        <code>0000</code> همه رشته‌های معتبر هستند.
       </p>
 
       <h3>تعداد رشته‌های با طول مشخص</h3>
@@ -845,10 +1046,18 @@
           اگر <code>Σ = {a, b}</code> (دو نماد)، آنگاه:
         </p>
         <ul>
-          <li>رشته‌های با طول ۰: <code>{λ}</code> — ۱ رشته</li>
-          <li>رشته‌های با طول ۱: <code>{a, b}</code> — ۲ رشته (۲¹)</li>
-          <li>رشته‌های با طول ۲: <code>{aa, ab, ba, bb}</code> — ۴ رشته (۲²)</li>
-          <li>رشته‌های با طول ۳: <code>{aaa, aab, aba, abb, baa, bab, bba, bbb}</code> — ۸ رشته (۲³)</li>
+          <li>رشته‌های با طول ۰: <code>{λ}</code> — ۱ رشته (<code>2⁰</code>)</li>
+          <li>رشته‌های با طول ۱: <code>{a, b}</code> — ۲ رشته (<code>2¹</code>)</li>
+          <li>رشته‌های با طول ۲: <code>{aa, ab, ba, bb}</code> — ۴ رشته (<code>2²</code>)</li>
+          <li>رشته‌های با طول ۳: <code>{aaa, aab, aba, abb, baa, bab, bba, bbb}</code> — ۸ رشته (<code>2³</code>)</li>
+        </ul>
+        <p>
+          اگر <code>Σ = {0, 1, 2}</code> (سه نماد)، آنگاه:
+        </p>
+        <ul>
+          <li>طول ۱: ۳ رشته (<code>3¹</code>)</li>
+          <li>طول ۲: ۹ رشته (<code>3²</code>)</li>
+          <li>طول ۳: ۲۷ رشته (<code>3³</code>)</li>
         </ul>
       </div>
     </section>
@@ -869,9 +1078,26 @@
         <strong>اتصال</strong> دو رشته w و v، رشته‌ای است که از پشت سر هم قرار دادن نمادهای
         w و سپس نمادهای v به‌دست می‌آید. با <code>wv</code> یا <code>w · v</code> نمایش داده می‌شود.
       </p>
-      <p><strong>مثال:</strong> اگر <code>w = ab</code> و <code>v = ba</code>، آنگاه
-        <code>wv = abba</code>.
-      </p>
+
+      <div class="callout note">
+        <span class="callout-label">مثال‌های متنوع</span>
+        <p>
+          <strong>مثال ۱:</strong> اگر <code>w = ab</code> و <code>v = ba</code>، آنگاه
+          <code>wv = abba</code>.
+        </p>
+        <p>
+          <strong>مثال ۲:</strong> اگر <code>w = abc</code> و <code>v = def</code>، آنگاه
+          <code>wv = abcdef</code>.
+        </p>
+        <p>
+          <strong>مثال ۳:</strong> اگر <code>w = a</code> و <code>v = bc</code>، آنگاه
+          <code>wv = abc</code>.
+        </p>
+        <p>
+          <strong>مثال ۴:</strong> اگر <code>w = 01</code> و <code>v = 10</code>، آنگاه
+          <code>wv = 0110</code>.
+        </p>
+      </div>
 
       <h4>خواص اتصال</h4>
       <ul>
@@ -889,13 +1115,31 @@
         <strong>معکوس</strong> یک رشته w، رشته‌ای است که نمادهای آن به <strong>ترتیب
         معکوس</strong> قرار گرفته‌اند.
       </p>
-      <p><strong>مثال:</strong> اگر <code>w = abc</code>، آنگاه <code>w^R = cba</code>.</p>
+
+      <div class="callout note">
+        <span class="callout-label">مثال‌های متنوع</span>
+        <p>
+          <strong>مثال ۱:</strong> اگر <code>w = abc</code>، آنگاه <code>w^R = cba</code>.
+        </p>
+        <p>
+          <strong>مثال ۲:</strong> اگر <code>w = abba</code>، آنگاه <code>w^R = abba</code>
+          (این رشته پالیندروم است؛ معکوسش با خودش یکی است).
+        </p>
+        <p>
+          <strong>مثال ۳:</strong> اگر <code>w = 0110</code>، آنگاه <code>w^R = 0110</code>
+          (پالیندروم).
+        </p>
+        <p>
+          <strong>مثال ۴:</strong> اگر <code>w = 0100</code>، آنگاه <code>w^R = 0010</code>.
+        </p>
+      </div>
 
       <h4>خواص معکوس</h4>
       <ul>
         <li><code>λ^R = λ</code></li>
         <li><code>(w^R)^R = w</code></li>
         <li><code>(wv)^R = v^R w^R</code> — معکوس اتصال، اتصال معکوس‌ها با ترتیب برعکس.</li>
+        <li><code>|w^R| = |w|</code></li>
       </ul>
 
       <h3>۳. توان (Power) — <code>w^n</code></h3>
@@ -912,8 +1156,23 @@
             <tr><td class="cell-ltr"><code>w¹</code></td><td>خود رشته</td><td class="cell-ltr">ab</td></tr>
             <tr><td class="cell-ltr"><code>w²</code></td><td>دو بار تکرار</td><td class="cell-ltr">abab</td></tr>
             <tr><td class="cell-ltr"><code>w³</code></td><td>سه بار تکرار</td><td class="cell-ltr">ababab</td></tr>
+            <tr><td class="cell-ltr"><code>w⁴</code></td><td>چهار بار تکرار</td><td class="cell-ltr">abababab</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="callout note">
+        <span class="callout-label">مثال‌های متنوع</span>
+        <p>
+          <strong>مثال ۱:</strong> اگر <code>w = a</code>، آنگاه:
+          <br>
+          <code>w² = aa</code>، <code>w³ = aaa</code>، <code>w⁴ = aaaa</code>، ...
+        </p>
+        <p>
+          <strong>مثال ۲:</strong> اگر <code>w = 01</code>، آنگاه:
+          <br>
+          <code>w² = 0101</code>، <code>w³ = 010101</code>، ...
+        </p>
       </div>
 
       <h4>خواص توان</h4>
@@ -931,10 +1190,6 @@
         <h2 class="section-title">پیشوند، پسوند و زیررشته</h2>
       </div>
 
-      <p>
-        علاوه بر عملیات قبلی، سه مفهوم مهم دیگر درباره رشته‌ها وجود دارد:
-      </p>
-
       <h3>۱. پیشوند (Prefix)</h3>
       <p>
         رشته‌ای که از <strong>حذف صفر یا چند نماد از انتهای</strong> یک رشته به‌دست می‌آید.
@@ -942,12 +1197,19 @@
       </p>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال کامل</span>
         <p>
           برای رشته <code>w = abcde</code>، پیشوندها عبارتند از:
           <br>
           <code>λ</code>، <code>a</code>، <code>ab</code>، <code>abc</code>، <code>abcd</code>،
           <code>abcde</code>
+          <br>
+          (۶ پیشوند، شامل خود رشته و رشته تهی)
+        </p>
+        <p>
+          برای رشته <code>w = 101</code>:
+          <br>
+          <code>λ</code>، <code>1</code>، <code>10</code>، <code>101</code>
         </p>
       </div>
 
@@ -958,12 +1220,17 @@
       </p>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال کامل</span>
         <p>
           برای رشته <code>w = abcde</code>، پسوندها عبارتند از:
           <br>
           <code>λ</code>، <code>e</code>، <code>de</code>، <code>cde</code>، <code>bcde</code>،
           <code>abcde</code>
+        </p>
+        <p>
+          برای رشته <code>w = 101</code>:
+          <br>
+          <code>λ</code>، <code>1</code>، <code>01</code>، <code>101</code>
         </p>
       </div>
 
@@ -974,17 +1241,24 @@
       </p>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال کامل</span>
         <p>
-          برای رشته <code>w = abcde</code>، زیررشته‌ها شامل:
-          <br>
-          <code>λ</code>، <code>a</code>، <code>b</code>، <code>c</code>، <code>d</code>، <code>e</code>،
-          <code>ab</code>، <code>bc</code>، <code>cd</code>، <code>de</code>،
-          <code>abc</code>، <code>bcd</code>، <code>cde</code>،
-          <code>abcd</code>، <code>bcde</code>، <code>abcde</code>
-          <br>
+          برای رشته <code>w = abcde</code>، همه زیررشته‌های ناتهی:
+        </p>
+        <ul>
+          <li>طول ۱: <code>a</code>، <code>b</code>، <code>c</code>، <code>d</code>، <code>e</code></li>
+          <li>طول ۲: <code>ab</code>، <code>bc</code>، <code>cd</code>، <code>de</code></li>
+          <li>طول ۳: <code>abc</code>، <code>bcd</code>، <code>cde</code></li>
+          <li>طول ۴: <code>abcd</code>، <code>bcde</code></li>
+          <li>طول ۵: <code>abcde</code></li>
+        </ul>
+        <p>
+          به‌علاوه رشته تهی <code>λ</code> هم یک زیررشته است.
+        </p>
+        <p>
           <strong>نکته:</strong> برخلاف زیردنباله (subsequence)، در زیررشته نمادها باید
-          <strong>پیوسته</strong> باشند.
+          <strong>پیوسته</strong> باشند. مثلاً <code>ace</code> زیررشته <code>abcde</code>
+          نیست، چون بین a و c، حرف b هست.
         </p>
       </div>
 
@@ -995,6 +1269,18 @@
         <li>رشته تهی، پیشوند، پسوند و زیررشته هر رشته‌ای است.</li>
         <li>خود رشته، پیشوند، پسوند و زیررشته خودش است.</li>
       </ul>
+
+      <h3>پالیندروم (Palindrome)</h3>
+      <p>
+        رشته‌ای که با معکوس خودش برابر باشد. یعنی <code>w = w^R</code>.
+      </p>
+      <p><strong>مثال‌ها:</strong> <code>aba</code>، <code>abba</code>، <code>abcba</code>،
+        <code>010</code>، <code>0110</code>، <code>λ</code>، <code>a</code>، <code>aa</code>.
+      </p>
+      <p>
+        پالیندروم‌ها در درس ما اهمیت زیادی دارند، چون زبان پالیندروم‌ها یک زبان
+        <strong>مستقل از متن</strong> است که با اتوماتای متناهی قابل تشخیص نیست.
+      </p>
     </section>
 
     <!-- ==================== 1.12 ==================== -->
@@ -1067,7 +1353,7 @@
             </tr>
             <tr>
               <td>رابطه با هم</td>
-              <td colspan="2"><code>Σ* = Σ⁺ ∪ {λ}</code></td>
+              <td colspan="2"><code>Σ* = Σ⁺ ∪ {λ}</code> و <code>Σ⁺ = Σ* − {λ}</code></td>
             </tr>
           </tbody>
         </table>
@@ -1123,7 +1409,7 @@
         می‌دانیم. سایر رشته‌ها «در زبان نیستند».
       </p>
 
-      <h3>مثال‌های زبان</h3>
+      <h3>مثال‌های فراوان زبان</h3>
 
       <h4>مثال ۱: زبان ساده</h4>
       <p>
@@ -1159,23 +1445,60 @@
         با اتوماتای متناهی قابل تشخیص نیست (در فصل‌های بعدی این را اثبات می‌کنیم).
       </p>
 
-      <h4>مثال ۴: زبان همه رشته‌ها</h4>
+      <h4>مثال ۴: زبان پالیندروم</h4>
       <p>
-        <code>L₄ = Σ*</code>
+        <code>L₄ = {w ∈ {a, b}* | w = w^R}</code>
+      </p>
+      <p>
+        این زبان شامل همه پالیندروم‌ها روی {a, b} است:
+        <br>
+        <code>L₄ = {λ, a, b, aa, bb, aaa, aba, bab, bbb, aaaa, abba, baab, bbbb, ...}</code>
+      </p>
+
+      <h4>مثال ۵: رشته‌هایی با تعداد مساوی a و b</h4>
+      <p>
+        <code>L₅ = {w ∈ {a, b}* | تعداد a در w برابر با تعداد b است}</code>
+      </p>
+      <p>
+        نمونه‌ها: <code>λ, ab, ba, aabb, abab, abba, baab, baba, bbaa, ...</code>
+      </p>
+
+      <h4>مثال ۶: زبان اعداد اول (در قالب یکتا)</h4>
+      <p>
+        <code>L₆ = {a^p | p عدد اول است}</code>
+      </p>
+      <p>
+        نمونه‌ها: <code>aa, aaa, aaaaa, aaaaaaa, ...</code> (طول‌های ۲، ۳، ۵، ۷، ۱۱، ...)
+      </p>
+      <p>
+        این زبان یک زبان <strong>حساس به متن</strong> است.
+      </p>
+
+      <h4>مثال ۷: زبان همه رشته‌ها</h4>
+      <p>
+        <code>L₇ = Σ*</code>
       </p>
       <p>
         این زبان شامل همه رشته‌های ممکن روی Σ است (یک زبان بدیهی اما معتبر).
       </p>
 
-      <h4>مثال ۵: زبان تهی</h4>
+      <h4>مثال ۸: زبان تهی</h4>
       <p>
-        <code>L₅ = ∅</code>
+        <code>L₈ = ∅</code>
       </p>
       <p>
         این زبان هیچ رشته‌ای ندارد. یک زبان معتبر است.
       </p>
 
-      <h4>مثال ۶: زبان اعتبارسنجی</h4>
+      <h4>مثال ۹: زبان فقط رشته تهی</h4>
+      <p>
+        <code>L₉ = {λ}</code>
+      </p>
+      <p>
+        این زبان فقط یک عضو دارد: رشته تهی.
+      </p>
+
+      <h4>مثال ۱۰: زبان اعتبارسنجی</h4>
       <p>
         زبان شناسه‌های معتبر در یک زبان برنامه‌نویسی: رشته‌هایی که با حرف شروع می‌شوند و
         سپس ترکیبی از حروف و ارقام هستند. این یک زبان باقاعده است.
@@ -1191,8 +1514,8 @@
           <strong>شامل رشته تهی</strong> باشد (<code>{λ}</code>).
         </li>
         <li>
-          <strong>توجه:</strong> <code>∅</code> و <code>{λ}</code> دو زبان متفاوت هستند!
-          اولی هیچ رشته‌ای ندارد، دومی یک رشته دارد (رشته تهی).
+          <strong>توجه مهم:</strong> <code>∅</code> و <code>{λ}</code> دو زبان متفاوت
+          هستند! اولی هیچ رشته‌ای ندارد (صفر عضو)، دومی یک رشته دارد (رشته تهی).
         </li>
         <li>
           زبان می‌تواند شامل رشته‌هایی با هر طولی باشد.
@@ -1225,34 +1548,44 @@
       </p>
 
       <h3>عملیات مجموعه‌ای روی زبان‌ها</h3>
-      <p>
-        این عملیات دقیقاً مانند عملیات مجموعه‌ای معمولی هستند:
-      </p>
 
       <h4>۱. اجتماع (Union)</h4>
       <p><code>L₁ ∪ L₂ = {w | w ∈ L₁ یا w ∈ L₂}</code></p>
-
-      <h4>۲. اشتراک (Intersection)</h4>
-      <p><code>L₁ ∩ L₂ = {w | w ∈ L₁ و w ∈ L₂}</code></p>
-
-      <h4>۳. تفاضل (Difference)</h4>
-      <p><code>L₁ − L₂ = {w | w ∈ L₁ و w ∉ L₂}</code></p>
-
-      <h4>۴. مکمل (Complement)</h4>
-      <p><code>‾L = Σ* − L</code></p>
-
       <div class="callout note">
         <span class="callout-label">مثال</span>
         <p>
-          اگر <code>L₁ = {a, ab}</code> و <code>L₂ = {ab, b}</code> روی الفبای
-          <code>Σ = {a, b}</code>:
+          اگر <code>L₁ = {a, ab}</code> و <code>L₂ = {ab, b}</code>:
+          <br>
+          <code>L₁ ∪ L₂ = {a, ab, b}</code>
         </p>
-        <ul>
-          <li><code>L₁ ∪ L₂ = {a, ab, b}</code></li>
-          <li><code>L₁ ∩ L₂ = {ab}</code></li>
-          <li><code>L₁ − L₂ = {a}</code></li>
-        </ul>
       </div>
+
+      <h4>۲. اشتراک (Intersection)</h4>
+      <p><code>L₁ ∩ L₂ = {w | w ∈ L₁ و w ∈ L₂}</code></p>
+      <div class="callout note">
+        <span class="callout-label">مثال</span>
+        <p>
+          اگر <code>L₁ = {a, ab}</code> و <code>L₂ = {ab, b}</code>:
+          <br>
+          <code>L₁ ∩ L₂ = {ab}</code>
+        </p>
+      </div>
+
+      <h4>۳. تفاضل (Difference)</h4>
+      <p><code>L₁ − L₂ = {w | w ∈ L₁ و w ∉ L₂}</code></p>
+      <div class="callout note">
+        <span class="callout-label">مثال</span>
+        <p>
+          اگر <code>L₁ = {a, ab}</code> و <code>L₂ = {ab, b}</code>:
+          <br>
+          <code>L₁ − L₂ = {a}</code>
+          <br>
+          <code>L₂ − L₁ = {b}</code>
+        </p>
+      </div>
+
+      <h4>۴. مکمل (Complement)</h4>
+      <p><code>‾L = Σ* − L</code></p>
 
       <h3>عملیات مخصوص زبان‌ها</h3>
 
@@ -1267,13 +1600,31 @@
       </div>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال ۱</span>
         <p>
-          اگر <code>L₁ = {a, ab}</code> و <code>L₂ = {b, ba}</code>، آنگاه:
+          اگر <code>L₁ = {a, ab}</code> و <code>L₂ = {b, ba}</code>:
           <br>
           <code>L₁L₂ = {ab, aba, abb, abba}</code>
+        </p>
+        <p>
+          <strong>توضیح گام‌به‌گام:</strong>
+        </p>
+        <ul>
+          <li><code>a · b = ab</code></li>
+          <li><code>a · ba = aba</code></li>
+          <li><code>ab · b = abb</code></li>
+          <li><code>ab · ba = abba</code></li>
+        </ul>
+      </div>
+
+      <div class="callout note">
+        <span class="callout-label">مثال ۲</span>
+        <p>
+          اگر <code>L₁ = {0, 1}</code> و <code>L₂ = {0, 1}</code>:
           <br>
-          (هر رشته از L₁ را با هر رشته از L₂ الحاق می‌کنیم.)
+          <code>L₁L₂ = {00, 01, 10, 11}</code>
+          <br>
+          (این همان <code>Σ²</code> است.)
         </p>
       </div>
 
@@ -1313,17 +1664,22 @@
       </p>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال‌های متنوع</span>
         <p>
-          اگر <code>L = {a}</code>، آنگاه:
+          <strong>مثال ۱:</strong> اگر <code>L = {a}</code>، آنگاه:
           <br>
           <code>L* = {λ, a, aa, aaa, aaaa, ...}</code>
           <br>
           یعنی همه رشته‌های <code>aⁿ</code> با <code>n ≥ 0</code>.
         </p>
         <p>
-          اگر <code>L = {a, b}</code>، آنگاه <code>L* = Σ*</code> (همه رشته‌های ممکن
-          روی {a, b}).
+          <strong>مثال ۲:</strong> اگر <code>L = {a, b}</code>، آنگاه <code>L* = Σ*</code>
+          (همه رشته‌های ممکن روی {a, b}).
+        </p>
+        <p>
+          <strong>مثال ۳:</strong> اگر <code>L = {ab}</code>، آنگاه:
+          <br>
+          <code>L* = {λ, ab, abab, ababab, abababab, ...}</code>
         </p>
       </div>
 
@@ -1350,6 +1706,9 @@
         <span class="callout-label">مثال</span>
         <p>
           اگر <code>L = {ab, abc}</code>، آنگاه <code>L^R = {ba, cba}</code>.
+        </p>
+        <p>
+          اگر <code>L = {aⁿbⁿ | n ≥ 0}</code>، آنگاه <code>L^R = {bⁿaⁿ | n ≥ 0}</code>.
         </p>
       </div>
 
@@ -1378,7 +1737,7 @@
     <section class="section fade-in" id="s15">
       <div class="section-head">
         <span class="section-num">15</span>
-        <h2 class="section-title">گرامرها</h2>
+        <h2 class="section-title">گرامر: تعریف رسمی</h2>
       </div>
 
       <p>
@@ -1458,6 +1817,11 @@
         <code>S ⇒ aSb ⇒ aaSbb ⇒ aaabbb</code>
       </p>
 
+      <p>
+        <strong>آیا رشته abab تولید می‌شود؟</strong> خیر. چون در گرامر، همه aها قبل از bها
+        تولید می‌شوند.
+      </p>
+
       <h3>زبان تولیدشده توسط گرامر</h3>
       <div class="callout key">
         <span class="callout-label">تعریف</span>
@@ -1468,17 +1832,45 @@
         <p><code>L(G) = {w ∈ T* | S ⇒* w}</code></p>
       </div>
 
-      <h3>انواع گرامر</h3>
+      <h3>مثال‌های بیشتر از گرامر</h3>
+
+      <h4>مثال ۱: گرامر برای زبان {a, aa, aaa, ...}</h4>
       <p>
-        گرامرها بر اساس شکل قواعد تولید به چهار نوع تقسیم می‌شوند که در
-        <a href="#s18">سلسله‌مراتب چامسکی</a> به‌تفصیل بررسی می‌شوند:
+        <code>G = ({S}, {a}, S, {S → aS, S → a})</code>
       </p>
-      <ul>
-        <li><strong>نوع ۰ (بدون محدودیت):</strong> هر شکل قاعده‌ای مجاز است.</li>
-        <li><strong>نوع ۱ (حساس به متن):</strong> طول سمت راست ≥ طول سمت چپ.</li>
-        <li><strong>نوع ۲ (مستقل از متن):</strong> سمت چپ یک متغیر منفرد است.</li>
-        <li><strong>نوع ۳ (باقاعده):</strong> قواعد بسیار ساده با یک متغیر و یک پایانه.</li>
-      </ul>
+      <p>
+        <strong>اشتقاق نمونه:</strong>
+        <br>
+        <code>S ⇒ a</code> (تولید a)
+        <br>
+        <code>S ⇒ aS ⇒ aa</code> (تولید aa)
+        <br>
+        <code>S ⇒ aS ⇒ aaS ⇒ aaa</code> (تولید aaa)
+      </p>
+
+      <h4>مثال ۲: گرامر برای زبان {λ, a, aa, aaa, ...}</h4>
+      <p>
+        <code>G = ({S}, {a}, S, {S → aS, S → λ})</code>
+      </p>
+      <p>
+        <strong>تفاوت با مثال قبل:</strong> این گرامر رشته تهی را هم تولید می‌کند.
+      </p>
+
+      <h4>مثال ۳: گرامر برای زبان {a, b}*</h4>
+      <p>
+        <code>G = ({S}, {a, b}, S, {S → aS, S → bS, S → λ})</code>
+      </p>
+      <p>
+        این گرامر هر رشته‌ای روی {a, b} را تولید می‌کند.
+      </p>
+
+      <h4>مثال ۴: گرامر برای زبان {aⁿbⁿ | n ≥ 0}</h4>
+      <p>
+        <code>G = ({S}, {a, b}, S, {S → aSb, S → λ})</code>
+      </p>
+      <p>
+        این گرامر رشته تهی را هم تولید می‌کند (برخلاف مثال قبلی که n ≥ 1 بود).
+      </p>
     </section>
 
     <!-- ==================== 1.16 ==================== -->
@@ -1525,22 +1917,22 @@
       </ul>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال کامل با گرامر E → E + E | E × E | (E) | id</span>
         <p>
-          برای رشته <code>aaabbb</code> در گرامر بالا:
+          رشته <code>id + id × id</code> را در نظر بگیرید.
         </p>
         <p>
           <strong>اشتقاق چپ‌ترین:</strong>
           <br>
-          <code>S ⇒ aSb ⇒ aaSbb ⇒ aaabbb</code>
+          <code>E ⇒ E + E ⇒ id + E ⇒ id + E × E ⇒ id + id × E ⇒ id + id × id</code>
         </p>
         <p>
           <strong>اشتقاق راست‌ترین:</strong>
           <br>
-          <code>S ⇒ aSb ⇒ aaSbb ⇒ aaabbb</code>
+          <code>E ⇒ E + E ⇒ E + E × E ⇒ E + E × id ⇒ E + id × id ⇒ id + id × id</code>
         </p>
         <p>
-          (در این مثال ساده، هر دو یکی هستند. اما در گرامرهای پیچیده‌تر متفاوت می‌شوند.)
+          توجه کنید که هر دو اشتقاق به یک رشته می‌رسند، اما ترتیب جایگزینی متفاوت است.
         </p>
       </div>
 
@@ -1561,14 +1953,14 @@
         </li>
       </ul>
 
-      <h4>مثال درخت اشتقاق</h4>
+      <h4>مثال درخت اشتقاق ۱</h4>
       <p>
         برای رشته <code>aaabbb</code> با گرامر <code>S → aSb | ab</code>، درخت اشتقاق
         به این شکل است:
       </p>
 
       <div class="diagram">
-        <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="درخت اشتقاق">
+        <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="درخت اشتقاق ۱">
           <circle cx="250" cy="40" r="22" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
           <text x="250" y="47" text-anchor="middle" fill="#e6edf3" font-family="JetBrains Mono, monospace" font-size="14" font-weight="600">S</text>
 
@@ -1619,30 +2011,925 @@
         اگر برای یک رشته در یک گرامر، <strong>دو درخت اشتقاق متفاوت</strong> وجود داشته
         باشد، می‌گوییم آن گرامر <strong>مبهم (Ambiguous)</strong> است.
       </p>
-      <p>
-        ابهام در طراحی زبان‌های برنامه‌نویسی نامطلوب است، چون معنی برنامه ممکن است
-        مبهم شود. به همین دلیل، کامپایلرها معمولاً از گرامرهای بدون ابهام استفاده می‌کنند.
-      </p>
 
       <div class="callout note">
-        <span class="callout-label">مثال</span>
+        <span class="callout-label">مثال کلاسیک: ابهام در عبارات ریاضی</span>
         <p>
-          گرامر <code>E → E + E | E × E | (E) | id</code> برای عبارات ریاضی مبهم است،
-          چون عبارت <code>a + b × c</code> می‌تواند دو درخت اشتقاق داشته باشد:
-          یکی <code>(a + b) × c</code> و دیگری <code>a + (b × c)</code>.
+          گرامر <code>E → E + E | E × E | (E) | id</code> مبهم است، چون عبارت
+          <code>id + id × id</code> می‌تواند دو درخت اشتقاق داشته باشد:
+        </p>
+        <ul>
+          <li>درخت ۱: <code>(id + id) × id</code></li>
+          <li>درخت ۲: <code>id + (id × id)</code></li>
+        </ul>
+        <p>
+          اگرچه قرارداد ریاضی می‌گوید ضرب اولویت بالاتری از جمع دارد، اما گرامر به‌تنهایی
+          این اولویت را تعیین نمی‌کند.
         </p>
       </div>
+
+      <h4>رفع ابهام</h4>
+      <p>
+        برای رفع ابهام، می‌توان گرامر را بازنویسی کرد. برای مثال، گرامر بدون ابهام برای
+        عبارات ریاضی با اولویت ضرب بر جمع:
+      </p>
+      <p><code>E → E + T | T</code></p>
+      <p><code>T → T × F | F</code></p>
+      <p><code>F → (E) | id</code></p>
+      <p>
+        این گرامر <strong>اولویت</strong> و <strong>شرکت‌پذیری</strong> عملگرها را
+        به‌درستی اعمال می‌کند.
+      </p>
     </section>
 
     <!-- ==================== 1.17 ==================== -->
     <section class="section fade-in" id="s17">
       <div class="section-head">
         <span class="section-num">17</span>
+        <h2 class="section-title">روش گام‌به‌گام نوشتن گرامر</h2>
+      </div>
+
+      <p>
+        این بخش، مهم‌ترین بخش این فصل برای امتحان است. در این بخش یاد می‌گیرید چطور
+        برای هر زبان، گرامر بنویسید. این مهارت با تمرین به‌دست می‌آید، اما روش مشخصی دارد.
+      </p>
+
+      <h3>روش کلی گام‌به‌گام</h3>
+      <p>
+        برای نوشتن گرامر یک زبان، این مراحل را دنبال کنید:
+      </p>
+
+      <ol class="flow">
+        <li>
+          <strong>تحلیل زبان</strong>
+          <span>الگوی رشته‌های زبان را پیدا کنید. آیا رشته‌ها طول ثابت دارند یا متغیر؟ آیا رابطه‌ای بین بخش‌های مختلف رشته وجود دارد؟</span>
+        </li>
+        <li>
+          <strong>شناسایی ساختار بازگشتی</strong>
+          <span>بیشتر زبان‌های نامتناهی، یک ساختار بازگشتی دارند. مثلاً <code>aⁿbⁿ</code> یعنی "a سپس aⁿ⁻¹bⁿ⁻¹ سپس b".</span>
+        </li>
+        <li>
+          <strong>تعیین متغیرها</strong>
+          <span>برای هر بخش از ساختار بازگشتی، یک متغیر در نظر بگیرید.</span>
+        </li>
+        <li>
+          <strong>نوشتن قواعد</strong>
+          <span>برای هر متغیر، قاعده‌های لازم برای تولید بخش مربوطه را بنویسید.</span>
+        </li>
+        <li>
+          <strong>تعیین شرایط پایه</strong>
+          <span>حالت پایه (کوتاه‌ترین رشته) را مشخص کنید و قاعده‌ای برای تولید آن بنویسید.</span>
+        </li>
+        <li>
+          <strong>آزمون با رشته‌های نمونه</strong>
+          <span>با چند رشته نمونه، گرامر را امتحان کنید. آیا همه رشته‌های زبان را تولید می‌کند؟ آیا رشته‌های خارج از زبان را هم تولید می‌کند؟</span>
+        </li>
+      </ol>
+
+      <h3>الگوی ۱: زبان‌های به شکل aⁿ (فقط یک نماد تکراری)</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {aⁿ | n ≥ 1} = {a, aa, aaa, ...}</code>
+      </p>
+      <p>
+        <strong>تحلیل:</strong> هر رشته n تا a دارد، با n ≥ 1.
+      </p>
+      <p>
+        <strong>گرامر:</strong> <code>S → aS | a</code>
+      </p>
+      <p>
+        <strong>اشتقاق نمونه:</strong>
+        <br>
+        <code>S ⇒ a</code> (طول ۱)
+        <br>
+        <code>S ⇒ aS ⇒ aa</code> (طول ۲)
+        <br>
+        <code>S ⇒ aS ⇒ aaS ⇒ aaa</code> (طول ۳)
+      </p>
+
+      <p>
+        <strong>نسخه با رشته تهی (n ≥ 0):</strong> <code>S → aS | λ</code>
+      </p>
+
+      <h3>الگوی ۲: زبان‌های به شکل aⁿbⁿ</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {aⁿbⁿ | n ≥ 1} = {ab, aabb, aaabbb, ...}</code>
+      </p>
+      <p>
+        <strong>تحلیل:</strong> هر رشته n تا a دارد، پس از آن n تا b. رابطه مستقیم بین
+        تعداد a و b وجود دارد.
+      </p>
+      <p>
+        <strong>ساختار بازگشتی:</strong> <code>aⁿbⁿ = a · aⁿ⁻¹bⁿ⁻¹ · b</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong> <code>S → aSb | ab</code>
+      </p>
+      <p>
+        <strong>اشتقاق نمونه:</strong>
+        <br>
+        <code>S ⇒ ab</code> (n=1)
+        <br>
+        <code>S ⇒ aSb ⇒ aabb</code> (n=2)
+        <br>
+        <code>S ⇒ aSb ⇒ aaSbb ⇒ aaabbb</code> (n=3)
+      </p>
+
+      <p>
+        <strong>نسخه با رشته تهی (n ≥ 0):</strong> <code>S → aSb | λ</code>
+      </p>
+
+      <h3>الگوی ۳: زبان‌های به شکل aⁿbᵐ (n، m مستقل)</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {aⁿbᵐ | n, m ≥ 1}</code>
+      </p>
+      <p>
+        <strong>تحلیل:</strong> n تا a و m تا b دارند، بدون رابطه بین n و m.
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → AB</code></p>
+      <p><code>A → aA | a</code> &nbsp; (تولید aⁿ)</p>
+      <p><code>B → bB | b</code> &nbsp; (تولید bᵐ)</p>
+
+      <p>
+        <strong>اشتقاق نمونه برای aabb:</strong>
+        <br>
+        <code>S ⇒ AB ⇒ aAB ⇒ aaAB ⇒ aaB ⇒ aabB ⇒ aabb</code>
+      </p>
+
+      <h3>الگوی ۴: زبان‌های به شکل aⁿbⁿcᵐ (ترکیب الگوها)</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {aⁿbⁿcᵐ | n ≥ 1، m ≥ 1}</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → AC</code></p>
+      <p><code>A → aAb | ab</code> &nbsp; (تولید aⁿbⁿ)</p>
+      <p><code>C → cC | c</code> &nbsp; (تولید cᵐ)</p>
+
+      <h3>الگوی ۵: زبان‌های پالیندروم</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {w ∈ {a, b}* | w = w^R}</code>
+      </p>
+      <p>
+        <strong>تحلیل:</strong> پالیندروم یا خالی است، یا یک نماد تنهاست، یا به شکل
+        <code>a...a</code> یا <code>b...b</code> است که وسطش یک پالیندروم کوچک‌تر است.
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → aSa | bSb | a | b | λ</code></p>
+      <p>
+        <strong>اشتقاق نمونه برای abba:</strong>
+        <br>
+        <code>S ⇒ aSa ⇒ abSba ⇒ abba</code>
+      </p>
+
+      <h3>الگوی ۶: زبان‌های با تعداد مساوی a و b</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {w ∈ {a, b}* | #a(w) = #b(w)}</code>
+        (تعداد a و b در w مساوی است)
+      </p>
+      <p>
+        <strong>تحلیل:</strong> هر a باید یک b متناظر داشته باشد، اما ترتیب مهم نیست.
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → aSb | bSa | SS | λ</code></p>
+      <p>
+        <strong>توضیح قواعد:</strong>
+      </p>
+      <ul>
+        <li><code>S → aSb</code> : یک a در ابتدا، یک b در انتها (متناظر)</li>
+        <li><code>S → bSa</code> : یک b در ابتدا، یک a در انتها (متناظر)</li>
+        <li><code>S → SS</code> : اتصال دو رشته معتبر</li>
+        <li><code>S → λ</code> : حالت پایه (رشته تهی)</li>
+      </ul>
+
+      <h3>الگوی ۷: زبان‌های با طول مشخص</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {w ∈ {a, b}* | |w| = 3}</code>
+      </p>
+      <p>
+        <strong>گرامر (تولید مستقیم):</strong>
+      </p>
+      <p>
+        <code>S → aaa | aab | aba | abb | baa | bab | bba | bbb</code>
+      </p>
+      <p>
+        <strong>یا گرامر با متغیرهای میانی:</strong>
+      </p>
+      <p>
+        <code>S → ABC</code>
+        <br>
+        <code>A → a | b</code>
+        <br>
+        <code>B → a | b</code>
+        <br>
+        <code>C → a | b</code>
+      </p>
+
+      <h3>الگوی ۸: زبان‌های با طول زوج یا فرد</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {w ∈ {a, b}* | |w| زوج است}</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → AAS | λ</code></p>
+      <p><code>A → a | b</code></p>
+      <p>
+        (هر بار دو نماد اضافه می‌شود، پس طول همیشه زوج می‌ماند)
+      </p>
+
+      <h3>الگوی ۹: زبان‌های با شروع یا پایان خاص</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {w ∈ {a, b}* | w با a شروع می‌شود}</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → aA</code></p>
+      <p><code>A → aA | bA | λ</code></p>
+      <p>
+        (اول یک a، سپس هر رشته‌ای روی {a, b})
+      </p>
+
+      <p>
+        <strong>زبان:</strong> <code>L = {w ∈ {a, b}* | w با b پایان می‌یابد}</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → Ab</code></p>
+      <p><code>A → aA | bA | λ</code></p>
+
+      <h3>الگوی ۱۰: زبان‌های با الگوی تکراری</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {(ab)ⁿ | n ≥ 1} = {ab, abab, ababab, ...}</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → abS | ab</code></p>
+      <p>
+        <strong>اشتقاق نمونه:</strong>
+        <br>
+        <code>S ⇒ ab</code>
+        <br>
+        <code>S ⇒ abS ⇒ abab</code>
+        <br>
+        <code>S ⇒ abS ⇒ ababS ⇒ ababab</code>
+      </p>
+
+      <h3>الگوی ۱۱: زبان‌های با دو بلوک متقارن</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {aⁿbᵐaⁿ | n, m ≥ 1}</code>
+      </p>
+      <p>
+        <strong>تحلیل:</strong> n تا a، سپس m تا b، سپس دوباره n تا a. تعداد a اول و
+        آخر برابر است.
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → aSa | B</code></p>
+      <p><code>B → bB | b</code></p>
+      <p>
+        (به‌طور متقارن از دو طرف a اضافه می‌شود، وسط B قرار دارد که bها را تولید می‌کند)
+      </p>
+
+      <h3>الگوی ۱۲: زبان‌های با تعداد نامساوی</h3>
+      <p>
+        <strong>زبان:</strong> <code>L = {aⁿbᵐ | n &gt; m ≥ 0}</code>
+        (تعداد a بیشتر از b)
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+      </p>
+      <p><code>S → aSb | aA</code></p>
+      <p><code>A → aA | a</code></p>
+      <p>
+        <strong>توضیح:</strong> ابتدا a و b به‌طور متقارن تولید می‌شوند (S → aSb)، تا
+        جایی که bها تمام شوند (m = 0). سپس aهای اضافی تولید می‌شوند (A).
+      </p>
+
+      <h3>روش سریع تعیین گرامر</h3>
+      <p>
+        جدول زیر الگوهای رایج و گرامر آن‌ها را خلاصه می‌کند:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>زبان</th><th>گرامر</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>{aⁿ | n ≥ 1}</code></td><td class="cell-ltr">S → aS | a</td></tr>
+            <tr><td><code>{aⁿ | n ≥ 0}</code></td><td class="cell-ltr">S → aS | λ</td></tr>
+            <tr><td><code>{aⁿbⁿ | n ≥ 1}</code></td><td class="cell-ltr">S → aSb | ab</td></tr>
+            <tr><td><code>{aⁿbⁿ | n ≥ 0}</code></td><td class="cell-ltr">S → aSb | λ</td></tr>
+            <tr><td><code>{aⁿbᵐ | n, m ≥ 1}</code></td><td class="cell-ltr">S → AB، A → aA | a، B → bB | b</td></tr>
+            <tr><td><code>{w ∈ {a,b}* | w = w^R}</code></td><td class="cell-ltr">S → aSa | bSb | a | b | λ</td></tr>
+            <tr><td><code>{w | #a = #b}</code></td><td class="cell-ltr">S → aSb | bSa | SS | λ</td></tr>
+            <tr><td><code>{w | w با a شروع می‌شود}</code></td><td class="cell-ltr">S → aA، A → aA | bA | λ</td></tr>
+            <tr><td><code>{w | w با b پایان می‌یابد}</code></td><td class="cell-ltr">S → Ab، A → aA | bA | λ</td></tr>
+            <tr><td><code>{(ab)ⁿ | n ≥ 1}</code></td><td class="cell-ltr">S → abS | ab</td></tr>
+            <tr><td><code>{aⁿbᵐaⁿ | n, m ≥ 1}</code></td><td class="cell-ltr">S → aSa | B، B → bB | b</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== 1.18 ==================== -->
+    <section class="section fade-in" id="s18">
+      <div class="section-head">
+        <span class="section-num">18</span>
+        <h2 class="section-title">گرامر چه زبانی تولید می‌کند؟</h2>
+      </div>
+
+      <p>
+        در امتحان، گاهی گرامر داده می‌شود و از شما می‌خواهند زبان تولیدشده را بنویسید.
+        این کار برعکس بخش قبلی است. روش حل:
+      </p>
+
+      <h3>روش گام‌به‌گام</h3>
+      <ol class="flow">
+        <li>
+          <strong>شناسایی ساختار بازگشتی</strong>
+          <span>به قواعد گرامر نگاه کنید. آیا قاعده‌ای به شکل <code>A → aAb</code> وجود دارد؟ این یعنی ساختار بازگشتی متقارن.</span>
+        </li>
+        <li>
+          <strong>تولید چند رشته نمونه</strong>
+          <span>با اشتقاق، چند رشته از گرامر تولید کنید (مثلاً ۳ تا ۵ رشته).</span>
+        </li>
+        <li>
+          <strong>پیدا کردن الگو</strong>
+          <span>بین رشته‌ها الگوی مشترکی پیدا کنید. آیا طول‌ها رابطه دارند؟ آیا تعداد نمادها رابطه دارد؟</span>
+        </li>
+        <li>
+          <strong>نوشتن زبان به‌صورت ضابطه‌ای</strong>
+          <span>زبان را با نمادهای ریاضی بنویسید (مثلاً <code>{aⁿbⁿ | n ≥ 1}</code>).</span>
+        </li>
+        <li>
+          <strong>بررسی دو طرف</strong>
+          <span>آیا همه رشته‌های زبان را گرامر تولید می‌کند؟ آیا رشته‌های خارج از زبان را هم تولید می‌کند؟</span>
+        </li>
+      </ol>
+
+      <h3>مثال ۱: گرامر ساده</h3>
+      <p>
+        <strong>گرامر:</strong> <code>S → aSb | ab</code>
+      </p>
+      <p>
+        <strong>رشته‌های نمونه:</strong>
+        <br>
+        <code>S ⇒ ab</code>
+        <br>
+        <code>S ⇒ aSb ⇒ aabb</code>
+        <br>
+        <code>S ⇒ aSb ⇒ aaSbb ⇒ aaabbb</code>
+      </p>
+      <p>
+        <strong>الگو:</strong> رشته‌های ab, aabb, aaabbb, ... — تعداد a و b برابر است و
+        همه aها قبل از bها هستند.
+      </p>
+      <p>
+        <strong>زبان:</strong> <code>L = {aⁿbⁿ | n ≥ 1}</code>
+      </p>
+
+      <h3>مثال ۲: گرامر با چند متغیر</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → AB</code>
+        <br>
+        <code>A → aA | a</code>
+        <br>
+        <code>B → bB | b</code>
+      </p>
+      <p>
+        <strong>رشته‌های نمونه:</strong>
+        <br>
+        <code>S ⇒ AB ⇒ aB ⇒ ab</code>
+        <br>
+        <code>S ⇒ AB ⇒ aaB ⇒ aab</code>
+        <br>
+        <code>S ⇒ AB ⇒ aB ⇒ abB ⇒ abb</code>
+        <br>
+        <code>S ⇒ AB ⇒ aaB ⇒ aabB ⇒ aabb</code>
+      </p>
+      <p>
+        <strong>الگو:</strong> n تا a و m تا b، که n و m مستقل از هم هستند.
+      </p>
+      <p>
+        <strong>زبان:</strong> <code>L = {aⁿbᵐ | n, m ≥ 1}</code>
+      </p>
+
+      <h3>مثال ۳: گرامر با قاعده λ</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → aSa | bSb | λ</code>
+      </p>
+      <p>
+        <strong>رشته‌های نمونه:</strong>
+        <br>
+        <code>S ⇒ λ</code> (رشته تهی)
+        <br>
+        <code>S ⇒ aSa ⇒ aa</code>
+        <br>
+        <code>S ⇒ bSb ⇒ bb</code>
+        <br>
+        <code>S ⇒ aSa ⇒ abSba ⇒ abba</code>
+        <br>
+        <code>S ⇒ aSa ⇒ abSba ⇒ abbSbba ⇒ abbbba</code>
+      </p>
+      <p>
+        <strong>الگو:</strong> رشته‌ها پالیندروم هستند (معکوس خودشان).
+      </p>
+      <p>
+        <strong>زبان:</strong> <code>L = {w ∈ {a, b}* | w = w^R}</code>
+      </p>
+
+      <h3>مثال ۴: گرامر پیچیده‌تر</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → aS | bS | a | b</code>
+      </p>
+      <p>
+        <strong>رشته‌های نمونه:</strong>
+        <br>
+        <code>S ⇒ a</code>
+        <br>
+        <code>S ⇒ b</code>
+        <br>
+        <code>S ⇒ aS ⇒ aa</code>
+        <br>
+        <code>S ⇒ aS ⇒ ab</code>
+        <br>
+        <code>S ⇒ aS ⇒ abS ⇒ aba</code>
+      </p>
+      <p>
+        <strong>الگو:</strong> رشته‌های ناتهی روی {a, b}.
+      </p>
+      <p>
+        <strong>زبان:</strong> <code>L = Σ⁺ = {a, b}⁺</code>
+      </p>
+
+      <h3>مثال ۵: گرامر با متغیرهای خاص</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → aA | bB</code>
+        <br>
+        <code>A → aA | λ</code>
+        <br>
+        <code>B → bB | λ</code>
+      </p>
+      <p>
+        <strong>رشته‌های نمونه:</strong>
+        <br>
+        <code>S ⇒ aA ⇒ a</code>
+        <br>
+        <code>S ⇒ aA ⇒ aaA ⇒ aa</code>
+        <br>
+        <code>S ⇒ aA ⇒ aaaA ⇒ aaa</code>
+        <br>
+        <code>S ⇒ bB ⇒ b</code>
+        <br>
+        <code>S ⇒ bB ⇒ bbB ⇒ bb</code>
+      </p>
+      <p>
+        <strong>الگو:</strong> یا رشته‌ای از aها (n ≥ 1) یا رشته‌ای از bها (n ≥ 1).
+      </p>
+      <p>
+        <strong>زبان:</strong> <code>L = {aⁿ | n ≥ 1} ∪ {bⁿ | n ≥ 1}</code>
+      </p>
+    </section>
+
+    <!-- ==================== 1.19 ==================== -->
+    <section class="section fade-in" id="s19">
+      <div class="section-head">
+        <span class="section-num">19</span>
+        <h2 class="section-title">الگوهای رایج امتحانی</h2>
+      </div>
+
+      <p>
+        در امتحان‌های نظریه زبان‌ها، برخی انواع سؤال‌ها تکرار می‌شوند. این بخش، الگوهای
+        رایج و روش حل هرکدام را نشان می‌دهد. با تسلط بر این الگوها، می‌توانید اکثر
+        سؤالات امتحان را حل کنید.
+      </p>
+
+      <h3>الگوی سؤال ۱: گرامر برای زبان داده‌شده بنویسید</h3>
+      <p>
+        <strong>سؤال:</strong> «گرامر زبان زیر را بنویسید: <code>L = {aⁿbⁿ | n ≥ 1}</code>»
+      </p>
+      <p>
+        <strong>روش حل:</strong>
+      </p>
+      <ol>
+        <li>الگوی رشته را شناسایی کنید (n تا a سپس n تا b).</li>
+        <li>ساختار بازگشتی را پیدا کنید (<code>aⁿbⁿ = a · aⁿ⁻¹bⁿ⁻¹ · b</code>).</li>
+        <li>گرامر را بنویسید: <code>S → aSb | ab</code>.</li>
+        <li>با چند رشته نمونه آزمون کنید.</li>
+      </ol>
+
+      <h3>الگوی سؤال ۲: زبان تولیدشده توسط گرامر را بنویسید</h3>
+      <p>
+        <strong>سؤال:</strong> «گرامر <code>S → aSb | ab</code> چه زبانی تولید می‌کند؟»
+      </p>
+      <p>
+        <strong>روش حل:</strong>
+      </p>
+      <ol>
+        <li>با اشتقاق، چند رشته تولید کنید: <code>ab</code>، <code>aabb</code>، <code>aaabbb</code>.</li>
+        <li>الگوی مشترک را پیدا کنید.</li>
+        <li>زبان را بنویسید: <code>{aⁿbⁿ | n ≥ 1}</code>.</li>
+      </ol>
+
+      <h3>الگوی سؤال ۳: درخت اشتقاق رسم کنید</h3>
+      <p>
+        <strong>سؤال:</strong> «برای رشته <code>aabb</code> در گرامر <code>S → aSb | ab</code>،
+        درخت اشتقاق رسم کنید.»
+      </p>
+      <p>
+        <strong>روش حل:</strong>
+      </p>
+      <ol>
+        <li>ابتدا اشتقاق را انجام دهید: <code>S ⇒ aSb ⇒ aabb</code>.</li>
+        <li>برای هر گام اشتقاق، یک سطح از درخت رسم کنید.</li>
+        <li>ریشه: S. فرزندان: a, S, b. سپس S به a, b گسترش می‌یابد.</li>
+      </ol>
+
+      <h3>الگوی سؤال ۴: آیا رشته داده‌شده در زبان است؟</h3>
+      <p>
+        <strong>سؤال:</strong> «آیا رشته <code>aabb</code> توسط گرامر <code>S → aSb | ab</code> تولید می‌شود؟»
+      </p>
+      <p>
+        <strong>روش حل:</strong>
+      </p>
+      <ol>
+        <li>سعی کنید اشتقاق را پیدا کنید: <code>S ⇒ aSb ⇒ aabb</code>. بله، تولید می‌شود.</li>
+        <li>یا با درخت اشتقاق امتحان کنید.</li>
+        <li>اگر نتوانستید اشتقاق بسازید، احتمالاً رشته در زبان نیست.</li>
+      </ol>
+
+      <h3>الگوی سؤال ۵: گرامر بدون ابهام بنویسید</h3>
+      <p>
+        <strong>سؤال:</strong> «گرامری بنویسید که عبارات ریاضی را بدون ابهام تولید کند.»
+      </p>
+      <p>
+        <strong>روش حل:</strong> از سلسله‌مراتب متغیرها استفاده کنید (E برای جمع، T برای
+        ضرب، F برای پرانتز و شناسه):
+      </p>
+      <p>
+        <code>E → E + T | T</code>
+        <br>
+        <code>T → T × F | F</code>
+        <br>
+        <code>F → (E) | id</code>
+      </p>
+
+      <h3>الگوی سؤال ۶: گرامر برای زبان مکمل بنویسید</h3>
+      <p>
+        <strong>سؤال:</strong> «گرامر زبان <code>L = {w ∈ {a, b}* | w ≠ aⁿbⁿ}</code> را بنویسید.»
+      </p>
+      <p>
+        <strong>روش حل:</strong> مکمل زبان را به‌صورت اجتماع چند حالت بنویسید:
+      </p>
+      <ul>
+        <li>رشته‌هایی که با b شروع می‌شوند: <code>b(a|b)*</code></li>
+        <li>رشته‌هایی که با a شروع می‌شوند اما با a تمام می‌شوند: <code>a(a|b)*a</code></li>
+        <li>رشته‌هایی که تعداد a و b برابر نیست.</li>
+      </ul>
+
+      <h3>الگوی سؤال ۷: گرامر برای زبان‌های با الگوی خاص</h3>
+      <p>
+        <strong>سؤال:</strong> «گرامر زبان <code>L = {w | w شامل ab به‌عنوان زیررشته است}</code> را بنویسید.»
+      </p>
+      <p>
+        <strong>روش حل:</strong> زبان را به سه بخش تقسیم کنید: قبل از ab، خود ab، بعد از ab.
+      </p>
+      <p>
+        <code>S → AabB</code>
+        <br>
+        <code>A → aA | bA | λ</code>
+        <br>
+        <code>B → aB | bB | λ</code>
+      </p>
+
+      <h3>الگوی سؤال ۸: گرامر برای زبان‌های با تعداد مشخص</h3>
+      <p>
+        <strong>سؤال:</strong> «گرامر زبان <code>L = {aⁿbⁿcⁿ | n ≥ 1}</code> را بنویسید.»
+      </p>
+      <p>
+        <strong>هشدار مهم:</strong> این زبان یک زبان <strong>حساس به متن</strong> است و
+        با گرامر مستقل از متن (CFG) قابل تولید نیست. باید از گرامر نوع ۱ استفاده کرد.
+      </p>
+      <p>
+        <strong>گرامر نوع ۱:</strong>
+        <br>
+        <code>S → aSBC | aBC</code>
+        <br>
+        <code>CB → BC</code>
+        <br>
+        <code>aB → ab</code>
+        <br>
+        <code>bB → bb</code>
+        <br>
+        <code>bC → bc</code>
+        <br>
+        <code>cC → cc</code>
+      </p>
+      <p>
+        (این گرامر پیچیده است و در فصل‌های بعدی بیشتر درباره‌اش بحث می‌کنیم.)
+      </p>
+
+      <h3>الگوی سؤال ۹: تعیین نوع گرامر در سلسله‌مراتب چامسکی</h3>
+      <p>
+        <strong>سؤال:</strong> «گرامر <code>S → aSb | λ</code> چه نوع گرامری است؟»
+      </p>
+      <p>
+        <strong>روش حل:</strong>
+      </p>
+      <ul>
+        <li>سمت چپ قاعده: <code>S</code> (یک متغیر منفرد) → گرامر مستقل از متن است.</li>
+        <li>سمت راست هم بسیار ساده است، اما چون سمت چپ یک متغیر است، این یک گرامر نوع ۲ (مستقل از متن) است.</li>
+        <li>گرامر باقاعده نیست، چون <code>S → aSb</code> همزمان a و b تولید می‌کند.</li>
+      </ul>
+
+      <h3>الگوی سؤال ۱۰: اثبات اینکه گرامر زبان مورد نظر را تولید می‌کند</h3>
+      <p>
+        <strong>سؤال:</strong> «اثبات کنید گرامر <code>S → aSb | ab</code> زبان
+        <code>L = {aⁿbⁿ | n ≥ 1}</code> را تولید می‌کند.»
+      </p>
+      <p>
+        <strong>روش حل:</strong> باید دو جهت را اثبات کنید:
+      </p>
+      <ol>
+        <li>
+          <strong>هر رشته تولیدشده در زبان است:</strong> با استقرا روی n نشان دهید هر
+          رشته تولیدشده به شکل <code>aⁿbⁿ</code> است.
+        </li>
+        <li>
+          <strong>هر رشته در زبان توسط گرامر تولید می‌شود:</strong> با استقرا روی n نشان
+          دهید <code>aⁿbⁿ</code> با n گام اشتقاق تولید می‌شود.
+        </li>
+      </ol>
+    </section>
+
+    <!-- ==================== 1.20 ==================== -->
+    <section class="section fade-in" id="s20">
+      <div class="section-head">
+        <span class="section-num">20</span>
+        <h2 class="section-title">مثال‌های حل‌شده جامع</h2>
+      </div>
+
+      <p>
+        در این بخش، ۲۰ مثال متنوع و حل‌شده برای تسلط کامل بر نوشتن گرامر ارائه می‌شود.
+        هر مثال شامل صورت مسئله، روش حل و پاسخ نهایی است.
+      </p>
+
+      <h3>مثال ۱: گرامر برای {aⁿ | n ≥ 2}</h3>
+      <p>
+        <strong>زبان:</strong> <code>{aa, aaa, aaaa, ...}</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong> <code>S → aS | aa</code>
+      </p>
+      <p>
+        <strong>توضیح:</strong> پایه <code>aa</code> است (حداقل ۲ تا a)، سپس هر بار یک a
+        اضافه می‌شود.
+      </p>
+
+      <h3>مثال ۲: گرامر برای {aⁿbⁿcᵏ | n, k ≥ 1}</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → AB</code>
+        <br>
+        <code>A → aAb | ab</code>
+        <br>
+        <code>B → cB | c</code>
+      </p>
+
+      <h3>مثال ۳: گرامر برای {aⁿbⁿ | n ≥ 0} ∪ {aⁿb²ⁿ | n ≥ 1}</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → S₁ | S₂</code>
+        <br>
+        <code>S₁ → aS₁b | λ</code>
+        <br>
+        <code>S₂ → aS₂bb | abb</code>
+      </p>
+
+      <h3>مثال ۴: گرامر برای رشته‌های با تعداد b بخش‌پذیر بر ۳</h3>
+      <p>
+        <strong>زبان:</strong> <code>{w ∈ {a, b}* | تعداد b در w مضرب ۳ است}</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong> (با ۳ حالت)
+        <br>
+        <code>S → aS | bA | λ</code> &nbsp; (حالت ۰: مضرب ۳)
+        <br>
+        <code>A → aA | bB</code> &nbsp; (حالت ۱: باقی‌مانده ۱)
+        <br>
+        <code>B → aB | bS</code> &nbsp; (حالت ۲: باقی‌مانده ۲)
+      </p>
+      <p>
+        <strong>توضیح:</strong> هر بار که b تولید می‌شود، به حالت بعدی می‌رویم. وقتی به
+        S برگشتیم، یعنی تعداد b مضرب ۳ شده است.
+      </p>
+
+      <h3>مثال ۵: گرامر برای {ww^R | w ∈ {a, b}*}</h3>
+      <p>
+        <strong>زبان:</strong> رشته‌هایی که نیمه اول و نیمه دوم (معکوس) برابر دارند.
+      </p>
+      <p>
+        <strong>گرامر:</strong> <code>S → aSa | bSb | λ</code>
+      </p>
+      <p>
+        (این همان زبان پالیندروم‌های با طول زوج است.)
+      </p>
+
+      <h3>مثال ۶: گرامر برای {aⁱbʲ | i ≠ j}</h3>
+      <p>
+        <strong>گرامر:</strong> (با دو حالت برای i &gt; j و i &lt; j)
+        <br>
+        <code>S → A | B</code>
+        <br>
+        <code>A → aAb | aA | a</code> &nbsp; (i &gt; j)
+        <br>
+        <code>B → aBb | Bb | b</code> &nbsp; (i &lt; j)
+      </p>
+
+      <h3>مثال ۷: گرامر برای {aⁿbⁿcⁿdⁿ | n ≥ 1}</h3>
+      <p>
+        <strong>هشدار:</strong> این زبان مستقل از متن نیست. با CFG قابل تولید نیست.
+      </p>
+      <p>
+        <strong>گرامر نوع ۱:</strong> پیچیده است و از قواعد بازآرایی استفاده می‌کند.
+      </p>
+
+      <h3>مثال ۸: گرامر برای {w | w شامل aaa است}</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → AaaaB</code>
+        <br>
+        <code>A → aA | bA | λ</code>
+        <br>
+        <code>B → aB | bB | λ</code>
+      </p>
+
+      <h3>مثال ۹: گرامر برای {w | w شامل aaa نیست}</h3>
+      <p>
+        <strong>گرامر:</strong> (پرهیز از ۳ تا a پشت سر هم)
+        <br>
+        <code>S → bS | abS | aabS | λ</code>
+      </p>
+      <p>
+        <strong>توضیح:</strong> هر بار یکی از سه حالت را انتخاب می‌کنیم:
+        <code>b</code>، <code>ab</code>، <code>aab</code>. هیچ‌کدام سه a پشت سر هم تولید نمی‌کنند.
+      </p>
+
+      <h3>مثال ۱۰: گرامر برای {aⁿbᵐ | n + m زوج است}</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → AA | AB | BA | BB | λ</code>
+        <br>
+        <code>A → a | b</code>
+      </p>
+      <p>
+        (این خیلی ساده است، چون هر رشته‌ای با طول زوج در این زبان است.)
+      </p>
+
+      <h3>مثال ۱۱: گرامر برای {aⁿbⁿ | n ≥ 1} ∪ {a}</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → S₁ | a</code>
+        <br>
+        <code>S₁ → aS₁b | ab</code>
+      </p>
+
+      <h3>مثال ۱۲: گرامر برای شناسه‌های معتبر (شروع با حرف، ادامه با حرف یا رقم)</h3>
+      <p>
+        <strong>الفبا:</strong> <code>Σ = {letter, digit}</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → letter R</code>
+        <br>
+        <code>R → letter R | digit R | λ</code>
+      </p>
+
+      <h3>مثال ۱۳: گرامر برای اعداد صحیح (با علامت اختیاری)</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → sign Digits | Digits</code>
+        <br>
+        <code>sign → + | -</code>
+        <br>
+        <code>Digits → digit Digits | digit</code>
+      </p>
+
+      <h3>مثال ۱۴: گرامر برای عبارات حسابی ساده</h3>
+      <p>
+        <strong>گرامر بدون ابهام:</strong>
+        <br>
+        <code>E → E + T | T</code>
+        <br>
+        <code>T → T × F | F</code>
+        <br>
+        <code>F → (E) | id</code>
+      </p>
+
+      <h3>مثال ۱۵: گرامر برای زبان {aⁿb²ⁿ | n ≥ 0}</h3>
+      <p>
+        <strong>گرامر:</strong> <code>S → aSbb | λ</code>
+      </p>
+      <p>
+        <strong>توضیح:</strong> هر بار یک a و دو b اضافه می‌شود (نسبت ۱ به ۲ حفظ می‌شود).
+      </p>
+
+      <h3>مثال ۱۶: گرامر برای {aⁿbⁿcᵐdᵐ | n, m ≥ 1}</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → AB</code>
+        <br>
+        <code>A → aAb | ab</code>
+        <br>
+        <code>B → cBd | cd</code>
+      </p>
+
+      <h3>مثال ۱۷: گرامر برای {aⁿbⁿcⁿ | n ≥ 1}</h3>
+      <p>
+        <strong>هشدار:</strong> مستقل از متن نیست. باید از گرامر نوع ۱ استفاده کرد.
+      </p>
+
+      <h3>مثال ۱۸: گرامر برای {aⁱbʲcᵏ | i = j یا j = k}</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → S₁ | S₂</code>
+        <br>
+        <code>S₁ → AC</code>
+        <br>
+        <code>A → aAb | ab</code> &nbsp; (aⁱbⁱ)
+        <br>
+        <code>C → cC | c</code> &nbsp; (cᵏ)
+        <br>
+        <code>S₂ → BD</code>
+        <br>
+        <code>B → aB | a</code> &nbsp; (aⁱ)
+        <br>
+        <code>D → bDc | bc</code> &nbsp; (bʲcʲ)
+      </p>
+
+      <h3>مثال ۱۹: گرامر برای {aⁿbⁿ | n ≥ 0} ∪ {aⁿb²ⁿ | n ≥ 0}</h3>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → S₁ | S₂</code>
+        <br>
+        <code>S₁ → aS₁b | λ</code>
+        <br>
+        <code>S₂ → aS₂bb | λ</code>
+      </p>
+
+      <h3>مثال ۲۰: گرامر برای رشته‌های با طول مساوی از ۰ و ۱</h3>
+      <p>
+        <strong>زبان:</strong> <code>{w ∈ {0, 1}* | #0(w) = #1(w)}</code>
+      </p>
+      <p>
+        <strong>گرامر:</strong>
+        <br>
+        <code>S → 0S1 | 1S0 | SS | λ</code>
+      </p>
+      <p>
+        <strong>توضیح:</strong> مشابه گرامر زبان <code>#a = #b</code>، اما با نمادهای ۰ و ۱.
+      </p>
+    </section>
+
+    <!-- ==================== 1.21 ==================== -->
+    <section class="section fade-in" id="s21">
+      <div class="section-head">
+        <span class="section-num">21</span>
         <h2 class="section-title">اتوماتاها</h2>
       </div>
 
       <p>
-        در بخش قبل دیدیم که گرامرها <strong>تولیدکننده</strong> زبان هستند. حالا به
+        در بخش‌های قبل دیدیم که گرامرها <strong>تولیدکننده</strong> زبان هستند. حالا به
         <strong>تشخیص‌دهنده‌های</strong> زبان می‌رسیم: اتوماتاها.
       </p>
 
@@ -1659,11 +2946,10 @@
       <h3>اجزای یک اتوماتا</h3>
       <ul>
         <li>
-          <strong>حالت‌ها (States):</strong> مجموعه‌ای متناهی از حالت‌ها که ماشین در هر
-          لحظه در یکی از آن‌ها قرار دارد.
+          <strong>حالت‌ها (States):</strong> مجموعه‌ای متناهی از حالت‌ها.
         </li>
         <li>
-          <strong>الفبای ورودی:</strong> مجموعه‌ای از نمادها که ماشین می‌تواند بخواند.
+          <strong>الفبای ورودی:</strong> مجموعه‌ای از نمادها.
         </li>
         <li>
           <strong>حالت شروع (Start State):</strong> حالتی که ماشین از آن شروع می‌کند.
@@ -1680,96 +2966,52 @@
 
       <h3>نحوه کار اتوماتا</h3>
       <ol class="flow">
-        <li>
-          <strong>شروع</strong>
-          <span>ماشین در حالت شروع قرار می‌گیرد.</span>
-        </li>
-        <li>
-          <strong>خواندن ورودی</strong>
-          <span>نمادهای ورودی یکی‌یکی خوانده می‌شوند (از چپ به راست).</span>
-        </li>
-        <li>
-          <strong>گذار</strong>
-          <span>با خواندن هر نماد، ماشین بر اساس جدول گذارها به حالت جدید می‌رود.</span>
-        </li>
-        <li>
-          <strong>تصمیم نهایی</strong>
-          <span>پس از خواندن کامل ورودی، اگر ماشین در حالت پایانی باشد، رشته پذیرفته می‌شود. در غیر این صورت، رد می‌شود.</span>
-        </li>
+        <li><strong>شروع</strong><span>ماشین در حالت شروع قرار می‌گیرد.</span></li>
+        <li><strong>خواندن ورودی</strong><span>نمادهای ورودی یکی‌یکی خوانده می‌شوند (از چپ به راست).</span></li>
+        <li><strong>گذار</strong><span>با خواندن هر نماد، ماشین بر اساس جدول گذارها به حالت جدید می‌رود.</span></li>
+        <li><strong>تصمیم نهایی</strong><span>پس از خواندن کامل ورودی، اگر ماشین در حالت پایانی باشد، رشته پذیرفته می‌شود. در غیر این صورت، رد می‌شود.</span></li>
       </ol>
 
       <h3>انواع اتوماتاها</h3>
-      <p>در این درس با چهار نوع اصلی ماشین آشنا می‌شویم که به‌ترتیب قدرت افزایش می‌یابند:</p>
-
       <div class="card-grid">
         <div class="card">
           <div class="card-title">۱. اتوماتای متناهی (FA)</div>
           <div class="card-desc">
-            ساده‌ترین نوع. حافظه‌ای جدا از حالت‌های خود ندارد و فقط حالت فعلی را نگه می‌دارد.
-            زبان‌های باقاعده را می‌پذیرد.
+            ساده‌ترین نوع. حافظه‌ای جدا از حالت‌های خود ندارد. زبان‌های باقاعده را می‌پذیرد.
           </div>
         </div>
         <div class="card">
           <div class="card-title">۲. اتوماتای پشته‌ای (PDA)</div>
           <div class="card-desc">
             دارای یک حافظه پشته‌ای (LIFO). زبان‌های مستقل از متن را می‌پذیرد.
-            برای تحلیل نحوی کاربرد دارد.
           </div>
         </div>
         <div class="card">
           <div class="card-title">۳. ماشین تورینگ (TM)</div>
           <div class="card-desc">
-            قدرتمندترین مدل محاسباتی. دارای نوار نامتناهی و امکان حرکت در هر دو جهت.
-            زبان‌های بازگشتی را می‌پذیرد.
+            قدرتمندترین مدل. دارای نوار نامتناهی. زبان‌های بازگشتی را می‌پذیرد.
           </div>
         </div>
         <div class="card">
           <div class="card-title">۴. ماشین تورینگ غیرقطعی (NTM)</div>
           <div class="card-desc">
-            نسخه غیرقطعی ماشین تورینگ. از نظر قدرت، معادل TM قطعی است.
+            نسخه غیرقطعی. از نظر قدرت، معادل TM قطعی است.
           </div>
         </div>
       </div>
-
-      <h3>قطعی و غیرقطعی</h3>
-      <ul>
-        <li>
-          <strong>قطعی (Deterministic):</strong> در هر حالت و با هر نماد ورودی،
-          <strong>فقط یک گذار</strong> ممکن وجود دارد.
-        </li>
-        <li>
-          <strong>غیرقطعی (Nondeterministic):</strong> در یک حالت و با یک نماد، ممکن است
-          <strong>چند گذار</strong> مختلف وجود داشته باشد. ماشین مثل این‌که «به‌طور جادویی»
-          بهترین مسیر را انتخاب می‌کند.
-        </li>
-      </ul>
-
-      <div class="callout note">
-        <span class="callout-label">نکته مهم</span>
-        <p>
-          برای اتوماتای متناهی، نسخه قطعی و غیرقطعی <strong>قدرت برابر</strong> دارند.
-          یعنی هر زبانی که با یک NFA پذیرفته شود، با یک DFA هم پذیرفته می‌شود
-          (و برعکس). این نتیجه در فصل‌های بعدی اثبات می‌شود.
-        </p>
-      </div>
     </section>
 
-    <!-- ==================== 1.18 ==================== -->
-    <section class="section fade-in" id="s18">
+    <!-- ==================== 1.22 ==================== -->
+    <section class="section fade-in" id="s22">
       <div class="section-head">
-        <span class="section-num">18</span>
+        <span class="section-num">22</span>
         <h2 class="section-title">سلسله‌مراتب چامسکی</h2>
       </div>
 
       <p>
-        <strong>نوام چامسکی</strong> زبان‌شناس و دانشمند معروف، در دهه ۱۹۵۰ دسته‌بندی زیبایی
-        از زبان‌ها و گرامرها ارائه داد که به نام او <strong>سلسله‌مراتب چامسکی
-        (Chomsky Hierarchy)</strong> شناخته می‌شود. این سلسله‌مراتب، رابطه زبان‌ها،
-        گرامرها و ماشین‌ها را نشان می‌دهد.
+        <strong>نوام چامسکی</strong> در دهه ۱۹۵۰ دسته‌بندی زیبایی از زبان‌ها و گرامرها
+        ارائه داد که به نام او <strong>سلسله‌مراتب چامسکی</strong> شناخته می‌شود.
       </p>
-
-      <h3>چهار نوع گرامر</h3>
-      <p>چامسکی گرامرها را بر اساس شکل قواعد تولید به چهار نوع تقسیم کرد:</p>
 
       <div class="table-wrap">
         <table>
@@ -1815,133 +3057,44 @@
         </table>
       </div>
 
-      <h4>توضیح هر نوع</h4>
-      <ul>
-        <li>
-          <strong>گرامر نوع ۰ (بدون محدودیت):</strong> هیچ محدودیتی روی قواعد تولید نیست.
-          قدرتمندترین نوع گرامر. زبان‌های بازگشتی شمارا را تولید می‌کند. مدل معادل آن
-          ماشین تورینگ است.
-        </li>
-        <li>
-          <strong>گرامر نوع ۱ (حساس به متن):</strong> طول سمت راست هر قاعده، حداقل به
-          اندازه طول سمت چپ است (<code>|α| ≤ |β|</code>). به‌جز قاعده <code>S → λ</code>.
-          زبان‌های حساس به متن را تولید می‌کند.
-        </li>
-        <li>
-          <strong>گرامر نوع ۲ (مستقل از متن):</strong> سمت چپ قاعده باید یک
-          <strong>متغیر منفرد</strong> باشد. پرکاربردترین نوع گرامر در طراحی
-          زبان‌های برنامه‌نویسی.
-        </li>
-        <li>
-          <strong>گرامر نوع ۳ (باقاعده):</strong> قواعد بسیار ساده‌ای دارند که فقط اجازه
-          می‌دهند یک متغیر به یک پایانه، یا به یک پایانه و یک متغیر منتهی شود. ساده‌ترین
-          نوع گرامر.
-        </li>
-      </ul>
-
       <h3>سلسله‌مراتب زبان‌ها</h3>
       <p>
-        این چهار دسته به‌صورت <strong>تودرتو</strong> هستند. یعنی هر زبان باقاعده،
-        مستقل از متن هم هست، و هر زبان مستقل از متن، حساس به متن هم هست، و به همین ترتیب:
+        این چهار دسته به‌صورت <strong>تودرتو</strong> هستند:
       </p>
       <p>
         <code>Regular ⊂ Context-Free ⊂ Context-Sensitive ⊂ Recursively Enumerable</code>
       </p>
 
-      <h3>نمودار سلسله‌مراتب</h3>
-      <div class="diagram">
-        <svg viewBox="0 0 640 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="سلسله‌مراتب چامسکی">
-          <ellipse cx="320" cy="220" rx="300" ry="200" fill="#0d1117" stroke="#6e7681" stroke-width="1.5"/>
-          <text x="320" y="50" text-anchor="middle" fill="#6e7681" font-family="Vazirmatn, sans-serif" font-size="13" font-weight="600">Recursively Enumerable (Type 0)</text>
-
-          <ellipse cx="320" cy="230" rx="230" ry="150" fill="#161b22" stroke="#d29922" stroke-width="1.5"/>
-          <text x="320" y="105" text-anchor="middle" fill="#d29922" font-family="Vazirmatn, sans-serif" font-size="13" font-weight="600">Context-Sensitive (Type 1)</text>
-
-          <ellipse cx="320" cy="250" rx="155" ry="100" fill="#161b22" stroke="#3fb950" stroke-width="1.5"/>
-          <text x="320" y="175" text-anchor="middle" fill="#3fb950" font-family="Vazirmatn, sans-serif" font-size="13" font-weight="600">Context-Free (Type 2)</text>
-
-          <ellipse cx="320" cy="270" rx="85" ry="55" fill="#161b22" stroke="#58a6ff" stroke-width="2"/>
-          <text x="320" y="263" text-anchor="middle" fill="#58a6ff" font-family="Vazirmatn, sans-serif" font-size="13" font-weight="600">Regular</text>
-          <text x="320" y="282" text-anchor="middle" fill="#58a6ff" font-family="Vazirmatn, sans-serif" font-size="11">(Type 3)</text>
-
-          <text x="320" y="408" text-anchor="middle" fill="#8b949e" font-family="Vazirmatn, sans-serif" font-size="12">هر زبان باقاعده، یک زبان مستقل از متن نیز هست (و به همین ترتیب)</text>
-        </svg>
-        <div class="diagram-caption">
-          سلسله‌مراتب چامسکی — زبان‌ها به‌صورت تودرتو هستند
-        </div>
-      </div>
-
       <h3>کاربردهای عملی</h3>
       <ul>
-        <li>
-          <strong>زبان‌های باقاعده (Regular):</strong> تحلیل‌گر لغوی (Lexer) در کامپایلرها،
-          جستجو و تطبیق الگو (Regex)، اعتبارسنجی ورودی.
-        </li>
-        <li>
-          <strong>زبان‌های مستقل از متن (Context-Free):</strong> تحلیل‌گر نحوی (Parser)
-          در کامپایلرها، ساختار زبان‌های برنامه‌نویسی، قالب‌های داده مثل JSON و XML.
-        </li>
-        <li>
-          <strong>زبان‌های حساس به متن (Context-Sensitive):</strong> پردازش زبان طبیعی،
-          برخی ساختارهای پیچیده در زبان‌شناسی.
-        </li>
-        <li>
-          <strong>زبان‌های بازگشتی شمارا (Recursively Enumerable):</strong> مدل کامل
-          محاسبه. مسائلی که اصلاً راه‌حل دارند.
-        </li>
+        <li><strong>زبان‌های باقاعده:</strong> Lexer، Regex، اعتبارسنجی ورودی.</li>
+        <li><strong>زبان‌های مستقل از متن:</strong> Parser، زبان‌های برنامه‌نویسی، JSON، XML.</li>
+        <li><strong>زبان‌های حساس به متن:</strong> پردازش زبان طبیعی.</li>
+        <li><strong>زبان‌های بازگشتی شمارا:</strong> مدل کامل محاسبه.</li>
+      </ul>
+
+      <h3>نکات مهم امتحانی</h3>
+      <ul>
+        <li>هر زبان باقاعده، مستقل از متن هم هست (اما نه برعکس).</li>
+        <li>زبان <code>{aⁿbⁿ}</code> مستقل از متن است، اما باقاعده نیست.</li>
+        <li>زبان <code>{aⁿbⁿcⁿ}</code> مستقل از متن نیست (حساس به متن است).</li>
+        <li>زبان پالیندروم‌ها مستقل از متن است، اما باقاعده نیست.</li>
       </ul>
     </section>
 
-    <!-- ==================== 1.19 ==================== -->
-    <section class="section fade-in" id="s19">
+    <!-- ==================== 1.23 ==================== -->
+    <section class="section fade-in" id="s23">
       <div class="section-head">
-        <span class="section-num">19</span>
-        <h2 class="section-title">خلاصه و تمرین‌ها</h2>
+        <span class="section-num">23</span>
+        <h2 class="section-title">تمرین‌های جامع دسته‌بندی‌شده</h2>
       </div>
 
       <p>
-        در این فصل از صفر شروع کردیم: از مجموعه‌ها و عملیاتشان، تا الفبا و رشته‌ها،
-        عملیات روی رشته‌ها، زبان، عملیات روی زبان‌ها، گرامر، اشتقاق، اتوماتا و
-        سلسله‌مراتب چامسکی. جدول زیر خلاصه‌ای از مهم‌ترین مفاهیم است.
+        این بخش شامل بیش از ۱۰۰ تمرین در ۶ دسته‌بندی مختلف است. برای آمادگی کامل
+        در امتحان، همه این تمرین‌ها را حل کنید.
       </p>
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>مفهوم</th><th>خلاصه</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><strong>مجموعه</strong></td><td>گردایه‌ای از اعضای متمایز</td></tr>
-            <tr><td><strong>عضویت ∈</strong></td><td>عضو بودن یک شیء در مجموعه</td></tr>
-            <tr><td><strong>زیرمجموعه ⊆</strong></td><td>هر عضو A، عضو B باشد</td></tr>
-            <tr><td><strong>اجتماع ∪</strong></td><td>اعضای A یا B</td></tr>
-            <tr><td><strong>اشتراک ∩</strong></td><td>اعضای مشترک A و B</td></tr>
-            <tr><td><strong>تفاضل −</strong></td><td>اعضای A که در B نیستند</td></tr>
-            <tr><td><strong>مکمل ‾A</strong></td><td>اعضای U که در A نیستند</td></tr>
-            <tr><td><strong>ضرب دکارتی ×</strong></td><td>مجموعه زوج‌های مرتب</td></tr>
-            <tr><td><strong>مجموعه توانی 2^A</strong></td><td>همه زیرمجموعه‌های A</td></tr>
-            <tr><td><strong>قوانین دمورگان</strong></td><td>‾(A ∪ B) = ‾A ∩ ‾B</td></tr>
-            <tr><td><strong>الفبا Σ</strong></td><td>مجموعه متناهی و ناتهی از نمادها</td></tr>
-            <tr><td><strong>نماد</strong></td><td>عضو الفبا</td></tr>
-            <tr><td><strong>رشته</strong></td><td>دنباله متناهی از نمادها</td></tr>
-            <tr><td><strong>رشته تهی λ</strong></td><td>رشته‌ای با طول صفر</td></tr>
-            <tr><td><strong>طول |w|</strong></td><td>تعداد نمادهای رشته</td></tr>
-            <tr><td><strong>اتصال wv</strong></td><td>پشت سر هم قرار دادن دو رشته</td></tr>
-            <tr><td><strong>معکوس w^R</strong></td><td>رشته با نمادهای معکوس</td></tr>
-            <tr><td><strong>توان w^n</strong></td><td>تکرار رشته n بار</td></tr>
-            <tr><td><strong>Σ*</strong></td><td>همه رشته‌های ممکن (شامل λ)</td></tr>
-            <tr><td><strong>Σ⁺</strong></td><td>همه رشته‌های ناتهی</td></tr>
-            <tr><td><strong>زبان L</strong></td><td>زیرمجموعه‌ای از Σ*</td></tr>
-            <tr><td><strong>ستاره کلین L*</strong></td><td>صفر یا چند الحاق از L</td></tr>
-            <tr><td><strong>به‌علاوه کلین L⁺</strong></td><td>یک یا چند الحاق از L</td></tr>
-            <tr><td><strong>گرامر G</strong></td><td>چهارتایی (V, T, S, P)</td></tr>
-            <tr><td><strong>اشتقاق ⇒</strong></td><td>تولید رشته از نماد شروع</td></tr>
-            <tr><td><strong>درخت اشتقاق</strong></td><td>نمایش درختی فرآیند اشتقاق</td></tr>
-            <tr><td><strong>اتوماتا</strong></td><td>مدل ریاضی پذیرش رشته</td></tr>
-            <tr><td><strong>سلسله‌مراتب چامسکی</strong></td><td>Regular ⊂ CF ⊂ CS ⊂ RE</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <h3>دسته ۱: تمرین‌های مجموعه‌ها</h3>
 
       <div class="exercise-box">
         <div class="exercise-title">
@@ -1950,31 +3103,362 @@
             <path d="M2 3.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1"/>
             <path d="M5 2v2M11 2v2M5 7h6M5 10h4"/>
           </svg>
-          تمرین‌های پایان فصل
+          تمرین‌های مجموعه (۱ تا ۱۵)
         </div>
         <ol class="exercise-list">
-          <li>تفاوت مجموعه و رشته را در سه جمله توضیح دهید.</li>
-          <li>مجموعه <code>A = {1, 2, 3}</code> و <code>B = {3, 4, 5}</code> را در نظر بگیرید. مقادیر زیر را حساب کنید: <code>A ∪ B</code>، <code>A ∩ B</code>، <code>A − B</code>، <code>B − A</code>، <code>A △ B</code>.</li>
-          <li>مجموعه توانی <code>A = {a, b, c}</code> را بنویسید و اندازه آن را تعیین کنید.</li>
-          <li>قوانین دمورگان را برای مجموعه‌های A و B بنویسید و یکی از آن‌ها را اثبات کنید.</li>
-          <li>اگر <code>|A| = 4</code> و <code>|B| = 3</code>، اندازه <code>A × B</code> چقدر است؟ یک مثال بزنید.</li>
-          <li>تفاوت مجموعه تهی <code>∅</code> و مجموعه <code>{∅}</code> را توضیح دهید.</li>
-          <li>الفبای <code>Σ = {a, b}</code> را در نظر بگیرید. تمام رشته‌های با طول حداکثر ۲ را بنویسید.</li>
-          <li>اگر <code>w = abca</code>، مقادیر زیر را حساب کنید: <code>|w|</code>، <code>w^R</code>، <code>w²</code>.</li>
-          <li>تفاوت پیشوند، پسوند و زیررشته را با یک مثال برای رشته <code>abcd</code> توضیح دهید.</li>
-          <li>تفاوت <code>Σ*</code> و <code>Σ⁺</code> را بنویسید.</li>
-          <li>اگر <code>Σ = {0, 1}</code>، اعضای <code>Σ⁰</code>، <code>Σ¹</code>، <code>Σ²</code> و <code>Σ³</code> را بنویسید.</li>
-          <li>زبان <code>L = {aⁿbⁿ | n ≥ 0}</code> را با توصیف فارسی توضیح دهید و پنج عضو آن را بنویسید.</li>
-          <li>اگر <code>L₁ = {a, b}</code> و <code>L₂ = {ab, ba}</code>، زبان‌های <code>L₁L₂</code>، <code>L₁ ∪ L₂</code>، <code>L₁ ∩ L₂</code> را بنویسید.</li>
-          <li>اگر <code>L = {a}</code>، اعضای <code>L*</code> و <code>L⁺</code> را بنویسید.</li>
-          <li>گرامر <code>G = ({S}, {a, b}, S, {S → aSb, S → ab})</code> را در نظر بگیرید. زبان <code>L(G)</code> چه زبانی است؟ برای رشته <code>aabb</code> درخت اشتقاق رسم کنید.</li>
-          <li>تفاوت اشتقاق چپ‌ترین و راست‌ترین را با یک مثال توضیح دهید.</li>
-          <li>یک گرامر مبهم مثال بزنید و توضیح دهید چرا مبهم است.</li>
-          <li>چهار نوع گرامر در سلسله‌مراتب چامسکی را با ماشین متناظرشان بنویسید.</li>
-          <li>چرا می‌گوییم زبان‌های باقاعده زیرمجموعه زبان‌های مستقل از متن هستند؟</li>
-          <li>یک کاربرد عملی از زبان‌های باقاعده و یک کاربرد عملی از زبان‌های مستقل از متن در دنیای واقعی ذکر کنید.</li>
+          <li>مجموعه <code>A = {1, 2, 3, 4, 5}</code> و <code>B = {3, 4, 5, 6, 7}</code> را در نظر بگیرید. مقادیر زیر را حساب کنید: <code>A ∪ B</code>، <code>A ∩ B</code>، <code>A − B</code>، <code>B − A</code>، <code>A △ B</code>.</li>
+          <li>مجموعه توانی <code>A = {a, b, c}</code> را بنویسید. اندازه آن چقدر است؟</li>
+          <li>آیا <code>{1, 2} ⊆ {1, 2, 3}</code>؟ چرا؟</li>
+          <li>آیا <code>{1, 2, 3} ⊂ {1, 2, 3}</code>؟ چرا؟</li>
+          <li>تفاوت <code>∅</code> و <code>{∅}</code> را توضیح دهید.</li>
+          <li>اگر <code>|A| = 4</code> و <code>|B| = 3</code>، اندازه <code>A × B</code> چقدر است؟</li>
+          <li>قوانین دمورگان را برای مجموعه‌های A و B بنویسید.</li>
+          <li>اگر <code>U = {1, 2, 3, 4, 5, 6}</code> و <code>A = {2, 4, 6}</code>، مقدار <code>‾A</code> چقدر است؟</li>
+          <li>مجموعه <code>A = {x ∈ ℕ | x &lt; 10 و x زوج}</code> را با نمایش شمارشی بنویسید.</li>
+          <li>آیا <code>{1, 2}</code> و <code>{3, 4}</code> جدا از هم هستند؟ چرا؟</li>
+          <li>نشان دهید <code>A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)</code> با یک مثال.</li>
+          <li>مجموعه <code>S = {1, 2, 3}</code> چند افراز دو بلوکی دارد؟ آن‌ها را بنویسید.</li>
+          <li>اگر <code>A = {1, 2}</code> و <code>B = {3, 4}</code>، مجموعه <code>A × B</code> را بنویسید.</li>
+          <li>تفاوت مجموعه متناهی و نامتناهی را با مثال توضیح دهید.</li>
+          <li>آیا مجموعه اعداد گویا شمارا است یا ناشمارا؟ چرا؟</li>
         </ol>
       </div>
+
+      <h3>دسته ۲: تمرین‌های رشته‌ها</h3>
+
+      <div class="exercise-box">
+        <div class="exercise-title">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3.5V12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5"/>
+            <path d="M2 3.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1"/>
+            <path d="M5 2v2M11 2v2M5 7h6M5 10h4"/>
+          </svg>
+          تمرین‌های رشته (۱۶ تا ۳۵)
+        </div>
+        <ol class="exercise-list">
+          <li>الفبای <code>Σ = {a, b}</code> را در نظر بگیرید. تمام رشته‌های با طول حداکثر ۳ را بنویسید.</li>
+          <li>اگر <code>w = abca</code>، مقادیر زیر را حساب کنید: <code>|w|</code>، <code>w^R</code>، <code>w²</code>.</li>
+          <li>رشته <code>abba</code> را در نظر بگیرید. آیا پالیندروم است؟ چرا؟</li>
+          <li>تمام پیشوندهای رشته <code>abcd</code> را بنویسید.</li>
+          <li>تمام پسوندهای رشته <code>abcd</code> را بنویسید.</li>
+          <li>تمام زیررشته‌های ناتهی رشته <code>abc</code> را بنویسید.</li>
+          <li>اگر <code>w = 01</code>، مقدار <code>w³</code> را بنویسید.</li>
+          <li>آیا <code>Σ⁺</code> رشته تهی را شامل می‌شود؟ چرا؟</li>
+          <li>اگر <code>Σ = {0, 1}</code>، اعضای <code>Σ⁰</code>، <code>Σ¹</code>، <code>Σ²</code> و <code>Σ³</code> را بنویسید.</li>
+          <li>تفاوت <code>Σ*</code> و <code>Σ⁺</code> را بنویسید.</li>
+          <li>اگر <code>w = ab</code> و <code>v = ba</code>، مقدار <code>wv</code> و <code>vw</code> را بنویسید. آیا برابرند؟</li>
+          <li>اگر <code>w = abc</code> و <code>v = def</code>، مقدار <code>(wv)^R</code> را حساب کنید و با <code>v^R w^R</code> مقایسه کنید.</li>
+          <li>رشته‌های با طول دقیقاً ۴ روی الفبای <code>Σ = {a, b}</code> چند تا هستند؟ چرا؟</li>
+          <li>رشته‌های با طول دقیقاً ۳ روی الفبای <code>Σ = {a, b, c}</code> چند تا هستند؟ چرا؟</li>
+          <li>اگر <code>w = aaa</code>، مقدار <code>w^R</code> چیست؟ آیا با w برابر است؟</li>
+          <li>تفاوت رشته و مجموعه را در سه جمله توضیح دهید.</li>
+          <li>اگر <code>w = abab</code>، آیا رشته پالیندروم است؟ چرا؟</li>
+          <li>اگر <code>w = abba</code>، آیا رشته پالیندروم است؟ چرا؟</li>
+          <li>رشته <code>abababa</code> را در نظر بگیرید. آیا پالیندروم است؟ چرا؟</li>
+          <li>اگر <code>Σ = {a}</code>، اعضای <code>Σ⁺</code> را تا طول ۵ بنویسید.</li>
+        </ol>
+      </div>
+
+      <h3>دسته ۳: تمرین‌های زبان و عملیات</h3>
+
+      <div class="exercise-box">
+        <div class="exercise-title">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3.5V12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5"/>
+            <path d="M2 3.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1"/>
+            <path d="M5 2v2M11 2v2M5 7h6M5 10h4"/>
+          </svg>
+          تمرین‌های زبان (۳۶ تا ۵۵)
+        </div>
+        <ol class="exercise-list">
+          <li>زبان <code>L = {aⁿbⁿ | n ≥ 0}</code> را با توصیف فارسی توضیح دهید و پنج عضو آن را بنویسید.</li>
+          <li>آیا <code>∅</code> و <code>{λ}</code> دو زبان متفاوت هستند؟ چرا؟</li>
+          <li>اگر <code>L₁ = {a, b}</code> و <code>L₂ = {ab, ba}</code>، زبان‌های <code>L₁L₂</code>، <code>L₁ ∪ L₂</code>، <code>L₁ ∩ L₂</code> را بنویسید.</li>
+          <li>اگر <code>L = {a}</code>، اعضای <code>L*</code> و <code>L⁺</code> را بنویسید.</li>
+          <li>اگر <code>L = {ab}</code>، اعضای <code>L*</code> را تا توان ۳ بنویسید.</li>
+          <li>اگر <code>L = {a, b}</code>، <code>L²</code> و <code>L³</code> را بنویسید.</li>
+          <li>اگر <code>L = {aⁿbⁿ | n ≥ 0}</code>، زبان <code>L^R</code> را بنویسید.</li>
+          <li>تفاوت <code>L*</code> و <code>L⁺</code> را توضیح دهید.</li>
+          <li>اگر <code>L₁ = {a, aa}</code> و <code>L₂ = {b, bb}</code>، اعضای <code>L₁L₂</code> را بنویسید.</li>
+          <li>آیا <code>(L*)* = L*</code>؟ چرا؟</li>
+          <li>مکمل زبان <code>L = {a}</code> روی <code>Σ = {a, b}</code> را توصیف کنید.</li>
+          <li>مکمل زبان <code>L = {aⁿbⁿ | n ≥ 0}</code> روی <code>Σ = {a, b}</code> را توصیف کنید.</li>
+          <li>چند رشته در زبان <code>L = {w ∈ {a, b}* | |w| = 3}</code> وجود دارد؟</li>
+          <li>آیا زبان <code>{a, aa, aaa}</code> متناهی است یا نامتناهی؟ چرا؟</li>
+          <li>زبان <code>{aⁿ | n ≥ 1}</code> را با توصیف فارسی بنویسید.</li>
+          <li>زبان <code>{w | w ∈ {a,b}* و w با a شروع می‌شود}</code> را با توصیف فارسی بنویسید.</li>
+          <li>زبان <code>{w | w ∈ {a,b}* و w شامل ab است}</code> را با توصیف فارسی بنویسید.</li>
+          <li>زبان <code>{ww^R | w ∈ {a, b}*}</code> را با توصیف فارسی بنویسید.</li>
+          <li>زبان <code>{aⁿbᵐ | n, m ≥ 0}</code> را با توصیف فارسی بنویسید.</li>
+          <li>زبان <code>{aᵖ | p عدد اول است}</code> را با توصیف فارسی بنویسید.</li>
+        </ol>
+      </div>
+
+      <h3>دسته ۴: نوشتن گرامر برای زبان (مهم‌ترین دسته)</h3>
+
+      <div class="exercise-box">
+        <div class="exercise-title">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3.5V12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5"/>
+            <path d="M2 3.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1"/>
+            <path d="M5 2v2M11 2v2M5 7h6M5 10h4"/>
+          </svg>
+          نوشتن گرامر (۵۶ تا ۸۰)
+        </div>
+        <ol class="exercise-list">
+          <li>گرامر زبان <code>L = {aⁿ | n ≥ 1}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿ | n ≥ 0}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿ | n ≥ 2}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿbⁿ | n ≥ 1}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿbⁿ | n ≥ 0}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿbᵐ | n, m ≥ 1}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿbᵐ | n, m ≥ 0}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿb²ⁿ | n ≥ 0}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿbⁿcᵏ | n, k ≥ 1}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿbⁿcᵏ | n, k ≥ 0}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {w ∈ {a,b}* | w = w^R}</code> (پالیندروم) را بنویسید.</li>
+          <li>گرامر زبان <code>L = {w ∈ {a,b}* | #a(w) = #b(w)}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {w ∈ {a,b}* | w با a شروع می‌شود}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {w ∈ {a,b}* | w با b پایان می‌یابد}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {w ∈ {a,b}* | w با a شروع و با b پایان می‌یابد}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {(ab)ⁿ | n ≥ 1}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿbᵐaⁿ | n, m ≥ 1}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿbⁿ | n ≥ 1} ∪ {a}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁿbⁿ | n ≥ 0} ∪ {aⁿb²ⁿ | n ≥ 0}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁱbʲ | i &gt; j ≥ 0}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁱbʲ | i &lt; j}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {aⁱbʲ | i ≠ j}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {w ∈ {a,b}* | |w| زوج است}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {w ∈ {a,b}* | |w| فرد است}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>L = {w | w شامل aaa است}</code> را بنویسید.</li>
+        </ol>
+      </div>
+
+      <h3>دسته ۵: تحلیل گرامر (چه زبانی تولید می‌کند؟)</h3>
+
+      <div class="exercise-box">
+        <div class="exercise-title">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3.5V12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5"/>
+            <path d="M2 3.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1"/>
+            <path d="M5 2v2M11 2v2M5 7h6M5 10h4"/>
+          </svg>
+          تحلیل گرامر (۸۱ تا ۱۰۰)
+        </div>
+        <ol class="exercise-list">
+          <li>گرامر <code>S → aS | a</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aS | λ</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aSb | ab</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aSb | λ</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aSb | ε</code> چه زبانی تولید می‌کند؟ (ε همان λ است)</li>
+          <li>گرامر <code>S → AB، A → aA | a، B → bB | b</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aSa | bSb | λ</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aSb | bSa | SS | λ</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aB | bA، A → aS | bAA، B → bS | aBB</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aSbb | λ</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → abS | ab</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aSa | B، B → bB | b</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aA | bB، A → aA | λ، B → bB | λ</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → AS | λ، A → a | b</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aS | bS | λ</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aS | bS | a | b</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → AA، A → a | b</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → AB، A → aA | a، B → bB | ε</code> چه زبانی تولید می‌کند؟</li>
+          <li>گرامر <code>S → aA، A → bS | λ</code> چه زبانی تولید می‌کند؟ (راهنما: رشته‌هایی با طول زوج که با a شروع و با b پایان می‌یابند و بین آن‌ها هر ترکیبی)</li>
+          <li>گرامر <code>S → aSb | ab</code> را در نظر بگیرید. آیا رشته <code>abab</code> تولید می‌شود؟ چرا؟</li>
+        </ol>
+      </div>
+
+      <h3>دسته ۶: اشتقاق و درخت اشتقاق</h3>
+
+      <div class="exercise-box">
+        <div class="exercise-title">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3.5V12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5"/>
+            <path d="M2 3.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1"/>
+            <path d="M5 2v2M11 2v2M5 7h6M5 10h4"/>
+          </svg>
+          اشتقاق و درخت (۱۰۱ تا ۱۱۵)
+        </div>
+        <ol class="exercise-list">
+          <li>برای گرامر <code>S → aSb | ab</code>، اشتقاق رشته <code>aaabbb</code> را بنویسید.</li>
+          <li>برای همان گرامر، درخت اشتقاق <code>aabb</code> را رسم کنید.</li>
+          <li>برای همان گرامر، درخت اشتقاق <code>aaabbb</code> را رسم کنید.</li>
+          <li>برای گرامر <code>S → aS | a</code>، اشتقاق رشته <code>aaaa</code> را بنویسید.</li>
+          <li>برای گرامر <code>S → aSa | bSb | λ</code>، اشتقاق رشته <code>abba</code> را بنویسید.</li>
+          <li>گرامر <code>E → E + E | E × E | (E) | id</code> را در نظر بگیرید. آیا این گرامر مبهم است؟ چرا؟</li>
+          <li>برای رشته <code>id + id × id</code> در گرامر بالا، دو درخت اشتقاق متفاوت رسم کنید.</li>
+          <li>گرامر <code>S → aSb | ab</code> را در نظر بگیرید. آیا این گرامر مبهم است؟ چرا؟</li>
+          <li>گرامر <code>S → SS | a</code> را در نظر بگیرید. آیا این گرامر مبهم است؟ چرا؟</li>
+          <li>تفاوت اشتقاق چپ‌ترین و راست‌ترین را با یک مثال توضیح دهید.</li>
+          <li>برای گرامر <code>S → aB، B → bS | λ</code>، اشتقاق چپ‌ترین رشته <code>abab</code> را بنویسید.</li>
+          <li>برای همان گرامر، اشتقاق راست‌ترین رشته <code>abab</code> را بنویسید.</li>
+          <li>آیا همه رشته‌ها دو اشتقاق (چپ و راست) دارند؟ چرا؟</li>
+          <li>درخت اشتقاق چه اطلاعاتی را نشان می‌دهد که اشتقاق متنی به‌تنهایی نشان نمی‌دهد؟</li>
+          <li>اگر دو درخت اشتقاق متفاوت برای یک رشته وجود داشته باشد، چه نتیجه‌ای می‌گیریم؟</li>
+        </ol>
+      </div>
+
+      <h3>پاسخ‌های کوتاه برخی تمرین‌های کلیدی</h3>
+
+      <p>
+        برای بعضی از تمرین‌های مهم، پاسخ کوتاه در جدول زیر آمده است. اما تلاش کنید
+        ابتدا خودتان حل کنید و سپس با پاسخ مقایسه کنید.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>شماره تمرین</th><th>پاسخ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>۵۶</td><td class="cell-ltr">S → aS | a</td></tr>
+            <tr><td>۵۷</td><td class="cell-ltr">S → aS | λ</td></tr>
+            <tr><td>۵۸</td><td class="cell-ltr">S → aS | aa</td></tr>
+            <tr><td>۵۹</td><td class="cell-ltr">S → aSb | ab</td></tr>
+            <tr><td>۶۰</td><td class="cell-ltr">S → aSb | λ</td></tr>
+            <tr><td>۶۱</td><td class="cell-ltr">S → AB، A → aA | a، B → bB | b</td></tr>
+            <tr><td>۶۳</td><td class="cell-ltr">S → aSbb | λ</td></tr>
+            <tr><td>۶۴</td><td class="cell-ltr">S → AB، A → aAb | ab، B → cB | c</td></tr>
+            <tr><td>۶۶</td><td class="cell-ltr">S → aSa | bSb | a | b | λ</td></tr>
+            <tr><td>۶۷</td><td class="cell-ltr">S → aSb | bSa | SS | λ</td></tr>
+            <tr><td>۶۸</td><td class="cell-ltr">S → aA، A → aA | bA | λ</td></tr>
+            <tr><td>۶۹</td><td class="cell-ltr">S → Ab، A → aA | bA | λ</td></tr>
+            <tr><td>۷۰</td><td class="cell-ltr">S → aA، A → bB | aA، B → bA | λ (یا S → aA، A → aA | bA | b)</td></tr>
+            <tr><td>۷۱</td><td class="cell-ltr">S → abS | ab</td></tr>
+            <tr><td>۷۳</td><td class="cell-ltr">S → S₁ | a، S₁ → aS₁b | ab</td></tr>
+            <tr><td>۷۴</td><td class="cell-ltr">S → S₁ | S₂، S₁ → aS₁b | λ، S₂ → aS₂bb | λ</td></tr>
+            <tr><td>۷۵</td><td class="cell-ltr">S → aS | aA، A → aAb | ab (یا A → aAb | b)</td></tr>
+            <tr><td>۷۶</td><td class="cell-ltr">S → Sa | A، A → aAb | ab (یا S → Aa، A → aAb | b)</td></tr>
+            <tr><td>۷۷</td><td class="cell-ltr">S → S₁ | S₂، S₁ و S₂ از تمرین‌های ۷۵ و ۷۶</td></tr>
+            <tr><td>۷۸</td><td class="cell-ltr">S → AAS | λ، A → a | b</td></tr>
+            <tr><td>۷۹</td><td class="cell-ltr">S → AAS | A، A → a | b</td></tr>
+            <tr><td>۸۱</td><td class="cell-ltr">{aⁿ | n ≥ 1}</td></tr>
+            <tr><td>۸۲</td><td class="cell-ltr">{aⁿ | n ≥ 0}</td></tr>
+            <tr><td>۸۳</td><td class="cell-ltr">{aⁿbⁿ | n ≥ 1}</td></tr>
+            <tr><td>۸۴</td><td class="cell-ltr">{aⁿbⁿ | n ≥ 0}</td></tr>
+            <tr><td>۸۶</td><td class="cell-ltr">{aⁿbᵐ | n, m ≥ 1}</td></tr>
+            <tr><td>۸۷</td><td class="cell-ltr">پالیندروم‌ها روی {a, b}</td></tr>
+            <tr><td>۸۸</td><td class="cell-ltr">{w ∈ {a, b}* | #a(w) = #b(w)}</td></tr>
+            <tr><td>۹۰</td><td class="cell-ltr">{aⁿb²ⁿ | n ≥ 0}</td></tr>
+            <tr><td>۹۱</td><td class="cell-ltr">{(ab)ⁿ | n ≥ 1}</td></tr>
+            <tr><td>۹۲</td><td class="cell-ltr">{aⁿbᵐaⁿ | n, m ≥ 1}</td></tr>
+            <tr><td>۹۵</td><td class="cell-ltr">Σ* (همه رشته‌های روی {a, b})</td></tr>
+            <tr><td>۹۶</td><td class="cell-ltr">Σ⁺ (همه رشته‌های ناتهی روی {a, b})</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>راهنمای تمرین‌های پیشرفته</h3>
+
+      <p>
+        تمرین‌های زیر سخت‌تر هستند و نیاز به تفکر بیشتری دارند. برای حل آن‌ها، از
+        روش‌های گام‌به‌گام بخش‌های ۱۷ و ۱۸ استفاده کنید.
+      </p>
+
+      <div class="exercise-box">
+        <div class="exercise-title">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3.5V12a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5"/>
+            <path d="M2 3.5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1"/>
+            <path d="M5 2v2M11 2v2M5 7h6M5 10h4"/>
+          </svg>
+          تمرین‌های پیشرفته (۱۱۶ تا ۱۳۰)
+        </div>
+        <ol class="exercise-list">
+          <li>گرامر زبان <code>{w ∈ {a, b}* | w شامل ab باشد}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{w ∈ {a, b}* | w شامل ab نباشد}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{w ∈ {a, b}* | w شامل aaa نباشد}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{w ∈ {a, b}* | w شامل تعداد مساوی a و b باشد}</code> را با روش دیگری بنویسید.</li>
+          <li>گرامر زبان <code>{w ∈ {a, b}* | #a(w) = 2·#b(w)}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{aⁿbⁿcᵏ | n + k مضرب ۲ است}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{aⁿbⁿcⁿ | n ≥ 1}</code> را بنویسید. (هشدار: این زبان مستقل از متن نیست.)</li>
+          <li>گرامر زبان <code>{w | w = w^R و |w| زوج است}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{aⁱbʲ | i = 2j}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{aⁿbⁿ⁺¹ | n ≥ 0}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{aⁿbⁿ | n ≥ 1} ∪ {bⁿaⁿ | n ≥ 1}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{w ∈ {a, b}* | تعداد a در w زوج است و تعداد b در w فرد است}</code> را بنویسید. (راهنما: از ۴ حالت استفاده کنید.)</li>
+          <li>گرامر زبان <code>{aⁿbᵐ | n ≤ m}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{aⁿbᵐ | n + m = 10}</code> را بنویسید.</li>
+          <li>گرامر زبان <code>{aⁿbᵐaⁿ | n ≥ 1}</code> را بنویسید (بدون m).</li>
+        </ol>
+      </div>
+
+      <h3>جدول مرور سریع</h3>
+
+      <p>
+        این جدول را در ذهن داشته باشید تا در امتحان سریع‌تر جواب دهید:
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>زبان</th><th>گرامر</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>{aⁿ | n ≥ 1}</code></td><td class="cell-ltr">S → aS | a</td></tr>
+            <tr><td><code>{aⁿ | n ≥ 0}</code></td><td class="cell-ltr">S → aS | λ</td></tr>
+            <tr><td><code>{aⁿbⁿ | n ≥ 1}</code></td><td class="cell-ltr">S → aSb | ab</td></tr>
+            <tr><td><code>{aⁿbⁿ | n ≥ 0}</code></td><td class="cell-ltr">S → aSb | λ</td></tr>
+            <tr><td><code>{aⁿbᵐ | n, m ≥ 1}</code></td><td class="cell-ltr">S → AB، A → aA | a، B → bB | b</td></tr>
+            <tr><td><code>{aⁿb²ⁿ | n ≥ 0}</code></td><td class="cell-ltr">S → aSbb | λ</td></tr>
+            <tr><td><code>{aⁿbⁿcᵏ | n, k ≥ 1}</code></td><td class="cell-ltr">S → AB، A → aAb | ab، B → cB | c</td></tr>
+            <tr><td><code>{w | w = w^R}</code></td><td class="cell-ltr">S → aSa | bSb | a | b | λ</td></tr>
+            <tr><td><code>{w | #a = #b}</code></td><td class="cell-ltr">S → aSb | bSa | SS | λ</td></tr>
+            <tr><td><code>{w | w با a شروع}</code></td><td class="cell-ltr">S → aA، A → aA | bA | λ</td></tr>
+            <tr><td><code>{w | w با b پایان}</code></td><td class="cell-ltr">S → Ab، A → aA | bA | λ</td></tr>
+            <tr><td><code>{(ab)ⁿ | n ≥ 1}</code></td><td class="cell-ltr">S → abS | ab</td></tr>
+            <tr><td><code>{aⁿbᵐaⁿ | n, m ≥ 1}</code></td><td class="cell-ltr">S → aSa | B، B → bB | b</td></tr>
+            <tr><td><code>{aⁿbⁿ | n ≥ 1} ∪ {a}</code></td><td class="cell-ltr">S → S₁ | a، S₁ → aS₁b | ab</td></tr>
+            <tr><td><code>{w | w شامل aaa}</code></td><td class="cell-ltr">S → AaaaB، A → aA | bA | λ، B → aB | bB | λ</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>۱۰ توصیه برای موفقیت در امتحان</h3>
+
+      <ol class="flow">
+        <li>
+          <strong>الگو را بشناسید، نه جواب را.</strong>
+          <span>اگر فقط جواب‌ها را حفظ کنید، در امتحان با یک زبان جدید گیر می‌کنید. باید یاد بگیرید چطور الگوی هر زبان را تشخیص دهید.</span>
+        </li>
+        <li>
+          <strong>از ساده به پیچیده بروید.</strong>
+          <span>اول زبان‌های ساده مثل <code>{aⁿ}</code> را حل کنید، سپس <code>{aⁿbⁿ}</code>، سپس ترکیب‌ها.</span>
+        </li>
+        <li>
+          <strong>با اشتقاق آزمون کنید.</strong>
+          <span>هر گرامری که نوشتید، با ۳ تا ۵ رشته نمونه آزمون کنید. اگر رشته‌های ناخواسته تولید شد، گرامر را اصلاح کنید.</span>
+        </li>
+        <li>
+          <strong>حالت پایه را فراموش نکنید.</strong>
+          <span>هر گرامر بازگشتی به یک حالت پایه نیاز دارد (مثل <code>S → ab</code> در گرامر <code>{aⁿbⁿ}</code>).</span>
+        </li>
+        <li>
+          <strong>از <code>λ</code> درست استفاده کنید.</strong>
+          <span>اگر زبان شامل رشته تهی است، حتماً <code>S → λ</code> داشته باشید. اگر نیست، نداشته باشید.</span>
+        </li>
+        <li>
+          <strong>ساختار متقارن را تشخیص دهید.</strong>
+          <span>هر جا رابطه‌ای بین ابتدا و انتهای رشته دیدید (مثل <code>aSa</code> یا <code>aSb</code>)، از قاعده بازگشتی متقارن استفاده کنید.</span>
+        </li>
+        <li>
+          <strong>از چند متغیر استفاده کنید.</strong>
+          <span>برای زبان‌های پیچیده، از چند متغیر (A, B, C) استفاده کنید تا هر متغیر یک وظیفه مشخص داشته باشد.</span>
+        </li>
+        <li>
+          <strong>درخت اشتقاق را جدی بگیرید.</strong>
+          <span>درخت اشتقاق، بهترین راه برای بررسی درستی گرامر و تشخیص ابهام است.</span>
+        </li>
+        <li>
+          <strong>ابهام را بررسی کنید.</strong>
+          <span>اگر گرامر ممکن است مبهم باشد، سعی کنید دو درخت اشتقاق متفاوت برای یک رشته پیدا کنید.</span>
+        </li>
+        <li>
+          <strong>با مرور سریع جدول، آماده شوید.</strong>
+          <span>قبل از امتحان، جدول مرور سریع را چند بار بخوانید تا الگوها در ذهن‌تان تثبیت شوند.</span>
+        </li>
+      </ol>
     </section>
 
     <nav class="part-nav">
